@@ -1,6 +1,6 @@
 # Melbourne Housing Price Predictor
 
-This project develops and evaluates regression models to predict housing prices in Melbourne using the Melbourne_housing_FULL.csv dataset (sourced from Kaggle). It contains multiple Machine Learning features, including data cleaning, feature engineering, model training, evaluation, and deployment via Streamlit.
+This project develops and evaluates regression models to predict housing prices in Melbourne using the Melbourne_housing_FULL.csv dataset (sourced from Kaggle). It contains multiple Machine Learning features, including data cleaning, feature engineering, model training, evaluation, and deployment via Streamlit. (also the code comments are kind of messy or I straight up didn't include them so sorry :P)
 
 ## Data Preparation & EDA
 
