@@ -64,7 +64,8 @@ async def analyze_stock(
         intent = intent_data['intent']
         symbol = intent_data.get('symbol')
         if intent == "UNKNOWN":
-             raise HTTPException(status_code=422, detail="Could not understand the query.")
+             pass
+
 
     async def event_generator():
         try:
@@ -74,6 +75,15 @@ async def analyze_stock(
                 stream_iterator = current_agent.analyze(symbol.upper(), tools=tools_to_use)
             elif intent == "GENERAL_CHAT":
                 stream_iterator = current_agent.respond_conversational(request.query)
+            elif intent == "UNKNOWN":
+                async def unknown_response():
+                    yield {"type": "progress", "step": "error", "message": "Analyzing...", "percent": 0}
+                    yield {
+                        "type": "result", 
+                        "final_report": "I apologize, but I couldn't understand your request. Could you please specify a stock symbol or ask a financial question?",
+                        "symbol": "UNKNOWN"
+                    }
+                stream_iterator = unknown_response()
             else:
                 yield f"data: {json.dumps({'error': 'Invalid Intent'})}\n\n"
                 return
