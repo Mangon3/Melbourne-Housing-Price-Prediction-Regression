@@ -1,20 +1,23 @@
-
 import asyncio
 import json
 import os
 import sys
 import httpx
-from typing import Optional
+
 DEFAULT_PORT = 7861
 API_URL = os.getenv("API_URL", f"http://0.0.0.0:{DEFAULT_PORT}/analyze")
 API_KEY = os.getenv("GOOGLE_API_KEY", "")
+
 async def stream_response(query: str):
+    
     headers = {
         "Content-Type": "application/json",
         "X-Gemini-API-Key": API_KEY
     }
+
     payload = {"query": query}
     print(f"\n[Connecting to {API_URL} map...]")
+
     try:
         async with httpx.AsyncClient(timeout=300.0) as client:
             async with client.stream("POST", API_URL, json=payload, headers=headers) as response:
@@ -50,6 +53,7 @@ async def stream_response(query: str):
         print(f"\nCould not connect to API at {API_URL}. Is the server running? (uvicorn src.api.index:app --reload)")
     except Exception as e:
         print(f"\nError: {e}")
+
 async def main():
     print("==================================================")
     print("       Stock Agent CLI (API Client)            ")
@@ -70,6 +74,7 @@ async def main():
         except KeyboardInterrupt:
             print("\nExiting...")
             break
+        
 if __name__ == "__main__":
     try:
         asyncio.run(main())

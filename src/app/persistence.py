@@ -6,7 +6,9 @@ from typing import Dict, Any, Callable
 from src.utils.logger import setup_logger
 
 logger = setup_logger(__name__)
+
 class CacheManager:
+    
     CACHE_KEY_PREFIX = "macro_analysis_cache" 
     TTL_SECONDS = 24 * 3600
 

@@ -15,8 +15,10 @@ class StockAnalysisPipeline:
     2. Micro Model Training & Inference
     3. Final Synthesis
     """
+
     def __init__(self, llm: ChatGoogleGenerativeAI):
         self.llm = llm
+
     def run_analysis(self, symbol: str, tools: List[str] = None):  
         """
         Orchestrates the analysis based on the selected tools plan.
@@ -74,6 +76,7 @@ class StockAnalysisPipeline:
             "macro_analysis": macro_analysis_text,
             "micro_analysis": micro_data
         }
+        
     def _synthesize_report(self, symbol: str, macro_text: str, micro_data: Dict[str, Any], tools_used: List[str]) -> str:
         micro_json = json.dumps(micro_data, indent=2)
         instruction_note = ""

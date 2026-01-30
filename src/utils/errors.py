@@ -1,5 +1,4 @@
 from typing import Dict, Optional, Any
-import traceback
 
 class StockAgentError(Exception):
     """Base class for all application errors."""
@@ -28,18 +27,12 @@ def format_error(e: Exception) -> Dict[str, Any]:
             "type": "error",
             "code": e.code,
             "message": e.message,
-            # We omit details in user-facing production output by default, 
-            # but can include them if meaningful.
             "details": e.details
         }
-    
-    # Handle known external libraries mapping if needed
-    # e.g. if isinstance(e, finnhub.FinnhubAPIException): ...
 
-    # Default fallback for unhandled exceptions
     return {
         "type": "error",
         "code": "ERR_UNKNOWN",
         "message": "An unexpected system error occurred. Please try again later.",
-        "details": str(e) # In dev mode we might want this, in prod maybe distinct
+        "details": str(e)
     }

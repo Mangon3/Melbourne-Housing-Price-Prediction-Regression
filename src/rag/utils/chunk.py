@@ -1,11 +1,14 @@
 import re
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any
+
 class NewsChunker:
+
     def __init__(self, chunk_size: int = 1000, chunk_overlap: int = 200):
         if chunk_overlap >= chunk_size:
             raise ValueError("Chunk overlap must be less than chunk size.")
         self.chunk_size = chunk_size
         self.chunk_overlap = chunk_overlap
+
     def _split_text(self, text: str) -> List[str]:
         if not text:
             return []
@@ -23,6 +26,7 @@ class NewsChunker:
                 if final_chunk_start > start - stride:
                     chunks[-1] = text[final_chunk_start:text_length]
         return chunks
+
     def __call__(self, news_articles: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         chunked_documents = []
         for article in news_articles:
@@ -43,4 +47,5 @@ class NewsChunker:
                     }
                 })
         return chunked_documents
+        
 chunker = NewsChunker()

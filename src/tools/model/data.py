@@ -1,18 +1,18 @@
-import os
-import sys
 import pandas as pd
 import numpy as np
-from pathlib import Path
-from typing import Dict, Any, Union
-from datetime import datetime, timedelta
+from typing import Dict, Union
 from tvDatafeed import TvDatafeed, Interval
 from dotenv import load_dotenv
 from src.utils.logger import setup_logger
-load_dotenv()
+
 logger = setup_logger(__name__)
+load_dotenv()
+
 class TvDataFetcher:
+
     def __init__(self):
         self.tv = self._initialize_tv_datafeed()
+
     def _initialize_tv_datafeed(self):
         try:
             tv_instance = TvDatafeed()
@@ -25,6 +25,7 @@ class TvDataFetcher:
             else:
                  logger.error(f"Failed to initialize TvDatafeed. {e}")
             return None
+
     def fetch_historical_data(self, symbol: str, timeframe_days: int, exchange: str = "NASDAQ", interval: str = None) -> Union[pd.DataFrame, Dict[str, str]]:
         if self.tv is None:
             return {"error": "TvDatafeed is not initialized. Cannot fetch data."}
@@ -55,4 +56,5 @@ class TvDataFetcher:
             return data
         except Exception as e:
             return {"error": f"Data fetching error for {symbol}: {e}"}
+            
 tv_data_fetcher = TvDataFetcher()

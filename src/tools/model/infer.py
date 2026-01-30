@@ -1,5 +1,4 @@
 import torch
-torch.set_num_threads(1)
 import pandas as pd
 import numpy as np
 from typing import Dict, Any, Tuple
@@ -8,6 +7,9 @@ from src.tools.model.data import tv_data_fetcher
 from src.tools.model.neural import HybridStockNet
 from src.tools.model.feature import features
 from src.utils.device import get_device
+
+torch.set_num_threads(1)
+
 def inference_results(prob: float) -> Tuple[str, str]:
     """Interprets the model's output probability into a human-readable signal and outlook."""
     if prob > 0.60:
@@ -27,9 +29,11 @@ def inference_results(prob: float) -> Tuple[str, str]:
         outlook = "Sideways / Low Confidence"
     return signal, outlook
 class MicroModelPredictor:
+
     def __init__(self):
         self.data_fetcher = tv_data_fetcher 
         pass
+
     def _load_model(self) -> HybridStockNet:
         if not settings.MODEL_PATH.exists():
             raise FileNotFoundError(f"Trained model file not found at: {settings.MODEL_PATH}. Please run training first.")
@@ -44,6 +48,7 @@ class MicroModelPredictor:
         model.to(device)
         model.eval()
         return model
+
     def _prepare_data_for_inference(self, df: pd.DataFrame) -> torch.Tensor:
         feature_df = features.calculate_features(df)
         if len(feature_df) < settings.SEQ_LEN:
@@ -52,16 +57,19 @@ class MicroModelPredictor:
         sequence_data = feature_data.tail(settings.SEQ_LEN).values
         input_tensor = torch.tensor(sequence_data, dtype=torch.float32).unsqueeze(0)
         return input_tensor
+
     def predict_price_outlook(self, symbol: str, exchange: str = "NASDAQ") -> Dict[str, Any]:
         try:
             model = self._load_model()
         except FileNotFoundError as e:
             return {"error": str(e)}
+
         df = self.data_fetcher.fetch_historical_data(
             symbol, 
             timeframe_days=settings.DATA_TIMEFRAME_DAYS, 
             exchange=exchange
         )
+
         if isinstance(df, dict) and "error" in df:
             return {"error": f"Data fetch failed for {symbol}: {df['error']}"}
         try:
@@ -86,4 +94,5 @@ class MicroModelPredictor:
             }
         except Exception as e:
             return {"error": f"Model inference failed for {symbol}. Reason: {e}"}
+            
 micro_model_predictor = MicroModelPredictor()

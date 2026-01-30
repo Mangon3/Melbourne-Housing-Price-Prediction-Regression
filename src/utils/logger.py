@@ -1,5 +1,6 @@
 import logging
 import sys
+
 def setup_logger(name: str) -> logging.Logger:
     """
     Sets up a standardized logger with console output.

@@ -6,8 +6,10 @@ from typing import Dict, Any, List
 from src.tools.sentiment.train import SentimentTrainer
 from src.utils.logger import setup_logger
 from datetime import datetime, timedelta
+
 logger = setup_logger(__name__)
 class NewsFetcher:
+    
     def __init__(self):
         self.FINNHUB_API_KEY = settings.FINNHUB_API_KEY
         self.finnhub_client = None
@@ -29,6 +31,7 @@ class NewsFetcher:
             self.train_model()
         else:
             self._load_model()
+
     def _load_model(self):
         """Attempts to assign self.pipeline and self.label_encoder if files exist."""
         try:
@@ -39,6 +42,7 @@ class NewsFetcher:
                 logger.info(f"Sentiment model not found at {self.model_path}. Training might be required.")
         except Exception as e:
             logger.warning(f"Failed to load sentiment model: {e}")
+
     def train_model(self):
         """Triggers the sentiment model training pipeline."""
         logger.info("Triggering sentiment model training from NewsFetcher...")
@@ -46,6 +50,7 @@ class NewsFetcher:
         result = trainer.train()
         self._load_model()
         return result
+
     def predict_sentiment(self, text: str) -> Dict[str, Any]:
         """Predicts sentiment for a given text."""
         if not self.pipeline or not self.label_encoder:
@@ -62,6 +67,7 @@ class NewsFetcher:
         except Exception as e:
             logger.error(f"Sentiment prediction error: {e}")
             return {"label": "Error", "score": 0.0}
+
     def fetch_stock_news(
         self,
         symbol: str, 
@@ -124,4 +130,5 @@ class NewsFetcher:
         except Exception as e:
             logger.exception(f"Failed to retrieve news due to unexpected issue: {e}")
             return [{"error": f"Failed to retrieve news due to unexpected issue: {e}"}]
+
 news_fetcher = NewsFetcher()

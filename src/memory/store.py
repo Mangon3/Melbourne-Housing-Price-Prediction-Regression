@@ -6,13 +6,18 @@ from pathlib import Path
 from src.config.settings import settings
 from src.rag.utils.embed import embedding
 from src.utils.logger import setup_logger
+
 logger = setup_logger(__name__)
+
 class ConversationStore:
+
     COLLECTION_NAME: str = "conversation_history"
+
     def __init__(self):
         self._client: chromadb.PersistentClient = None
         self._collection: chromadb.Collection = None
         self.persist_path = Path(settings.VECTOR_STORE_PATH)
+
     def _get_client(self) -> chromadb.PersistentClient:
         if self._client is None:
             self.persist_path.mkdir(parents=True, exist_ok=True)
@@ -22,6 +27,7 @@ class ConversationStore:
                 logger.error(f"Failed to initialize ChromaDB for memory: {e}")
                 raise e
         return self._client
+
     def _get_collection(self) -> chromadb.Collection:
         if self._collection is None:
             client = self._get_client()
@@ -29,6 +35,7 @@ class ConversationStore:
                 name=self.COLLECTION_NAME
             )
         return self._collection
+
     def save_turn(self, user_input: str, model_output: str, intent: str):
         """
         Saves a conversation turn (User + AI) into ChromaDB.
@@ -54,6 +61,7 @@ class ConversationStore:
             logger.info(f"Saved conversation turn {turn_id} to vector memory.")
         except Exception as e:
             logger.error(f"Error saving conversation to memory: {e}")
+
     def retrieve_similar(self, query: str, limit: int = 3) -> List[Dict[str, Any]]:
         """
         Retrieves similar past conversations.
@@ -77,4 +85,5 @@ class ConversationStore:
         except Exception as e:
             logger.error(f"Error retrieving memory: {e}")
             return []
+            
 memory_store = ConversationStore()

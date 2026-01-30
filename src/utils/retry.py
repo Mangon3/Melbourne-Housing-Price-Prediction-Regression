@@ -1,18 +1,21 @@
 import time
 import re
-import random
 import functools
 from google.api_core.exceptions import ResourceExhausted, ServiceUnavailable, InternalServerError
 from src.utils.logger import setup_logger
+
 logger = setup_logger(__name__)
+
 def retry_with_backoff(max_retries=5, initial_delay=5.0, backoff_factor=2.0):
     """
     Decorator to retry a function call upon encountering Google API rate limit errors.
     It attempts to parse the 'Please retry in X seconds' message. 
     Otherwise, it uses exponential backoff.
     """
+    
     def decorator(func):
         @functools.wraps(func)
+
         def wrapper(*args, **kwargs):
             delay = initial_delay
             for attempt in range(max_retries + 1):
@@ -46,5 +49,7 @@ def retry_with_backoff(max_retries=5, initial_delay=5.0, backoff_factor=2.0):
                     if not match:
                         delay *= backoff_factor
             return None 
+
         return wrapper
+
     return decorator

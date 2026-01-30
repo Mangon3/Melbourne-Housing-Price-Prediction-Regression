@@ -1,14 +1,15 @@
-import os
 from typing import Dict, Any, List
 from src.tools.model.train import trainer
 from src.tools.model.infer import micro_model_predictor
 from src.utils.logger import setup_logger
+
 logger = setup_logger(__name__)
 class MicroModel:
     """
     The tool interface for managing the Micro Stock Prediction Model, 
     including training and future prediction/backtesting functions.
     """
+    
     def execute_model_training(
         self,
         symbols_list: str = "AAPL,MSFT,GOOGL,AMZN,TSLA",
@@ -52,4 +53,5 @@ class MicroModel:
                 "status": "error",
                 "message": f"A critical error occurred during training or inference: {str(e)}"
             }
+
 micro_model = MicroModel()

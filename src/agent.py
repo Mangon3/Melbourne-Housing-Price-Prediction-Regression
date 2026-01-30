@@ -1,5 +1,5 @@
 import json
-from typing import List, Dict, Any, Optional, Generator
+from typing import List, Dict, Any, Generator
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.messages import SystemMessage, HumanMessage
 from src.config.prompts import StockAgentPrompts
@@ -9,8 +9,10 @@ from src.pipeline import StockAnalysisPipeline
 from src.utils.logger import setup_logger
 from src.memory.store import memory_store
 from src.memory.short_term import stm
+
 logger = setup_logger(__name__)
 class Agent:
+
     def __init__(self, api_key: str):
         self.GEMINI_API_KEY = api_key
         self.AGENT_MODEL = settings.MODEL
@@ -21,6 +23,7 @@ class Agent:
             max_retries=0
         )
         self.pipeline = StockAnalysisPipeline(self.llm)
+
     @retry_with_backoff(max_retries=3)
     def analyze(self, symbol: str, tools: List[str] = None) -> Generator[Dict[str, Any], None, None]:
         """
@@ -28,6 +31,7 @@ class Agent:
         """
         logger.info(f"Tool Selection: StockAnalysisPipeline for {symbol} with tools {tools}")
         yield from self.pipeline.run_analysis(symbol, tools)
+
     @retry_with_backoff(max_retries=2)
     def parse_intent(self, query: str) -> Dict[str, Any]:
         """
@@ -57,6 +61,7 @@ class Agent:
         except json.JSONDecodeError:
             logger.error("Failed to parse planning JSON. Fallback to Unknown.")
             return {'intent': 'UNKNOWN', 'symbol': None, 'tools': []}
+
     def respond_conversational(self, query: str) -> Generator[Dict[str, Any], None, None]:
         """
         Generates a conversational response. Yields progress then result.
@@ -77,6 +82,7 @@ class Agent:
             "symbol": "AI_AGENT",
             "final_report": reply_text
         }
+        
     def parse_symbol(self, query: str) -> str:
         result = self.parse_intent(query)
         if result['intent'] == 'STOCK_QUERY':

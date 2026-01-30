@@ -4,31 +4,34 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 from torch.utils.data import Dataset, DataLoader
-import torch.nn.functional as F
 import pandas as pd
 import numpy as np
-from pathlib import Path
 from typing import List, Tuple, Dict, Any
 import time 
 import random 
-from src.utils.logger import setup_logger
-logger = setup_logger(__name__)
 from src.config.settings import settings
 from src.tools.model.data import tv_data_fetcher
 from src.tools.model.neural import HybridStockNet
 from src.tools.model.feature import FeatureCalculator
 from src.utils.device import get_device
+from src.utils.logger import setup_logger
+
+logger = setup_logger(__name__)
 class StockDataset(Dataset):
     """
     Custom PyTorch Dataset for handling time-series sequence data.
     """
+
     def __init__(self, X: np.ndarray, y: np.ndarray):
         self.X = torch.tensor(X, dtype=torch.float32)
         self.y = torch.tensor(y, dtype=torch.float32).unsqueeze(1)
+
     def __len__(self):
         return len(self.X)
+
     def __getitem__(self, idx):
         return self.X[idx], self.y[idx]
+
     @staticmethod
     def create_sequences(df: pd.DataFrame, seq_len: int, feature_cols: List[str]) -> Tuple[np.ndarray, np.ndarray]:
         X, y = [], []
@@ -49,10 +52,12 @@ class StockDataset(Dataset):
             return np.array([]), np.array([])
         return np.array(X), np.array(y)
 class DirectionalMSELoss(nn.Module):
+
     def __init__(self, penalty_factor: float = 5.0):
         super(DirectionalMSELoss, self).__init__()
         self.mse = nn.MSELoss()
         self.penalty_factor = penalty_factor
+
     def forward(self, pred, target):
         loss_mse = self.mse(pred, target)
         interaction = -1 * (pred * target)
@@ -66,9 +71,11 @@ class StockModelTrainer:
     LEARNING_RATE: float = 0.001
     TEST_SIZE_RATIO: float = 0.2
     DEVICE = get_device()
+
     def __init__(self):
         self.best_test_accuracy = 0.0
         logger.info(f"Trainer initialized. Target device: {self.DEVICE}.")
+
     def _load_and_prepare_data(self, symbols: List[str]) -> Tuple[StockDataset, StockDataset]:
         """Fetches data, calculates features, and creates the final sequence datasets with temporal splitting."""
         train_X_list, train_y_list = [], []
@@ -81,6 +88,7 @@ class StockModelTrainer:
                 timeframe_days=settings.DATA_TIMEFRAME_DAYS, 
                 exchange="NASDAQ"
             )
+
             if isinstance(df_raw, dict) and "error" in df_raw:
                 logger.info(f"NASDAQ fetch failed for {symbol}, trying NYSE...")
                 df_raw = tv_data_fetcher.fetch_historical_data(
@@ -88,6 +96,7 @@ class StockModelTrainer:
                     timeframe_days=settings.DATA_TIMEFRAME_DAYS, 
                     exchange="NYSE"
                 )
+
             if isinstance(df_raw, dict) and "error" in df_raw:
                 logger.info(f"NYSE fetch failed for {symbol}, trying BINANCE...")
                 df_raw = tv_data_fetcher.fetch_historical_data(
@@ -95,6 +104,7 @@ class StockModelTrainer:
                     timeframe_days=settings.DATA_TIMEFRAME_DAYS, 
                     exchange="BINANCE"
                 )
+
             if isinstance(df_raw, dict) and "error" in df_raw:
                 logger.error(f"Skipping {symbol}: Data fetch failed on NASDAQ, NYSE, and BINANCE: {df_raw['error']}")
                 time.sleep(random.uniform(1, 3))
@@ -124,17 +134,21 @@ class StockModelTrainer:
                 logger.error(f"Skipping {symbol} due to feature calculation error: {e}")
             except Exception as e:
                 logger.error(f"An unexpected error occurred for {symbol}: {str(e)}")
+
         if not train_X_list:
             raise RuntimeError("No training data could be generated for any symbol.")
         X_train_combined = np.concatenate(train_X_list, axis=0)
         y_train_combined = np.concatenate(train_y_list, axis=0)
+
         if test_X_list:
             X_test_combined = np.concatenate(test_X_list, axis=0)
             y_test_combined = np.concatenate(test_y_list, axis=0)
         else:
             X_test_combined = np.array([])
             y_test_combined = np.array([])
+
         return StockDataset(X_train_combined, y_train_combined), StockDataset(X_test_combined, y_test_combined)
+
     def _evaluate_model(self, model: nn.Module, dataloader: DataLoader) -> Tuple[float, float]:
         """Evaluates loss and accuracy on a given dataset (train or test)."""
         model.eval()
@@ -158,6 +172,7 @@ class StockModelTrainer:
         else:
             directional_accuracy = 0.0
         return avg_loss, directional_accuracy
+
     def train(self, symbols: List[str] = None, num_epochs: int = None, batch_size: int = None) -> Dict[str, Any]:
         logger.info(f"Trainer.train started. Device: {self.DEVICE}")
         """
@@ -170,23 +185,28 @@ class StockModelTrainer:
         Returns:
             Dict[str, Any]: Final training metrics and status.
         """
+
         symbols = symbols if symbols is not None else self.DEFAULT_SYMBOLS
         num_epochs = num_epochs if num_epochs is not None else self.DEFAULT_EPOCHS
         batch_size = batch_size if batch_size is not None else self.DEFAULT_BATCH_SIZE
+
         try:
             train_dataset, test_dataset = self._load_and_prepare_data(symbols)
             train_dataloader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, drop_last=True)
             test_dataloader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
             logger.info(f"\nTotal training samples available: {len(train_dataset)}")
             logger.info(f"Total testing samples available: {len(test_dataset)}")
+
             if train_dataset.X.shape[2] != settings.INPUT_SIZE:
                  raise RuntimeError(f"Feature count mismatch! Expected {settings.INPUT_SIZE}, got {train_dataset.X.shape[2]}.")
+
             model = HybridStockNet(
                 input_size=settings.INPUT_SIZE,
                 hidden_dim=settings.HIDDEN_DIM,
                 num_layers=settings.NUM_LAYERS,
                 dropout=settings.DROPOUT
             ).to(self.DEVICE)
+
             criterion_reg = DirectionalMSELoss(penalty_factor=5.0)
             criterion_cls = nn.BCELoss()
             optimizer = optim.Adam(model.parameters(), lr=self.LEARNING_RATE)
@@ -196,9 +216,12 @@ class StockModelTrainer:
             early_stop_counter = 0
             patience = 12
             logger.info(f"Training started for {num_epochs} epochs on symbols: {', '.join(symbols)}")
+
             for epoch in range(num_epochs):
                 model.train()
+
                 running_loss = 0.0
+
                 for i, (inputs, labels) in enumerate(train_dataloader):
                     inputs, labels = inputs.to(self.DEVICE), labels.to(self.DEVICE)
                     optimizer.zero_grad()
@@ -211,14 +234,17 @@ class StockModelTrainer:
                     loss.backward()
                     optimizer.step()
                     running_loss += loss.item()
+
                 train_loss = running_loss / len(train_dataloader)
                 test_loss, test_accuracy = self._evaluate_model(model, test_dataloader)
                 logger.info(f"Epoch {epoch+1}/{num_epochs} | Train Loss: {train_loss:.4f} | Test Loss: {test_loss:.4f} | Test Accuracy: {test_accuracy:.4f}")
+
                 if test_accuracy > self.best_test_accuracy:
                     self.best_test_accuracy = test_accuracy
                     settings.MODEL_PATH.parent.mkdir(parents=True, exist_ok=True)
                     torch.save(model.state_dict(), settings.MODEL_PATH)
                     logger.info(f"--> Model saved! New BEST Test Accuracy: {self.best_test_accuracy:.4f}")
+
                 scheduler.step(test_loss)
                 if test_loss < best_test_loss:
                     best_test_loss = test_loss
@@ -229,16 +255,19 @@ class StockModelTrainer:
                         logger.info(f"Early stopping triggered at epoch {epoch+1}")
                         break
             logger.info("Training complete.")
+
             return {
                 "status": "success",
                 "final_accuracy": self.best_test_accuracy,
                 "epochs_run": num_epochs,
                 "model_path": str(settings.MODEL_PATH)
             }
+            
         except RuntimeError as e:
             logger.error(f"Training failed: {e}")
             return {"status": "error", "message": f"Training failed: {e}"}
         except Exception as e:
             logger.error(f"An unexpected error occurred during training: {e}")
             return {"status": "error", "message": f"Unexpected error: {e}"}
+
 trainer = StockModelTrainer()
