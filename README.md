@@ -1,6 +1,6 @@
 # Stock Agent API
 
-A FastAPI-powered financial analysis platform leveraging LangGraph, Google Gemini, and machine learning for comprehensive stock analysis.
+A FastAPI-powered financial analysis platform using LangGraph, Google Gemini, and machine learning for comprehensive stock analysis.
 
 ## Features
 
