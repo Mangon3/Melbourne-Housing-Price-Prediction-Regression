@@ -5,11 +5,10 @@ import { TrendingUp, TrendingDown, DollarSign, Activity } from 'lucide-react';
 interface AnalysisData {
   symbol: string;
   final_report: string;
-  micro_analysis?: any; // Relaxed type for legacy support
+  micro_analysis?: any;
 }
 
 export function AnalysisReport({ data }: { data: AnalysisData }) {
-  // Extract signal if available (fallback to safely checking final_report)
   const reportLower = data.final_report.toLowerCase();
   const isBullish = reportLower.includes("bullish") || reportLower.includes("strong buy");
   const isBearish = reportLower.includes("bearish") || reportLower.includes("sell");

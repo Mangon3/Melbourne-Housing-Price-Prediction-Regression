@@ -11,11 +11,9 @@ export default function Home() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   
-  // Settings State
   const [apiKey, setApiKey] = useState('');
   const [showSettings, setShowSettings] = useState(false);
   
-  // Auto-scroll ref
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -44,14 +42,12 @@ export default function Home() {
     setInput('');
     setIsLoading(true);
 
-    // Add User Message
     const userMsg: Message = {
       id: uuidv4(),
       role: 'user',
       content: userQuery
     };
     
-    // Add Placeholder Bot Message with Initial Progress
     const botMsgId = uuidv4();
     const botPlaceholder: Message = {
       id: botMsgId,
@@ -81,11 +77,9 @@ export default function Home() {
          throw new Error(`Analysis failed: ${response.statusText}`);
       }
 
-      // Check Content-Type to determine method
       const contentType = response.headers.get("content-type");
       
       if (contentType && contentType.includes("application/json")) {
-        // Handle Legacy Non-Streaming Response
         const result = await response.json();
         
         setMessages(prev => prev.map(msg =>
@@ -95,7 +89,6 @@ export default function Home() {
         ));
         
       } else {
-        // Handle SSE Streaming Response
         const reader = response.body?.getReader();
         const decoder = new TextDecoder();
         
@@ -115,8 +108,6 @@ export default function Home() {
   
               try {
                 const data = JSON.parse(jsonStr);
-  
-                // Update Bot Message State based on Event Type
                 setMessages(prev => prev.map(msg => {
                   if (msg.id !== botMsgId) return msg;
   
