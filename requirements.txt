@@ -22,3 +22,6 @@ pandas
 tabulate
 matplotlib
 ipykernel
+pytest
+bandit
+prometheus-fastapi-instrumentator

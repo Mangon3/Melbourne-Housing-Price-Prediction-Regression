@@ -4,6 +4,7 @@ from fastapi import FastAPI, HTTPException, Header
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, model_validator
 from fastapi.middleware.cors import CORSMiddleware
+from prometheus_fastapi_instrumentator import Instrumentator
 from src.agent import Agent
 from src.utils.logger import setup_logger
 from src.utils.errors import format_error
@@ -18,6 +19,8 @@ app = FastAPI(
     description=settings.API_DESCRIPTION,
     version="1.0.0"
 )
+
+Instrumentator().instrument(app).expose(app)
 
 app.add_middleware(
     CORSMiddleware,
