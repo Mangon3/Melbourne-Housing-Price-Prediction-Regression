@@ -8,7 +8,9 @@ from src.tools.micro import micro_model
 from src.rag.core import rag_system
 from src.utils.logger import setup_logger
 from src.config.prompts import StockAgentPrompts
+
 logger = setup_logger(__name__)
+
 class StockAnalysisPipeline:
     """
     1. Macro News Analysis
