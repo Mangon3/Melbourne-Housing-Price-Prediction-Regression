@@ -98,10 +98,8 @@ pipeline {
 
     post {
         always {
-            node {
-                // logout
-                sh "docker logout || true"
-            }
+            // logout
+            sh "docker logout || true"
         }
         success {
             echo "DevSecOps Pipeline Completed Successfully! Image is live at ${IMAGE_NAME}:${IMAGE_TAG}"
