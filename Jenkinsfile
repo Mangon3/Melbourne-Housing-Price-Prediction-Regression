@@ -9,7 +9,7 @@ pipeline {
         
         // credentials
         DOCKER_CREDS = credentials('docker-hub-credentials')
-        SONAR_TOKEN = credentials('sonar-token')
+        SONAR_TOKEN = credentials('SONAR_TOKEN')
     }
 
     stages {
@@ -98,8 +98,10 @@ pipeline {
 
     post {
         always {
-            // logout
-            sh "docker logout || true"
+            node {
+                // logout
+                sh "docker logout || true"
+            }
         }
         success {
             echo "DevSecOps Pipeline Completed Successfully! Image is live at ${IMAGE_NAME}:${IMAGE_TAG}"
