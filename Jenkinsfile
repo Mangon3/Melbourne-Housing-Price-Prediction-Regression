@@ -21,18 +21,13 @@ pipeline {
             }
         }
 
-        stage('2. Unit Test') {
+        stage('2. Test (Unit & Integration)') {
             steps {
-                echo "Running Automated Unit Tests..."
+                echo "--- Running Automated Unit Tests ---"
                 sh "docker run --rm ${IMAGE_NAME}:${IMAGE_TAG} pytest test_agent.py"
-            }
-        }
-
-        stage('3. Integration Test') {
-            steps {
-                echo "Running Automated Integration Tests via Docker Compose..."
+                
+                echo "--- Running Automated Integration Tests via Docker Compose ---"
                 sh """
-                # Setup test namespace
                 export IMAGE_NAME=${IMAGE_NAME}
                 export IMAGE_TAG=${IMAGE_TAG}
                 export COMPOSE_PROJECT_NAME=test_env_${BUILD_NUMBER}
@@ -56,7 +51,7 @@ pipeline {
             }
         }
 
-        stage('4. Code Quality (SonarCloud)') {
+        stage('3. Code Quality (SonarCloud)') {
             steps {
                 echo "Running Static Application Security Testing (SAST) via SonarQube..."
                 sh """
@@ -67,12 +62,13 @@ pipeline {
                     -Dsonar.organization=${DOCKER_USERNAME} \
                     -Dsonar.host.url=https://sonarcloud.io \
                     -Dsonar.login=${SONAR_TOKEN} \
+                    -Dsonar.exclusions="test/**,.venv/**" \
                     -Dsonar.qualitygate.wait=true
                 """
             }
         }
 
-        stage('5. Security Scan (Trivy)') {
+        stage('4. Security Scan (Trivy)') {
             steps {
                 echo "Scanning Docker Image for High/Critical Vulnerabilities..."
                 sh """
@@ -84,19 +80,31 @@ pipeline {
             }
         }
 
-        stage('6. Deploy (Staging)') {
+        stage('5. Deploy (Staging IaC)') {
             steps {
                 echo "Deploying to Staging Environment via IaC..."
-                sh """
-                export IMAGE_NAME=${IMAGE_NAME}
-                export IMAGE_TAG=${IMAGE_TAG}
-                export COMPOSE_PROJECT_NAME=staging_env
-                docker-compose -f docker-compose.yml up -d
-                """
+                script {
+                    try {
+                        sh """
+                        export IMAGE_NAME=${IMAGE_NAME}
+                        export IMAGE_TAG=${IMAGE_TAG}
+                        export COMPOSE_PROJECT_NAME=staging_env
+                        docker-compose -f docker-compose.yml up -d
+                        """
+                    } catch (Exception e) {
+                        echo "Deployment failed! Initiating rollback to previous state..."
+                        sh """
+                        export COMPOSE_PROJECT_NAME=staging_env
+                        docker-compose -f docker-compose.yml down
+                        # In a real environment, we would re-deploy the previous successful image tag here.
+                        """
+                        error("Deployment failed and rollback executed.")
+                    }
+                }
             }
         }
 
-        stage('7. Release (Docker Hub & Git)') {
+        stage('6. Release (Docker Hub & Git)') {
             steps {
                 echo "Pushing Versioned Release to Docker Hub & Tagging Git..."
                 sh """
@@ -114,7 +122,7 @@ pipeline {
             }
         }
 
-        stage('8. Monitoring (Health & Alerts)') {
+        stage('7. Monitoring (Health & Alerts)') {
             steps {
                 echo "Simulating Live Monitoring and Alerting..."
                 sleep 5
