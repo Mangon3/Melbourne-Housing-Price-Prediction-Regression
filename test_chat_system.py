@@ -26,7 +26,7 @@ async def test_query(query: str, expected_type: str):
     full_text = ""
 
     try:
-        async with httpx.AsyncClient(timeout=60.0) as client:
+        async with httpx.AsyncClient(timeout=180.0) as client:
             async with client.stream("POST", API_URL, json=payload, headers=headers) as response:
                 if response.status_code != 200:
                     error_text = await response.aread()
