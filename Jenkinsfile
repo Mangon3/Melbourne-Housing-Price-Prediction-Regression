@@ -42,7 +42,7 @@ pipeline {
                 
                 # Run the integration tests inside the running app container
                 APP_CONTAINER=\$(docker-compose ps -q stock-agent)
-                docker exec \${APP_CONTAINER} pytest test/test_chat_system.py
+                docker exec \${APP_CONTAINER} pytest test_chat_system.py
                 """
             }
             post {
