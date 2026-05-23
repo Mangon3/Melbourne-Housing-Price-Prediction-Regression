@@ -16,23 +16,49 @@ pipeline {
         stage('1. Build') {
             steps {
                 echo "Building Docker Image: ${IMAGE_NAME}:${IMAGE_TAG}..."
-                // build
-                sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} -t ${IMAGE_NAME}:latest ."
+                sh "docker build --network=host -t ${IMAGE_NAME}:${IMAGE_TAG} -t ${IMAGE_NAME}:latest . | tee build_log.txt"
+                archiveArtifacts artifacts: 'build_log.txt', allowEmptyArchive: true
             }
         }
 
-        stage('2. Test') {
+        stage('2. Unit Test') {
             steps {
                 echo "Running Automated Unit Tests..."
-                // run pytest
                 sh "docker run --rm ${IMAGE_NAME}:${IMAGE_TAG} pytest test_agent.py"
             }
         }
 
-        stage('3. Code Quality (SonarCloud)') {
+        stage('3. Integration Test') {
+            steps {
+                echo "Running Automated Integration Tests via Docker Compose..."
+                sh """
+                # Setup test namespace
+                export IMAGE_NAME=${IMAGE_NAME}
+                export IMAGE_TAG=${IMAGE_TAG}
+                export COMPOSE_PROJECT_NAME=test_env_${BUILD_NUMBER}
+                
+                # Start IaC
+                docker-compose -f docker-compose.yml up -d
+                sleep 10
+                
+                # Run the integration tests inside the running app container
+                APP_CONTAINER=\$(docker-compose ps -q stock-agent)
+                docker exec \${APP_CONTAINER} pytest test/test_chat_system.py
+                """
+            }
+            post {
+                always {
+                    sh """
+                    export COMPOSE_PROJECT_NAME=test_env_${BUILD_NUMBER}
+                    docker-compose -f docker-compose.yml down || true
+                    """
+                }
+            }
+        }
+
+        stage('4. Code Quality (SonarCloud)') {
             steps {
                 echo "Running Static Application Security Testing (SAST) via SonarQube..."
-                // sonarsource scanner
                 sh """
                 docker run --rm \
                     -v "${WORKSPACE}:/usr/src" \
@@ -40,57 +66,69 @@ pipeline {
                     -Dsonar.projectKey=stock-agent-devsecops \
                     -Dsonar.organization=${DOCKER_USERNAME} \
                     -Dsonar.host.url=https://sonarcloud.io \
-                    -Dsonar.login=${SONAR_TOKEN}
+                    -Dsonar.login=${SONAR_TOKEN} \
+                    -Dsonar.qualitygate.wait=true
                 """
             }
         }
 
-        stage('4. Security Scan (Trivy)') {
+        stage('5. Security Scan (Trivy)') {
             steps {
                 echo "Scanning Docker Image for High/Critical Vulnerabilities..."
-                // aquasec trivy
                 sh """
                 docker run --rm \
                     -v /var/run/docker.sock:/var/run/docker.sock \
-                    aquasec/trivy image --severity HIGH,CRITICAL --exit-code 0 ${IMAGE_NAME}:${IMAGE_TAG}
+                    -v "${WORKSPACE}/.trivyignore:/.trivyignore" \
+                    aquasec/trivy image --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1 ${IMAGE_NAME}:${IMAGE_TAG}
                 """
             }
         }
 
-        stage('5. Deploy (Staging)') {
+        stage('6. Deploy (Staging)') {
             steps {
-                echo "Deploying to Local Arch Staging Environment..."
-                // stop, remove, & start
+                echo "Deploying to Staging Environment via IaC..."
                 sh """
-                docker stop stock-agent-staging || true
-                docker rm stock-agent-staging || true
-                docker run -d --name stock-agent-staging -p 7860:7860 ${IMAGE_NAME}:${IMAGE_TAG}
+                export IMAGE_NAME=${IMAGE_NAME}
+                export IMAGE_TAG=${IMAGE_TAG}
+                export COMPOSE_PROJECT_NAME=staging_env
+                docker-compose -f docker-compose.yml up -d
                 """
             }
         }
 
-        stage('6. Release (Docker Hub)') {
+        stage('7. Release (Docker Hub & Git)') {
             steps {
-                echo "Pushing Versioned Release to Docker Hub..."
-                // login & push
+                echo "Pushing Versioned Release to Docker Hub & Tagging Git..."
                 sh """
-                echo ${DOCKER_CREDS_PSW} | docker login -u ${DOCKER_CREDS_USR} --password-stdin
+                echo \${DOCKER_CREDS_PSW} | docker login -u \${DOCKER_CREDS_USR} --password-stdin
                 docker push ${IMAGE_NAME}:${IMAGE_TAG}
                 docker push ${IMAGE_NAME}:latest
                 """
+                
+                sh """
+                git config --global user.email "jenkins@localhost" || true
+                git config --global user.name "Jenkins CI" || true
+                git tag -a ${IMAGE_TAG} -m "Release ${IMAGE_TAG}" || true
+                echo "Simulated Git Tag Push: git push origin ${IMAGE_TAG}"
+                """
             }
         }
 
-        stage('7. Monitoring (Health Check & Metrics)') {
+        stage('8. Monitoring (Health & Alerts)') {
             steps {
-                echo "Simulating Live Monitoring and Uptime Check..."
-                // sleep & check health & metrics
+                echo "Simulating Live Monitoring and Alerting..."
                 sleep 5
                 sh """
                 echo "Checking Application Health..."
                 curl -f http://localhost:7860/docs || exit 1
+                
                 echo "Checking Metrics Endpoint for Prometheus..."
                 curl -f http://localhost:7860/metrics || echo "WARNING: /metrics not found, but app is up."
+                
+                echo "Simulating incident alert to Slack/Email..."
+                echo '{"text": "Deployment ${IMAGE_TAG} successful! Live on Staging."}' > alert.json
+                echo "Webhook payload:"
+                cat alert.json
                 """
             }
         }
@@ -98,14 +136,13 @@ pipeline {
 
     post {
         always {
-            // logout
             sh "docker logout || true"
         }
         success {
             echo "DevSecOps Pipeline Completed Successfully! Image is live at ${IMAGE_NAME}:${IMAGE_TAG}"
         }
         failure {
-            echo "Pipeline Failed. Please check the logs."
+            echo "Pipeline Failed. Review the security and code quality gates."
         }
     }
 }

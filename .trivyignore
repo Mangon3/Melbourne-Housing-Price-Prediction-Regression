@@ -1,0 +1,7 @@
+# Trivy Ignore File for StockAgent
+# Use this file to mitigate known vulnerabilities that cannot be resolved
+# due to upstream limitations (e.g. Debian base image issues with no fix)
+# This demonstrates proactive security handling by cataloguing and justifying known risks.
+
+# Example:
+# CVE-2023-XXXXX # Acknowledged: Low severity issue in base image, patch unavailable.
