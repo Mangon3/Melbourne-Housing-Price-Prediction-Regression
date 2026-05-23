@@ -62,7 +62,7 @@ pipeline {
             steps {
                 echo "Running Static Application Security Testing (SAST) via SonarQube..."
                 sh """
-                docker run --rm \
+                docker run --rm --network=host \
                     -v "${WORKSPACE}:/usr/src" \
                     sonarsource/sonar-scanner-cli \
                     -Dsonar.projectKey=stock-agent-devsecops \
