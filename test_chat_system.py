@@ -1,10 +1,12 @@
 import pytest
 import asyncio
 import json
+import os
 import httpx
 
 # Configuration
 API_URL = "http://0.0.0.0:7860/analyze"  # Ensure this matches the port in docker-compose.yml
+API_KEY = os.environ.get("GOOGLE_API_KEY", "")
 
 @pytest.mark.anyio
 @pytest.mark.parametrize("query, expected_type", [
@@ -16,6 +18,8 @@ async def test_query(query: str, expected_type: str):
     print(f"    Expected Intent Type: {expected_type}")
     
     headers = {"Content-Type": "application/json"}
+    if API_KEY:
+        headers["X-Gemini-API-Key"] = API_KEY
     payload = {"query": query}
     
     found_expected_response = False

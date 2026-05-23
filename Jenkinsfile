@@ -28,28 +28,31 @@ pipeline {
                 
                 echo "--- Running Automated Integration Tests via Docker Compose ---"
                 sh """
+                # Copy .env from host project for API keys
+                cp /home/mango/Documents/Work/Code\\ Projects/StockAgent/.env .env || true
+                
                 export IMAGE_NAME=${IMAGE_NAME}
                 export IMAGE_TAG=${IMAGE_TAG}
                 # Prevent port collisions by temporarily bringing down staging
                 export COMPOSE_PROJECT_NAME=staging_env
-                docker-compose -f docker-compose.yml down || true
+                docker-compose --env-file .env -f docker-compose.yml down || true
                 
                 export COMPOSE_PROJECT_NAME=test_env_${BUILD_NUMBER}
                 
-                # Start IaC
-                docker-compose -f docker-compose.yml up -d
-                sleep 10
+                # Start IaC with env file
+                docker-compose --env-file .env -f docker-compose.yml up -d
+                sleep 15
                 
                 # Run the integration tests inside the running app container
-                APP_CONTAINER=\$(docker-compose ps -q stock-agent)
-                docker exec \${APP_CONTAINER} pytest test_chat_system.py
+                APP_CONTAINER=\$(docker-compose --env-file .env ps -q stock-agent)
+                docker exec -e GOOGLE_API_KEY=\$(grep GOOGLE_API_KEY .env | cut -d '=' -f2) \${APP_CONTAINER} pytest test_chat_system.py
                 """
             }
             post {
                 always {
                     sh """
                     export COMPOSE_PROJECT_NAME=test_env_${BUILD_NUMBER}
-                    docker-compose -f docker-compose.yml down || true
+                    docker-compose --env-file .env -f docker-compose.yml down || true
                     """
                 }
             }
@@ -93,13 +96,13 @@ pipeline {
                         export IMAGE_NAME=${IMAGE_NAME}
                         export IMAGE_TAG=${IMAGE_TAG}
                         export COMPOSE_PROJECT_NAME=staging_env
-                        docker-compose -f docker-compose.yml up -d
+                        docker-compose --env-file .env -f docker-compose.yml up -d
                         """
                     } catch (Exception e) {
                         echo "Deployment failed! Initiating rollback to previous state..."
                         sh """
                         export COMPOSE_PROJECT_NAME=staging_env
-                        docker-compose -f docker-compose.yml down
+                        docker-compose --env-file .env -f docker-compose.yml down
                         # In a real environment, we would re-deploy the previous successful image tag here.
                         """
                         error("Deployment failed and rollback executed.")
