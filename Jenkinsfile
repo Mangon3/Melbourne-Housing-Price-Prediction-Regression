@@ -65,8 +65,8 @@ pipeline {
                 docker run --rm --network=host \
                     -v "${WORKSPACE}:/usr/src" \
                     sonarsource/sonar-scanner-cli \
-                    -Dsonar.projectKey=stock-agent-devsecops \
-                    -Dsonar.organization=${DOCKER_USERNAME} \
+                    -Dsonar.projectKey=Mangon3_Stock-Agent \
+                    -Dsonar.organization=mango80200782 \
                     -Dsonar.host.url=https://sonarcloud.io \
                     -Dsonar.login=${SONAR_TOKEN} \
                     -Dsonar.exclusions="test/**,.venv/**" \
