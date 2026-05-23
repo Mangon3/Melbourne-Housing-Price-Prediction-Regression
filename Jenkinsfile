@@ -30,6 +30,10 @@ pipeline {
                 sh """
                 export IMAGE_NAME=${IMAGE_NAME}
                 export IMAGE_TAG=${IMAGE_TAG}
+                # Prevent port collisions by temporarily bringing down staging
+                export COMPOSE_PROJECT_NAME=staging_env
+                docker-compose -f docker-compose.yml down || true
+                
                 export COMPOSE_PROJECT_NAME=test_env_${BUILD_NUMBER}
                 
                 # Start IaC
