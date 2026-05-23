@@ -28,8 +28,8 @@ pipeline {
                 
                 echo "--- Running Automated Integration Tests via Docker Compose ---"
                 sh """
-                # Copy .env from host project for API keys
-                cp /home/mango/Documents/Work/Code\\ Projects/StockAgent/.env .env || true
+                # Copy .env from Jenkins home for API keys
+                cp /var/lib/jenkins/.env .env || true
                 
                 export IMAGE_NAME=${IMAGE_NAME}
                 export IMAGE_TAG=${IMAGE_TAG}
