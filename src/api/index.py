@@ -44,7 +44,8 @@ class AnalyzeRequest(BaseModel):
 
 def _parse_intent(current_agent: Agent, query: str):
     """Parses user intent, returning (intent, symbol, intent_data)."""
-    logger.info("Analyzing intent for query: %s", query)
+    sanitized_query = query.replace('\n', ' ').replace('\r', '')
+    logger.info("Analyzing intent for query: %s", sanitized_query)
     try:
         intent_data = current_agent.parse_intent(query)
         return intent_data['intent'], intent_data.get('symbol'), intent_data
