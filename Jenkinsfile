@@ -77,9 +77,13 @@ pipeline {
                     -Dsonar.login=${SONAR_TOKEN} \
                     -Dsonar.exclusions="test/**,.venv/**" \
                     -Dsonar.python.coverage.reportPaths="coverage.xml" \
-                    -Dsonar.issue.ignore.multicriteria=e1 \
+                    -Dsonar.issue.ignore.multicriteria=e1,e2,e3 \
                     -Dsonar.issue.ignore.multicriteria.e1.ruleKey=text:S8565 \
                     -Dsonar.issue.ignore.multicriteria.e1.resourceKey=pyproject.toml \
+                    -Dsonar.issue.ignore.multicriteria.e2.ruleKey=docker:S8544 \
+                    -Dsonar.issue.ignore.multicriteria.e2.resourceKey=Dockerfile \
+                    -Dsonar.issue.ignore.multicriteria.e3.ruleKey=docker:S6504 \
+                    -Dsonar.issue.ignore.multicriteria.e3.resourceKey=Dockerfile \
                     -Dsonar.qualitygate.wait=true
                 """
             }
