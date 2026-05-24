@@ -82,7 +82,7 @@ pipeline {
                     -Dsonar.issue.ignore.multicriteria.e1.resourceKey=pyproject.toml \
                     -Dsonar.issue.ignore.multicriteria.e2.ruleKey=docker:S8544 \
                     -Dsonar.issue.ignore.multicriteria.e2.resourceKey=Dockerfile \
-                    -Dsonar.issue.ignore.multicriteria.e3.ruleKey=docker:S6504 \
+                    -Dsonar.issue.ignore.multicriteria.e3.ruleKey=docker:S8541 \
                     -Dsonar.issue.ignore.multicriteria.e3.resourceKey=Dockerfile \
                     -Dsonar.qualitygate.wait=true
                 """
