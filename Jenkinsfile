@@ -27,6 +27,9 @@ pipeline {
                 sh """
                 # Run unit tests and generate XML coverage report for SonarCloud
                 docker run --rm -v "${WORKSPACE}:/app" ${IMAGE_NAME}:${IMAGE_TAG} pytest --cov=src --cov-report=xml:coverage.xml test_agent.py
+                
+                # Fix paths in coverage.xml to match SonarScanner's expected base directory
+                sed -i 's|/app|/usr/src|g' coverage.xml
                 """
                 
                 echo "--- Running Automated Integration Tests via Docker Compose ---"
