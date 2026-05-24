@@ -26,10 +26,10 @@ pipeline {
                 echo "--- Running Automated Unit Tests (with Coverage) ---"
                 sh """
                 # Run unit tests and generate XML coverage report for SonarCloud
-                docker run --rm -v "${WORKSPACE}:/app" ${IMAGE_NAME}:${IMAGE_TAG} pytest --cov=. --cov-report=xml:coverage.xml test/test_agent.py
+                docker run --rm -v "${WORKSPACE}:/app" ${IMAGE_NAME}:${IMAGE_TAG} pytest --cov=. --cov-report=xml:coverage.xml test/test_agent.py test/test_tools.py test/test_graph.py test/test_rag.py test/test_memory.py test/test_main.py
                 
                 # Fix paths in coverage.xml to match SonarScanner's expected base directory
-                sed -i 's|/app|/usr/src|g' coverage.xml
+                sed -i 's|<source>/app</source>|<source>/usr/src</source>|g' coverage.xml
                 """
                 
                 echo "--- Running Automated Integration Tests via Docker Compose ---"
@@ -55,7 +55,7 @@ pipeline {
                 
                 # Copy the integration coverage report out of the container
                 docker cp \${APP_CONTAINER}:/app/coverage_integration.xml coverage_integration.xml
-                sed -i 's|/app|/usr/src|g' coverage_integration.xml
+                sed -i 's|<source>/app</source>|<source>/usr/src</source>|g' coverage_integration.xml
                 """
             }
             post {
