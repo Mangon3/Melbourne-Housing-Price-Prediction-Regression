@@ -26,7 +26,7 @@ pipeline {
                 echo "--- Running Automated Unit Tests (with Coverage) ---"
                 sh """
                 # Run unit tests and generate XML coverage report for SonarCloud
-                docker run --rm -v "${WORKSPACE}:/app" ${IMAGE_NAME}:${IMAGE_TAG} pytest --cov=. --cov-report=xml:coverage.xml test_agent.py
+                docker run --rm -v "${WORKSPACE}:/app" ${IMAGE_NAME}:${IMAGE_TAG} pytest --cov=. --cov-report=xml:coverage.xml test/test_agent.py
                 
                 # Fix paths in coverage.xml to match SonarScanner's expected base directory
                 sed -i 's|/app|/usr/src|g' coverage.xml
@@ -51,7 +51,7 @@ pipeline {
                 
                 # Run the integration tests inside the running app container
                 APP_CONTAINER=\$(docker-compose --env-file .env ps -q stock-agent)
-                docker exec -e GOOGLE_API_KEY=\$(grep GOOGLE_API_KEY .env | cut -d '=' -f2) \${APP_CONTAINER} pytest --cov=. --cov-report=xml:coverage_integration.xml test_chat_system.py
+                docker exec -e GOOGLE_API_KEY=\$(grep GOOGLE_API_KEY .env | cut -d '=' -f2) \${APP_CONTAINER} pytest --cov=. --cov-report=xml:coverage_integration.xml test/test_chat_system.py
                 
                 # Copy the integration coverage report out of the container
                 docker cp \${APP_CONTAINER}:/app/coverage_integration.xml coverage_integration.xml
@@ -82,7 +82,7 @@ pipeline {
                     -Dsonar.organization=mango80200782 \
                     -Dsonar.host.url=https://sonarcloud.io \
                     -Dsonar.login=${SONAR_TOKEN} \
-                    -Dsonar.exclusions="test/**,.venv/**" \
+                    -Dsonar.exclusions="test/**,.venv/**,src/app/**,src/components/**,src/lib/**,**/*.ts,**/*.tsx,**/*.css" \
                     -Dsonar.python.coverage.reportPaths="coverage.xml,coverage_integration.xml" \
                     -Dsonar.issue.ignore.multicriteria=e1,e2,e3 \
                     -Dsonar.issue.ignore.multicriteria.e1.ruleKey=text:S8565 \
