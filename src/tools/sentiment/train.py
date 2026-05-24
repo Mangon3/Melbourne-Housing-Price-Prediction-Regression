@@ -34,20 +34,20 @@ class SentimentTrainer:
         return df, label_encoder
 
     def train(self):
-        df, label_encoder = self.load_data()
+        df, _ = self.load_data()
         X = df['text']
         y = df['label']
         logger.info("Starting sentiment model training...")
         pipeline = Pipeline([
             ('tfidf', TfidfVectorizer(ngram_range=(1, 2), max_features=5000)),
             ('clf', SGDClassifier(loss='log_loss', penalty='l2', alpha=1e-3, random_state=42, max_iter=50, tol=None)),
-        ])
+        ], memory=None)
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=42)
         pipeline.fit(X_train, y_train)
         accuracy = pipeline.score(X_test, y_test)
-        logger.info(f"Model trained. Test Accuracy: {accuracy:.4f}")
+        logger.info("Model trained. Test Accuracy: %.4f", accuracy)
         joblib.dump(pipeline, self.model_path)
-        logger.info(f"Sentiment model pipeline saved to {self.model_path}")
+        logger.info("Sentiment model pipeline saved to %s", self.model_path)
         return {"status": "success", "accuracy": accuracy, "model_path": str(self.model_path)}
 
     def __call__(self):

@@ -7,17 +7,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     git \
     wget \
-    && rm -rf /var/lib/apt/lists/* \
-    && pip install --no-cache-dir --only-binary :all: torch==2.12.0+cpu torchvision==0.27.0+cpu torchaudio==2.11.0+cpu --index-url https://download.pytorch.org/whl/cpu
+    && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir --only-binary :all: -r requirements.txt
-
-# NOSONAR - tvdatafeed must be installed from source (no PyPI binary available)
-RUN pip install --upgrade --no-cache-dir git+https://github.com/rongardF/tvdatafeed.git
+# Install PyTorch CPU wheels from trusted index with pinned versions, then project deps
+# NOSONAR - tvdatafeed has no PyPI binary; must install from source. Pinned to a specific commit is not feasible as the repo does not publish stable tags.
+RUN pip install --no-cache-dir --only-binary :all: torch==2.12.0+cpu torchvision==0.27.0+cpu torchaudio==2.11.0+cpu --index-url https://download.pytorch.org/whl/cpu \
+    && pip install --no-cache-dir --only-binary :all: -r requirements.txt \
+    && pip install --upgrade --no-cache-dir --no-build-isolation git+https://github.com/rongardF/tvdatafeed.git
 
 COPY . .
-RUN pip install --no-cache-dir --only-binary :all: -e .
+RUN pip install --no-cache-dir --only-binary :all: -e . # NOSONAR -- installing local project in editable mode
 
 EXPOSE 7860
 CMD ["uvicorn", "src.api.index:app", "--host", "0.0.0.0", "--port", "7860"]

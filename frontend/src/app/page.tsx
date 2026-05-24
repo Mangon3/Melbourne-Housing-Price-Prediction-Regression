@@ -34,6 +34,62 @@ export default function Home() {
     localStorage.setItem('gemini_api_key', val);
   };
 
+  const _handleJsonResponse = async (response: Response, botMsgId: string) => {
+    const result = await response.json();
+    setMessages(prev => prev.map(msg =>
+      msg.id === botMsgId
+        ? { ...msg, isLoading: false, data: result, content: result.final_report }
+        : msg
+    ));
+  };
+
+  const _handleStreamResponse = async (response: Response, botMsgId: string) => {
+    const reader = response.body?.getReader();
+    const decoder = new TextDecoder();
+    
+    if (!reader) throw new Error("No response body");
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      const chunk = decoder.decode(value);
+      const lines = chunk.split('\n\n');
+
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue;
+        
+        const jsonStr = line.slice(6);
+        if (!jsonStr.trim()) continue;
+
+        try {
+          const data = JSON.parse(jsonStr);
+          setMessages(prev => prev.map(msg => {
+            if (msg.id !== botMsgId) return msg;
+
+            if (data.error) {
+              return { ...msg, isLoading: false, isError: true, content: data.error };
+            }
+
+            if (data.type === 'result') {
+              return {
+                ...msg,
+                isLoading: false,
+                data: data,
+                content: data.final_report
+              };
+            }
+
+            return msg; // progress chunks return unmodified message
+          }));
+
+        } catch (e) {
+          console.error("Error parsing stream chunk", e);
+        }
+      }
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
@@ -79,71 +135,18 @@ export default function Home() {
 
       const contentType = response.headers.get("content-type");
       
-      if (contentType && contentType.includes("application/json")) {
-        const result = await response.json();
-        
-        setMessages(prev => prev.map(msg =>
-          msg.id === botMsgId
-            ? { ...msg, isLoading: false, data: result, content: result.final_report }
-            : msg
-        ));
-        
+      if (contentType?.includes("application/json")) {
+        await _handleJsonResponse(response, botMsgId);
       } else {
-        const reader = response.body?.getReader();
-        const decoder = new TextDecoder();
-        
-        if (!reader) throw new Error("No response body");
-  
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) break;
-  
-          const chunk = decoder.decode(value);
-          const lines = chunk.split('\n\n');
-  
-          for (const line of lines) {
-            if (line.startsWith('data: ')) {
-              const jsonStr = line.slice(6);
-              if (!jsonStr.trim()) continue;
-  
-              try {
-                const data = JSON.parse(jsonStr);
-                setMessages(prev => prev.map(msg => {
-                  if (msg.id !== botMsgId) return msg;
-  
-                  if (data.error) {
-                    return { ...msg, isLoading: false, isError: true, content: data.error };
-                  }
-  
-                  if (data.type === 'progress') {
-                    return msg;
-                  }
-  
-                  if (data.type === 'result') {
-                    return {
-                      ...msg,
-                      isLoading: false,
-                      data: data,
-                      content: data.final_report
-                    };
-                  }
-  
-                  return msg;
-                }));
-  
-              } catch (e) {
-                console.error("Error parsing stream chunk", e);
-              }
-            }
-          }
-        }
+        await _handleStreamResponse(response, botMsgId);
       }
 
-    } catch (err: any) {
+    } catch (err) {
       console.error(err);
+      const errorMessage = err instanceof Error ? err.message : "Something went wrong.";
       setMessages(prev => prev.map(msg => 
         msg.id === botMsgId 
-          ? { ...msg, isLoading: false, isError: true, content: err.message || "Something went wrong." } 
+          ? { ...msg, isLoading: false, isError: true, content: errorMessage } 
           : msg
       ));
     } finally {

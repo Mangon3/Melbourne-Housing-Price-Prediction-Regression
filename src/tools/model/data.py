@@ -21,9 +21,9 @@ class TvDataFetcher:
             if "driver" in str(e).lower() or "selenium" in str(e).lower():
                  logger.critical("FATAL ERROR: Failed to initialize TvDatafeed due to web driver issues.")
                  logger.critical("The library still requires a functioning Chromedriver/Selenium setup, even in anonymous mode.")
-                 logger.critical(f"Original error: {e}")
+                 logger.critical("Original error: %s", e)
             else:
-                 logger.error(f"Failed to initialize TvDatafeed. {e}")
+                 logger.exception("Failed to initialize TvDatafeed")
             return None
 
     def fetch_historical_data(self, symbol: str, timeframe_days: int, exchange: str = "NASDAQ", interval: str = None) -> Union[pd.DataFrame, Dict[str, str]]:
@@ -50,7 +50,8 @@ class TvDataFetcher:
             data.columns = [col.lower() for col in data.columns]
             returns_5d = data['close'].pct_change(5).fillna(0)
             proxy_sentiment = 1 / (1 + np.exp(-returns_5d * 10))
-            noise = np.random.normal(0, 0.05, len(data))
+            rng = np.random.default_rng()
+            noise = rng.normal(0, 0.05, len(data))
             data['News_Sentiment_Score'] = (proxy_sentiment + noise).clip(0, 1)
             data = data[['open', 'high', 'low', 'close', 'volume', 'News_Sentiment_Score']]
             return data

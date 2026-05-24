@@ -23,9 +23,9 @@ class ConversationStore:
             self.persist_path.mkdir(parents=True, exist_ok=True)
             try:
                 self._client = chromadb.PersistentClient(path=str(self.persist_path))
-            except Exception as e:
-                logger.error(f"Failed to initialize ChromaDB for memory: {e}")
-                raise e
+            except Exception:
+                logger.exception("Failed to initialize ChromaDB for memory")
+                raise
         return self._client
 
     def _get_collection(self) -> chromadb.Collection:
@@ -59,8 +59,8 @@ class ConversationStore:
                 }]
             )
             logger.info(f"Saved conversation turn {turn_id} to vector memory.")
-        except Exception as e:
-            logger.error(f"Error saving conversation to memory: {e}")
+        except Exception:
+            logger.exception("Error saving conversation to memory")
 
     def retrieve_similar(self, query: str, limit: int = 3) -> List[Dict[str, Any]]:
         """
@@ -82,8 +82,8 @@ class ConversationStore:
                     "metadata": meta
                 })
             return history
-        except Exception as e:
-            logger.error(f"Error retrieving memory: {e}")
+        except Exception:
+            logger.exception("Error retrieving memory")
             return []
             
 memory_store = ConversationStore()

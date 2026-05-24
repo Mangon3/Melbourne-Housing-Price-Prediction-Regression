@@ -8,6 +8,27 @@ DEFAULT_PORT = 7861
 API_URL = os.getenv("API_URL", f"http://0.0.0.0:{DEFAULT_PORT}/analyze")
 API_KEY = os.getenv("GOOGLE_API_KEY", "")
 
+
+def _process_sse_chunk(data_str: str) -> bool:
+    """Processes a single SSE data chunk. Returns True if stream should stop."""
+    if data_str.strip() == "[DONE]":
+        return True
+    chunk = json.loads(data_str)
+    if chunk.get("type") == "progress":
+        sys.stdout.write(f"\n   -> [PROGRESS] {chunk.get('message')}")
+    elif chunk.get("type") == "result":
+        sys.stdout.write("\n\n")
+        report = chunk.get("final_report", "")
+        print(report)
+    elif chunk.get("type") == "error":
+        code = chunk.get("code", "ERR")
+        msg = chunk.get("message", "Unknown Error")
+        print(f"\n[!] Error ({code}): {msg}")
+    elif "error" in chunk:
+        print(f"\nServer Error: {chunk['error']}")
+    return False
+
+
 async def stream_response(query: str):
     
     headers = {
@@ -24,31 +45,16 @@ async def stream_response(query: str):
                 if response.status_code != 200:
                     print(f"Error {response.status_code}: {await response.read()}")
                     return
-                buffer = ""
                 print("Agent: ", end="", flush=True)
                 async for line in response.aiter_lines():
-                    if not line:
+                    if not line or not line.startswith("data: "):
                         continue
-                    if line.startswith("data: "):
-                        data_str = line[6:]
-                        try:
-                            if data_str.strip() == "[DONE]":
-                                break
-                            chunk = json.loads(data_str)
-                            if chunk.get("type") == "progress":
-                                sys.stdout.write(f"\n   ↳ [PROGRESS] {chunk.get('message')}")
-                            elif chunk.get("type") == "result":
-                                sys.stdout.write("\n\n")
-                                report = chunk.get("final_report", "")
-                                print(report)
-                            elif chunk.get("type") == "error":
-                                code = chunk.get("code", "ERR")
-                                msg = chunk.get("message", "Unknown Error")
-                                print(f"\n[!] Error ({code}): {msg}")
-                            elif "error" in chunk:
-                                print(f"\nServer Error: {chunk['error']}")
-                        except json.JSONDecodeError:
-                            pass
+                    data_str = line[6:]
+                    try:
+                        if _process_sse_chunk(data_str):
+                            break
+                    except json.JSONDecodeError:
+                        pass
     except httpx.ConnectError:
         print(f"\nCould not connect to API at {API_URL}. Is the server running? (uvicorn src.api.index:app --reload)")
     except Exception as e:
@@ -62,13 +68,13 @@ async def main():
     print("Commands: 'exit', 'quit', 'clear'")
     while True:
         try:
-            query = input("\nYou: ").strip()
+            query = (await asyncio.to_thread(input, "\nYou: ")).strip()
             if not query:
                 continue
             if query.lower() in ["exit", "quit"]:
                 break
             if query.lower() == "clear":
-                os.system('clear')
+                await asyncio.create_subprocess_exec('clear')
                 continue
             await stream_response(query)
         except KeyboardInterrupt:

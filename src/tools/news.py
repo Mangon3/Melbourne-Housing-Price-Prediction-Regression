@@ -27,7 +27,7 @@ class NewsFetcher:
         self.pipeline = None
         self.label_encoder = None
         if not self.model_path.exists() or not self.encoder_path.exists():
-            logger.info(f"Sentiment model missing at {self.model_path}. Initiating auto-training...")
+            logger.info("Sentiment model missing at %s. Initiating auto-training...", self.model_path)
             self.train_model()
         else:
             self._load_model()
@@ -39,9 +39,9 @@ class NewsFetcher:
                 self.pipeline = joblib.load(self.model_path)
                 self.label_encoder = joblib.load(self.encoder_path)
             else:
-                logger.info(f"Sentiment model not found at {self.model_path}. Training might be required.")
+                logger.info("Sentiment model not found at %s. Training might be required.", self.model_path)
         except Exception as e:
-            logger.warning(f"Failed to load sentiment model: {e}")
+            logger.warning("Failed to load sentiment model: %s", e)
 
     def train_model(self):
         """Triggers the sentiment model training pipeline."""
@@ -64,8 +64,8 @@ class NewsFetcher:
                 "label": sentiment_label,
                 "score": float(f"{confidence:.2f}")
             }
-        except Exception as e:
-            logger.error(f"Sentiment prediction error: {e}")
+        except Exception:
+            logger.exception("Sentiment prediction error")
             return {"label": "Error", "score": 0.0}
 
     def fetch_stock_news(
@@ -88,7 +88,7 @@ class NewsFetcher:
                 to=to_timestamp
             )
             if not news_data:
-                logger.info(f"No news found for {symbol}.")
+                logger.info("No news found for %s.", symbol)
                 return [{"warning": f"No news found for {symbol}."}]
             cleaned_articles = []
             for article in news_data:
@@ -116,7 +116,7 @@ class NewsFetcher:
                 if len(cleaned_articles) >= limit:
                     break
             if not cleaned_articles:
-                logger.warning(f"No valid news articles found for {symbol} after filtering.")
+                logger.warning("No valid news articles found for %s after filtering.", symbol)
                 return [{"warning": f"No valid news found for {symbol}."}]
             return cleaned_articles
         except finnhub.FinnhubAPIException as e:
@@ -128,7 +128,7 @@ class NewsFetcher:
                 logger.error(error_message)
             return [{"error": error_message}]
         except Exception as e:
-            logger.exception(f"Failed to retrieve news due to unexpected issue: {e}")
+            logger.exception("Failed to retrieve news due to unexpected issue: %s", e)
             return [{"error": f"Failed to retrieve news due to unexpected issue: {e}"}]
 
 news_fetcher = NewsFetcher()

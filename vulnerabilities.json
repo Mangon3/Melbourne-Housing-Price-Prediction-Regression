@@ -1,0 +1,5873 @@
+// ISSUES JSON:
+{
+  "total": 85,
+  "p": 1,
+  "ps": 500,
+  "paging": {
+    "pageIndex": 1,
+    "pageSize": 500,
+    "total": 85
+  },
+  "effortTotal": 806,
+  "debtTotal": 806,
+  "issues": [
+    {
+      "key": "AZ5X6PeuOZg2hyVe4IPz",
+      "rule": "python:S8572",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:src/api/index.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 71,
+      "hash": "71b3c550f0f7f3dc92f4d4bd6678f371",
+      "textRange": {
+        "startLine": 71,
+        "endLine": 71,
+        "startOffset": 19,
+        "endOffset": 24
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Use \"logging.exception()\" instead.",
+      "effort": "5min",
+      "debt": "5min",
+      "assignee": "Mangon3-Qgdku@github",
+      "author": "hoanglam130982@gmail.com",
+      "tags": [
+        "exception",
+        "logging"
+      ],
+      "creationDate": "2026-05-24T02:54:20+0000",
+      "updateDate": "2026-05-24T02:54:20+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "COMPLETE",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "7b907ba5-2efd-4e43-9675-17d0438a83fb",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5X6Pj-OZg2hyVe4IP0",
+      "rule": "python:S1066",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:test_chat_system.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 66,
+      "hash": "4bc0649ee7d8e742cb38f607d47b41f8",
+      "textRange": {
+        "startLine": 66,
+        "endLine": 66,
+        "startOffset": 32,
+        "endOffset": 34
+      },
+      "flows": [
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:test_chat_system.py",
+              "textRange": {
+                "startLine": 65,
+                "endLine": 65,
+                "startOffset": 28,
+                "endOffset": 32
+              },
+              "msg": "enclosing"
+            }
+          ]
+        }
+      ],
+      "status": "OPEN",
+      "message": "Merge this if statement with the enclosing one.",
+      "effort": "5min",
+      "debt": "5min",
+      "assignee": "Mangon3-Qgdku@github",
+      "author": "hoanglam130982@gmail.com",
+      "tags": [
+        "clumsy"
+      ],
+      "creationDate": "2026-05-24T02:54:20+0000",
+      "updateDate": "2026-05-24T02:54:20+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "CLEAR",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "7b907ba5-2efd-4e43-9675-17d0438a83fb",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UuhJXUEPGbqIcnedX",
+      "rule": "docker:S8544",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:Dockerfile",
+      "project": "Mangon3_Stock-Agent",
+      "line": 11,
+      "hash": "38f65ab47b5253ae05bbb416ee79ced0",
+      "textRange": {
+        "startLine": 11,
+        "endLine": 11,
+        "startOffset": 7,
+        "endOffset": 53
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Using dependencies without locking resolved versions is security-sensitive.",
+      "effort": "1h",
+      "debt": "1h",
+      "assignee": "Mangon3-Qgdku@github",
+      "author": "hoanglam130982@gmail.com",
+      "tags": [],
+      "creationDate": "2026-05-23T12:03:56+0000",
+      "updateDate": "2026-05-23T12:03:56+0000",
+      "type": "VULNERABILITY",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "COMPLETE",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "SECURITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "aef41583-3160-4763-a27d-1c33a05d1cb2",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UuhJXUEPGbqIcnedW",
+      "rule": "docker:S7031",
+      "severity": "MINOR",
+      "component": "Mangon3_Stock-Agent:Dockerfile",
+      "project": "Mangon3_Stock-Agent",
+      "line": 14,
+      "hash": "a77e0f9ea6c50138625f40ae1cc67488",
+      "textRange": {
+        "startLine": 14,
+        "endLine": 14,
+        "startOffset": 0,
+        "endOffset": 3
+      },
+      "flows": [
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:Dockerfile",
+              "textRange": {
+                "startLine": 17,
+                "endLine": 17,
+                "startOffset": 0,
+                "endOffset": 3
+              },
+              "msg": "consecutive RUN instruction"
+            }
+          ]
+        }
+      ],
+      "status": "OPEN",
+      "message": "Merge this RUN instruction with the consecutive ones.",
+      "effort": "5min",
+      "debt": "5min",
+      "assignee": "Mangon3-Qgdku@github",
+      "author": "hoanglam130982@gmail.com",
+      "tags": [],
+      "creationDate": "2026-05-23T12:03:56+0000",
+      "updateDate": "2026-05-23T12:03:56+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "CONVENTIONAL",
+      "cleanCodeAttributeCategory": "CONSISTENT",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "LOW"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "aef41583-3160-4763-a27d-1c33a05d1cb2",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UuhJXUEPGbqIcnedY",
+      "rule": "docker:S8544",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:Dockerfile",
+      "project": "Mangon3_Stock-Agent",
+      "line": 20,
+      "hash": "fbb79fa786d774e0a8ea0ed1d376558b",
+      "textRange": {
+        "startLine": 20,
+        "endLine": 20,
+        "startOffset": 4,
+        "endOffset": 50
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Using dependencies without locking resolved versions is security-sensitive.",
+      "effort": "1h",
+      "debt": "1h",
+      "assignee": "Mangon3-Qgdku@github",
+      "author": "hoanglam130982@gmail.com",
+      "tags": [],
+      "creationDate": "2026-05-23T12:03:56+0000",
+      "updateDate": "2026-05-23T12:03:56+0000",
+      "type": "VULNERABILITY",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "COMPLETE",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "SECURITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "aef41583-3160-4763-a27d-1c33a05d1cb2",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UdTetBnT8UsONoh_p",
+      "rule": "docker:S8544",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:Dockerfile",
+      "project": "Mangon3_Stock-Agent",
+      "line": 14,
+      "hash": "a77e0f9ea6c50138625f40ae1cc67488",
+      "textRange": {
+        "startLine": 14,
+        "endLine": 14,
+        "startOffset": 4,
+        "endOffset": 70
+      },
+      "flows": [],
+      "status": "REOPENED",
+      "message": "Using dependencies without locking resolved versions is security-sensitive.",
+      "effort": "1h",
+      "debt": "1h",
+      "assignee": "Mangon3-Qgdku@github",
+      "author": "hoanglam130982@gmail.com",
+      "tags": [],
+      "creationDate": "2026-05-23T10:48:56+0000",
+      "updateDate": "2026-05-23T10:59:32+0000",
+      "type": "VULNERABILITY",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "COMPLETE",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "SECURITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "aef41583-3160-4763-a27d-1c33a05d1cb2",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UZZL0UEPGbqIclmxK",
+      "rule": "docker:S8541",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:Dockerfile",
+      "project": "Mangon3_Stock-Agent",
+      "line": 17,
+      "hash": "ba389a5c2ac164271e0b60a2cfbc4363",
+      "textRange": {
+        "startLine": 17,
+        "endLine": 17,
+        "startOffset": 4,
+        "endOffset": 15
+      },
+      "flows": [],
+      "status": "REOPENED",
+      "message": "Omitting \"--only-binary :all:\" can lead to the execution of setup scripts. Make sure it is safe here.",
+      "effort": "1h",
+      "debt": "1h",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "cwe"
+      ],
+      "creationDate": "2026-05-23T10:31:20+0000",
+      "updateDate": "2026-05-23T10:59:32+0000",
+      "type": "VULNERABILITY",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "TRUSTWORTHY",
+      "cleanCodeAttributeCategory": "RESPONSIBLE",
+      "impacts": [
+        {
+          "softwareQuality": "SECURITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "f255fcf2-0bd7-4b70-a4a1-b8a677472dab",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UZZL0UEPGbqIclmxL",
+      "rule": "docker:S8544",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:Dockerfile",
+      "project": "Mangon3_Stock-Agent",
+      "line": 17,
+      "hash": "ba389a5c2ac164271e0b60a2cfbc4363",
+      "textRange": {
+        "startLine": 17,
+        "endLine": 17,
+        "startOffset": 4,
+        "endOffset": 87
+      },
+      "flows": [],
+      "status": "REOPENED",
+      "message": "Using dependencies without locking resolved versions is security-sensitive.",
+      "effort": "1h",
+      "debt": "1h",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [],
+      "creationDate": "2026-05-23T10:31:20+0000",
+      "updateDate": "2026-05-23T10:59:32+0000",
+      "type": "VULNERABILITY",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "COMPLETE",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "SECURITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "f255fcf2-0bd7-4b70-a4a1-b8a677472dab",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxgCnW8oUaet740A",
+      "rule": "python:S3776",
+      "severity": "CRITICAL",
+      "component": "Mangon3_Stock-Agent:test_chat_system.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 16,
+      "hash": "f5f09c1d95f6e0fda509b2de0afe9884",
+      "textRange": {
+        "startLine": 16,
+        "endLine": 16,
+        "startOffset": 10,
+        "endOffset": 20
+      },
+      "flows": [
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:test_chat_system.py",
+              "textRange": {
+                "startLine": 21,
+                "endLine": 21,
+                "startOffset": 4,
+                "endOffset": 6
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:test_chat_system.py",
+              "textRange": {
+                "startLine": 31,
+                "endLine": 31,
+                "startOffset": 16,
+                "endOffset": 18
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:test_chat_system.py",
+              "textRange": {
+                "startLine": 37,
+                "endLine": 37,
+                "startOffset": 22,
+                "endOffset": 25
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:test_chat_system.py",
+              "textRange": {
+                "startLine": 38,
+                "endLine": 38,
+                "startOffset": 20,
+                "endOffset": 22
+              },
+              "msg": "+2 (incl 1 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:test_chat_system.py",
+              "textRange": {
+                "startLine": 38,
+                "endLine": 38,
+                "startOffset": 32,
+                "endOffset": 34
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:test_chat_system.py",
+              "textRange": {
+                "startLine": 42,
+                "endLine": 42,
+                "startOffset": 20,
+                "endOffset": 22
+              },
+              "msg": "+2 (incl 1 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:test_chat_system.py",
+              "textRange": {
+                "startLine": 48,
+                "endLine": 48,
+                "startOffset": 24,
+                "endOffset": 26
+              },
+              "msg": "+2 (incl 1 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:test_chat_system.py",
+              "textRange": {
+                "startLine": 54,
+                "endLine": 54,
+                "startOffset": 28,
+                "endOffset": 30
+              },
+              "msg": "+3 (incl 2 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:test_chat_system.py",
+              "textRange": {
+                "startLine": 55,
+                "endLine": 55,
+                "startOffset": 32,
+                "endOffset": 34
+              },
+              "msg": "+4 (incl 3 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:test_chat_system.py",
+              "textRange": {
+                "startLine": 61,
+                "endLine": 61,
+                "startOffset": 32,
+                "endOffset": 36
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:test_chat_system.py",
+              "textRange": {
+                "startLine": 62,
+                "endLine": 62,
+                "startOffset": 36,
+                "endOffset": 38
+              },
+              "msg": "+5 (incl 4 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:test_chat_system.py",
+              "textRange": {
+                "startLine": 65,
+                "endLine": 65,
+                "startOffset": 28,
+                "endOffset": 32
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:test_chat_system.py",
+              "textRange": {
+                "startLine": 66,
+                "endLine": 66,
+                "startOffset": 32,
+                "endOffset": 34
+              },
+              "msg": "+4 (incl 3 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:test_chat_system.py",
+              "textRange": {
+                "startLine": 72,
+                "endLine": 72,
+                "startOffset": 24,
+                "endOffset": 28
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:test_chat_system.py",
+              "textRange": {
+                "startLine": 77,
+                "endLine": 77,
+                "startOffset": 20,
+                "endOffset": 26
+              },
+              "msg": "+2 (incl 1 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:test_chat_system.py",
+              "textRange": {
+                "startLine": 80,
+                "endLine": 80,
+                "startOffset": 4,
+                "endOffset": 10
+              },
+              "msg": "+1"
+            }
+          ]
+        }
+      ],
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 32 to the 15 allowed.",
+      "effort": "22min",
+      "debt": "22min",
+      "assignee": "Mangon3-Qgdku@github",
+      "author": "hoanglam130982@gmail.com",
+      "tags": [
+        "brain-overload"
+      ],
+      "creationDate": "2026-05-23T03:05:50+0000",
+      "updateDate": "2026-05-24T02:54:20+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "FOCUSED",
+      "cleanCodeAttributeCategory": "ADAPTABLE",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "7b907ba5-2efd-4e43-9675-17d0438a83fb",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxdcnW8oUaet74y5",
+      "rule": "python:S3776",
+      "severity": "CRITICAL",
+      "component": "Mangon3_Stock-Agent:src/api/index.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 48,
+      "hash": "c190afb3fc1bd6765152f2a1cd360376",
+      "textRange": {
+        "startLine": 48,
+        "endLine": 48,
+        "startOffset": 10,
+        "endOffset": 23
+      },
+      "flows": [
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/api/index.py",
+              "textRange": {
+                "startLine": 56,
+                "endLine": 56,
+                "startOffset": 31,
+                "endOffset": 33
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/api/index.py",
+              "textRange": {
+                "startLine": 57,
+                "endLine": 57,
+                "startOffset": 4,
+                "endOffset": 6
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/api/index.py",
+              "textRange": {
+                "startLine": 62,
+                "endLine": 62,
+                "startOffset": 31,
+                "endOffset": 33
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/api/index.py",
+              "textRange": {
+                "startLine": 62,
+                "endLine": 62,
+                "startOffset": 55,
+                "endOffset": 57
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/api/index.py",
+              "textRange": {
+                "startLine": 64,
+                "endLine": 64,
+                "startOffset": 4,
+                "endOffset": 6
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/api/index.py",
+              "textRange": {
+                "startLine": 64,
+                "endLine": 64,
+                "startOffset": 18,
+                "endOffset": 21
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/api/index.py",
+              "textRange": {
+                "startLine": 70,
+                "endLine": 70,
+                "startOffset": 8,
+                "endOffset": 14
+              },
+              "msg": "+2 (incl 1 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/api/index.py",
+              "textRange": {
+                "startLine": 80,
+                "endLine": 80,
+                "startOffset": 12,
+                "endOffset": 14
+              },
+              "msg": "+2 (incl 1 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/api/index.py",
+              "textRange": {
+                "startLine": 80,
+                "endLine": 80,
+                "startOffset": 39,
+                "endOffset": 42
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/api/index.py",
+              "textRange": {
+                "startLine": 81,
+                "endLine": 81,
+                "startOffset": 56,
+                "endOffset": 58
+              },
+              "msg": "+3 (incl 2 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/api/index.py",
+              "textRange": {
+                "startLine": 83,
+                "endLine": 83,
+                "startOffset": 12,
+                "endOffset": 16
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/api/index.py",
+              "textRange": {
+                "startLine": 85,
+                "endLine": 85,
+                "startOffset": 12,
+                "endOffset": 16
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/api/index.py",
+              "textRange": {
+                "startLine": 94,
+                "endLine": 94,
+                "startOffset": 12,
+                "endOffset": 16
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/api/index.py",
+              "textRange": {
+                "startLine": 97,
+                "endLine": 97,
+                "startOffset": 12,
+                "endOffset": 15
+              },
+              "msg": "+2 (incl 1 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/api/index.py",
+              "textRange": {
+                "startLine": 98,
+                "endLine": 98,
+                "startOffset": 16,
+                "endOffset": 18
+              },
+              "msg": "+3 (incl 2 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/api/index.py",
+              "textRange": {
+                "startLine": 99,
+                "endLine": 99,
+                "startOffset": 20,
+                "endOffset": 22
+              },
+              "msg": "+4 (incl 3 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/api/index.py",
+              "textRange": {
+                "startLine": 107,
+                "endLine": 107,
+                "startOffset": 8,
+                "endOffset": 14
+              },
+              "msg": "+2 (incl 1 for nesting)"
+            }
+          ]
+        }
+      ],
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 28 to the 15 allowed.",
+      "effort": "18min",
+      "debt": "18min",
+      "assignee": "Mangon3-Qgdku@github",
+      "author": "hoanglam130982@gmail.com",
+      "tags": [
+        "brain-overload"
+      ],
+      "creationDate": "2026-05-22T04:51:53+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "FOCUSED",
+      "cleanCodeAttributeCategory": "ADAPTABLE",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "7b907ba5-2efd-4e43-9675-17d0438a83fb",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxgHnW8oUaet740B",
+      "rule": "python:S1244",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:test_agent.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 41,
+      "hash": "b28a18f79e68e3768e485752c5944d4a",
+      "textRange": {
+        "startLine": 41,
+        "endLine": 41,
+        "startOffset": 11,
+        "endOffset": 34
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Do not perform equality checks with floating point values.",
+      "effort": "5min",
+      "debt": "5min",
+      "assignee": "Mangon3-Qgdku@github",
+      "author": "hoanglam130982@gmail.com",
+      "tags": [
+        "data-science",
+        "numpy",
+        "pytorch",
+        "suspicious"
+      ],
+      "creationDate": "2026-05-22T04:51:53+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "BUG",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "LOGICAL",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "RELIABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfknW8oUaet74zf",
+      "rule": "python:S3776",
+      "severity": "CRITICAL",
+      "component": "Mangon3_Stock-Agent:src/main.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 11,
+      "hash": "a0fe27e83b91b9fee26be27ab15183e8",
+      "textRange": {
+        "startLine": 11,
+        "endLine": 11,
+        "startOffset": 10,
+        "endOffset": 25
+      },
+      "flows": [
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/main.py",
+              "textRange": {
+                "startLine": 24,
+                "endLine": 24,
+                "startOffset": 16,
+                "endOffset": 18
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/main.py",
+              "textRange": {
+                "startLine": 29,
+                "endLine": 29,
+                "startOffset": 22,
+                "endOffset": 25
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/main.py",
+              "textRange": {
+                "startLine": 30,
+                "endLine": 30,
+                "startOffset": 20,
+                "endOffset": 22
+              },
+              "msg": "+2 (incl 1 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/main.py",
+              "textRange": {
+                "startLine": 32,
+                "endLine": 32,
+                "startOffset": 20,
+                "endOffset": 22
+              },
+              "msg": "+2 (incl 1 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/main.py",
+              "textRange": {
+                "startLine": 35,
+                "endLine": 35,
+                "startOffset": 28,
+                "endOffset": 30
+              },
+              "msg": "+3 (incl 2 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/main.py",
+              "textRange": {
+                "startLine": 38,
+                "endLine": 38,
+                "startOffset": 28,
+                "endOffset": 30
+              },
+              "msg": "+3 (incl 2 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/main.py",
+              "textRange": {
+                "startLine": 40,
+                "endLine": 40,
+                "startOffset": 28,
+                "endOffset": 32
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/main.py",
+              "textRange": {
+                "startLine": 44,
+                "endLine": 44,
+                "startOffset": 28,
+                "endOffset": 32
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/main.py",
+              "textRange": {
+                "startLine": 48,
+                "endLine": 48,
+                "startOffset": 28,
+                "endOffset": 32
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/main.py",
+              "textRange": {
+                "startLine": 50,
+                "endLine": 50,
+                "startOffset": 24,
+                "endOffset": 30
+              },
+              "msg": "+3 (incl 2 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/main.py",
+              "textRange": {
+                "startLine": 52,
+                "endLine": 52,
+                "startOffset": 4,
+                "endOffset": 10
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/main.py",
+              "textRange": {
+                "startLine": 54,
+                "endLine": 54,
+                "startOffset": 4,
+                "endOffset": 10
+              },
+              "msg": "+1"
+            }
+          ]
+        }
+      ],
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 20 to the 15 allowed.",
+      "effort": "10min",
+      "debt": "10min",
+      "assignee": "Mangon3-Qgdku@github",
+      "author": "hoanglam130982@gmail.com",
+      "tags": [
+        "brain-overload"
+      ],
+      "creationDate": "2026-01-23T02:18:53+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "FOCUSED",
+      "cleanCodeAttributeCategory": "ADAPTABLE",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfknW8oUaet74ze",
+      "rule": "python:S1481",
+      "severity": "MINOR",
+      "component": "Mangon3_Stock-Agent:src/main.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 27,
+      "hash": "63c39f466850d805e932c5abdbb6cb3d",
+      "textRange": {
+        "startLine": 27,
+        "endLine": 27,
+        "startOffset": 16,
+        "endOffset": 22
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Remove the unused local variable \"buffer\".",
+      "effort": "5min",
+      "debt": "5min",
+      "assignee": "Mangon3-Qgdku@github",
+      "author": "hoanglam130982@gmail.com",
+      "tags": [
+        "unused"
+      ],
+      "creationDate": "2026-01-15T09:35:23+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "CLEAR",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "LOW"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfknW8oUaet74zg",
+      "rule": "python:S7501",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:src/main.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 65,
+      "hash": "c81cb067ec9f8c6630f288b4de85f184",
+      "textRange": {
+        "startLine": 65,
+        "endLine": 65,
+        "startOffset": 20,
+        "endOffset": 25
+      },
+      "flows": [
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/main.py",
+              "textRange": {
+                "startLine": 57,
+                "endLine": 57,
+                "startOffset": 0,
+                "endOffset": 5
+              },
+              "msg": "This function is async."
+            }
+          ]
+        }
+      ],
+      "status": "OPEN",
+      "message": "Wrap this call to input() with await asyncio.to_thread(input).",
+      "effort": "5min",
+      "debt": "5min",
+      "assignee": "Mangon3-Qgdku@github",
+      "author": "hoanglam130982@gmail.com",
+      "tags": [
+        "anyio",
+        "async",
+        "asyncio",
+        "trio"
+      ],
+      "creationDate": "2026-01-15T09:35:23+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "BUG",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "LOGICAL",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "RELIABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfknW8oUaet74zh",
+      "rule": "python:S7487",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:src/main.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 71,
+      "hash": "87f07d6b63f88d24a96f5c49380ed9b6",
+      "textRange": {
+        "startLine": 71,
+        "endLine": 71,
+        "startOffset": 16,
+        "endOffset": 25
+      },
+      "flows": [
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/main.py",
+              "textRange": {
+                "startLine": 57,
+                "endLine": 57,
+                "startOffset": 0,
+                "endOffset": 5
+              },
+              "msg": "This function is async."
+            }
+          ]
+        }
+      ],
+      "status": "OPEN",
+      "message": "Use an async subprocess call in this async function instead of a synchronous one.",
+      "effort": "5min",
+      "debt": "5min",
+      "assignee": "Mangon3-Qgdku@github",
+      "author": "hoanglam130982@gmail.com",
+      "tags": [
+        "anyio",
+        "async",
+        "asyncio",
+        "trio"
+      ],
+      "creationDate": "2026-01-15T09:35:23+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "BUG",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "EFFICIENT",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "RELIABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxf3nW8oUaet74z8",
+      "rule": "typescript:S3776",
+      "severity": "CRITICAL",
+      "component": "Mangon3_Stock-Agent:frontend/src/app/page.tsx",
+      "project": "Mangon3_Stock-Agent",
+      "line": 37,
+      "hash": "afc200d6e898423b580c0fb4a5d4068d",
+      "textRange": {
+        "startLine": 37,
+        "endLine": 37,
+        "startOffset": 50,
+        "endOffset": 52
+      },
+      "flows": [
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:frontend/src/app/page.tsx",
+              "textRange": {
+                "startLine": 39,
+                "endLine": 39,
+                "startOffset": 4,
+                "endOffset": 6
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:frontend/src/app/page.tsx",
+              "textRange": {
+                "startLine": 75,
+                "endLine": 75,
+                "startOffset": 6,
+                "endOffset": 8
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:frontend/src/app/page.tsx",
+              "textRange": {
+                "startLine": 76,
+                "endLine": 76,
+                "startOffset": 9,
+                "endOffset": 11
+              },
+              "msg": "+2 (incl. 1 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:frontend/src/app/page.tsx",
+              "textRange": {
+                "startLine": 82,
+                "endLine": 82,
+                "startOffset": 6,
+                "endOffset": 8
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:frontend/src/app/page.tsx",
+              "textRange": {
+                "startLine": 91,
+                "endLine": 91,
+                "startOffset": 8,
+                "endOffset": 12
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:frontend/src/app/page.tsx",
+              "textRange": {
+                "startLine": 82,
+                "endLine": 82,
+                "startOffset": 22,
+                "endOffset": 24
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:frontend/src/app/page.tsx",
+              "textRange": {
+                "startLine": 95,
+                "endLine": 95,
+                "startOffset": 8,
+                "endOffset": 10
+              },
+              "msg": "+2 (incl. 1 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:frontend/src/app/page.tsx",
+              "textRange": {
+                "startLine": 97,
+                "endLine": 97,
+                "startOffset": 8,
+                "endOffset": 13
+              },
+              "msg": "+2 (incl. 1 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:frontend/src/app/page.tsx",
+              "textRange": {
+                "startLine": 99,
+                "endLine": 99,
+                "startOffset": 10,
+                "endOffset": 12
+              },
+              "msg": "+3 (incl. 2 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:frontend/src/app/page.tsx",
+              "textRange": {
+                "startLine": 104,
+                "endLine": 104,
+                "startOffset": 10,
+                "endOffset": 13
+              },
+              "msg": "+3 (incl. 2 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:frontend/src/app/page.tsx",
+              "textRange": {
+                "startLine": 105,
+                "endLine": 105,
+                "startOffset": 12,
+                "endOffset": 14
+              },
+              "msg": "+4 (incl. 3 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:frontend/src/app/page.tsx",
+              "textRange": {
+                "startLine": 107,
+                "endLine": 107,
+                "startOffset": 14,
+                "endOffset": 16
+              },
+              "msg": "+5 (incl. 4 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:frontend/src/app/page.tsx",
+              "textRange": {
+                "startLine": 134,
+                "endLine": 134,
+                "startOffset": 16,
+                "endOffset": 21
+              },
+              "msg": "+5 (incl. 4 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:frontend/src/app/page.tsx",
+              "textRange": {
+                "startLine": 142,
+                "endLine": 142,
+                "startOffset": 6,
+                "endOffset": 11
+              },
+              "msg": "+1"
+            }
+          ]
+        }
+      ],
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 32 to the 15 allowed.",
+      "effort": "22min",
+      "debt": "22min",
+      "assignee": "Mangon3-Qgdku@github",
+      "author": "hoanglam130982@gmail.com",
+      "tags": [
+        "brain-overload"
+      ],
+      "creationDate": "2026-01-14T09:15:30+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "FOCUSED",
+      "cleanCodeAttributeCategory": "ADAPTABLE",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxf3nW8oUaet74z9",
+      "rule": "typescript:S6582",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:frontend/src/app/page.tsx",
+      "project": "Mangon3_Stock-Agent",
+      "line": 82,
+      "hash": "b6e08a1c8fb0bdd56c633aacb9b7f099",
+      "textRange": {
+        "startLine": 82,
+        "endLine": 82,
+        "startOffset": 10,
+        "endOffset": 65
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Prefer using an optional chain expression instead, as it's more concise and easier to read.",
+      "effort": "5min",
+      "debt": "5min",
+      "assignee": "Mangon3-Qgdku@github",
+      "author": "hoanglam130982@gmail.com",
+      "tags": [
+        "type-dependent"
+      ],
+      "creationDate": "2026-01-14T09:15:30+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "CLEAR",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxdcnW8oUaet74y4",
+      "rule": "python:S1066",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:src/api/index.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 99,
+      "hash": "542e9a496e0cb594c715d452a9a13594",
+      "textRange": {
+        "startLine": 99,
+        "endLine": 99,
+        "startOffset": 20,
+        "endOffset": 22
+      },
+      "flows": [
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/api/index.py",
+              "textRange": {
+                "startLine": 98,
+                "endLine": 98,
+                "startOffset": 16,
+                "endOffset": 18
+              },
+              "msg": "enclosing"
+            }
+          ]
+        }
+      ],
+      "status": "OPEN",
+      "message": "Merge this if statement with the enclosing one.",
+      "effort": "5min",
+      "debt": "5min",
+      "assignee": "Mangon3-Qgdku@github",
+      "author": "hoanglam130982@gmail.com",
+      "tags": [
+        "clumsy"
+      ],
+      "creationDate": "2026-01-14T08:38:02+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "CLEAR",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "7b907ba5-2efd-4e43-9675-17d0438a83fb",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxdcnW8oUaet74y8",
+      "rule": "pythonsecurity:S5145",
+      "severity": "MINOR",
+      "component": "Mangon3_Stock-Agent:src/api/index.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 65,
+      "hash": "d77089e41ff4c2575bf9bfa95296f875",
+      "textRange": {
+        "startLine": 65,
+        "endLine": 65,
+        "startOffset": 8,
+        "endOffset": 67
+      },
+      "flows": [
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/api/index.py",
+              "textRange": {
+                "startLine": 65,
+                "endLine": 65,
+                "startOffset": 8,
+                "endOffset": 67
+              },
+              "msg": "Sink: this invocation is not safe; a malicious value can be used as argument"
+            },
+            {
+              "component": "Mangon3_Stock-Agent:src/api/index.py",
+              "textRange": {
+                "startLine": 65,
+                "endLine": 65,
+                "startOffset": 20,
+                "endOffset": 66
+              },
+              "msg": "This concatenation can propagate malicious content to the newly created string"
+            },
+            {
+              "component": "Mangon3_Stock-Agent:src/api/index.py",
+              "textRange": {
+                "startLine": 65,
+                "endLine": 65,
+                "startOffset": 51,
+                "endOffset": 64
+              },
+              "msg": "A malicious value was previously assigned to the field ‘query’"
+            },
+            {
+              "component": "Mangon3_Stock-Agent:src/api/index.py",
+              "textRange": {
+                "startLine": 49,
+                "endLine": 49,
+                "startOffset": 4,
+                "endOffset": 27
+              },
+              "msg": "Source: a user can craft an HTTP request with malicious content"
+            }
+          ]
+        }
+      ],
+      "status": "OPEN",
+      "message": "Change this code to not log user-controlled data.",
+      "effort": "30min",
+      "debt": "30min",
+      "assignee": "Mangon3-Qgdku@github",
+      "author": "hoanglam130982@gmail.com",
+      "tags": [
+        "cwe"
+      ],
+      "creationDate": "2026-01-14T08:24:02+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "VULNERABILITY",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "COMPLETE",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "SECURITY",
+          "severity": "LOW"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [
+        "taint"
+      ],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfdnW8oUaet74zZ",
+      "rule": "python:S8572",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:src/memory/store.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 27,
+      "hash": "93e9ceb05c8514504a98dfe0e14eee07",
+      "textRange": {
+        "startLine": 27,
+        "endLine": 27,
+        "startOffset": 23,
+        "endOffset": 28
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Use \"logging.exception()\" instead.",
+      "effort": "5min",
+      "debt": "5min",
+      "assignee": "Mangon3-Qgdku@github",
+      "author": "hoanglam130982@gmail.com",
+      "tags": [
+        "exception",
+        "logging"
+      ],
+      "creationDate": "2026-01-14T08:22:07+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "COMPLETE",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfdnW8oUaet74za",
+      "rule": "python:S8572",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:src/memory/store.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 63,
+      "hash": "179f569b30abadb9cbc63ab872b8898c",
+      "textRange": {
+        "startLine": 63,
+        "endLine": 63,
+        "startOffset": 19,
+        "endOffset": 24
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Use \"logging.exception()\" instead.",
+      "effort": "5min",
+      "debt": "5min",
+      "assignee": "Mangon3-Qgdku@github",
+      "author": "hoanglam130982@gmail.com",
+      "tags": [
+        "exception",
+        "logging"
+      ],
+      "creationDate": "2026-01-14T08:22:07+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "COMPLETE",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfdnW8oUaet74zb",
+      "rule": "python:S8572",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:src/memory/store.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 86,
+      "hash": "5bcc87318f0bf88f0ecdc5753d237777",
+      "textRange": {
+        "startLine": 86,
+        "endLine": 86,
+        "startOffset": 19,
+        "endOffset": 24
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Use \"logging.exception()\" instead.",
+      "effort": "5min",
+      "debt": "5min",
+      "assignee": "Mangon3-Qgdku@github",
+      "author": "hoanglam130982@gmail.com",
+      "tags": [
+        "exception",
+        "logging"
+      ],
+      "creationDate": "2026-01-14T08:22:07+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "COMPLETE",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfwnW8oUaet74zw",
+      "rule": "typescript:S6478",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:frontend/src/components/ChatMessage.tsx",
+      "project": "Mangon3_Stock-Agent",
+      "line": 57,
+      "hash": "520159013ac1cb4b11b68a69ff3ed4bb",
+      "textRange": {
+        "startLine": 57,
+        "endLine": 57,
+        "startOffset": 42,
+        "endOffset": 44
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Move this component definition out of the parent component and pass data as props.",
+      "effort": "5min",
+      "debt": "5min",
+      "assignee": "Mangon3-Qgdku@github",
+      "author": "hoanglam130982@gmail.com",
+      "tags": [
+        "jsx",
+        "performance",
+        "react"
+      ],
+      "creationDate": "2026-01-14T07:58:26+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "EFFICIENT",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfwnW8oUaet74zx",
+      "rule": "typescript:S6478",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:frontend/src/components/ChatMessage.tsx",
+      "project": "Mangon3_Stock-Agent",
+      "line": 58,
+      "hash": "4fe23dc1afcb65d47aca1d0ff80f8717",
+      "textRange": {
+        "startLine": 58,
+        "endLine": 58,
+        "startOffset": 47,
+        "endOffset": 49
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Move this component definition out of the parent component and pass data as props.",
+      "effort": "5min",
+      "debt": "5min",
+      "assignee": "Mangon3-Qgdku@github",
+      "author": "hoanglam130982@gmail.com",
+      "tags": [
+        "jsx",
+        "performance",
+        "react"
+      ],
+      "creationDate": "2026-01-14T07:58:26+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "EFFICIENT",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfwnW8oUaet74zy",
+      "rule": "typescript:S6478",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:frontend/src/components/ChatMessage.tsx",
+      "project": "Mangon3_Stock-Agent",
+      "line": 59,
+      "hash": "ad09d1661b4fee0c0b932b95eaa33896",
+      "textRange": {
+        "startLine": 59,
+        "endLine": 59,
+        "startOffset": 43,
+        "endOffset": 45
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Move this component definition out of the parent component and pass data as props.",
+      "effort": "5min",
+      "debt": "5min",
+      "assignee": "Mangon3-Qgdku@github",
+      "author": "hoanglam130982@gmail.com",
+      "tags": [
+        "jsx",
+        "performance",
+        "react"
+      ],
+      "creationDate": "2026-01-14T07:58:26+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "EFFICIENT",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfwnW8oUaet74zz",
+      "rule": "typescript:S6850",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:frontend/src/components/ChatMessage.tsx",
+      "project": "Mangon3_Stock-Agent",
+      "line": 59,
+      "hash": "ad09d1661b4fee0c0b932b95eaa33896",
+      "textRange": {
+        "startLine": 59,
+        "endLine": 59,
+        "startOffset": 46,
+        "endOffset": 172
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Headings must have content and the content must be accessible by a screen reader.",
+      "effort": "5min",
+      "debt": "5min",
+      "assignee": "Mangon3-Qgdku@github",
+      "author": "hoanglam130982@gmail.com",
+      "tags": [
+        "accessibility",
+        "react"
+      ],
+      "creationDate": "2026-01-14T07:58:26+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "CONVENTIONAL",
+      "cleanCodeAttributeCategory": "CONSISTENT",
+      "impacts": [
+        {
+          "softwareQuality": "RELIABILITY",
+          "severity": "MEDIUM"
+        },
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "LOW"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfwnW8oUaet74z0",
+      "rule": "typescript:S6478",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:frontend/src/components/ChatMessage.tsx",
+      "project": "Mangon3_Stock-Agent",
+      "line": 60,
+      "hash": "02e3d56dc84578d717a202f17867582b",
+      "textRange": {
+        "startLine": 60,
+        "endLine": 60,
+        "startOffset": 43,
+        "endOffset": 45
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Move this component definition out of the parent component and pass data as props.",
+      "effort": "5min",
+      "debt": "5min",
+      "assignee": "Mangon3-Qgdku@github",
+      "author": "hoanglam130982@gmail.com",
+      "tags": [
+        "jsx",
+        "performance",
+        "react"
+      ],
+      "creationDate": "2026-01-14T07:58:26+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "EFFICIENT",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfwnW8oUaet74z1",
+      "rule": "typescript:S6850",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:frontend/src/components/ChatMessage.tsx",
+      "project": "Mangon3_Stock-Agent",
+      "line": 60,
+      "hash": "02e3d56dc84578d717a202f17867582b",
+      "textRange": {
+        "startLine": 60,
+        "endLine": 60,
+        "startOffset": 46,
+        "endOffset": 195
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Headings must have content and the content must be accessible by a screen reader.",
+      "effort": "5min",
+      "debt": "5min",
+      "assignee": "Mangon3-Qgdku@github",
+      "author": "hoanglam130982@gmail.com",
+      "tags": [
+        "accessibility",
+        "react"
+      ],
+      "creationDate": "2026-01-14T07:58:26+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "CONVENTIONAL",
+      "cleanCodeAttributeCategory": "CONSISTENT",
+      "impacts": [
+        {
+          "softwareQuality": "RELIABILITY",
+          "severity": "MEDIUM"
+        },
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "LOW"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfwnW8oUaet74z2",
+      "rule": "typescript:S6478",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:frontend/src/components/ChatMessage.tsx",
+      "project": "Mangon3_Stock-Agent",
+      "line": 61,
+      "hash": "099a9421eed27c32c06157a8bb664c55",
+      "textRange": {
+        "startLine": 61,
+        "endLine": 61,
+        "startOffset": 43,
+        "endOffset": 45
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Move this component definition out of the parent component and pass data as props.",
+      "effort": "5min",
+      "debt": "5min",
+      "assignee": "Mangon3-Qgdku@github",
+      "author": "hoanglam130982@gmail.com",
+      "tags": [
+        "jsx",
+        "performance",
+        "react"
+      ],
+      "creationDate": "2026-01-14T07:58:26+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "EFFICIENT",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfwnW8oUaet74z3",
+      "rule": "typescript:S6850",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:frontend/src/components/ChatMessage.tsx",
+      "project": "Mangon3_Stock-Agent",
+      "line": 61,
+      "hash": "099a9421eed27c32c06157a8bb664c55",
+      "textRange": {
+        "startLine": 61,
+        "endLine": 61,
+        "startOffset": 46,
+        "endOffset": 147
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Headings must have content and the content must be accessible by a screen reader.",
+      "effort": "5min",
+      "debt": "5min",
+      "assignee": "Mangon3-Qgdku@github",
+      "author": "hoanglam130982@gmail.com",
+      "tags": [
+        "accessibility",
+        "react"
+      ],
+      "creationDate": "2026-01-14T07:58:26+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "CONVENTIONAL",
+      "cleanCodeAttributeCategory": "CONSISTENT",
+      "impacts": [
+        {
+          "softwareQuality": "RELIABILITY",
+          "severity": "MEDIUM"
+        },
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "LOW"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfwnW8oUaet74z4",
+      "rule": "typescript:S6478",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:frontend/src/components/ChatMessage.tsx",
+      "project": "Mangon3_Stock-Agent",
+      "line": 62,
+      "hash": "4c86cc01b62491557b897103f95cbbf6",
+      "textRange": {
+        "startLine": 62,
+        "endLine": 62,
+        "startOffset": 43,
+        "endOffset": 45
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Move this component definition out of the parent component and pass data as props.",
+      "effort": "5min",
+      "debt": "5min",
+      "assignee": "Mangon3-Qgdku@github",
+      "author": "hoanglam130982@gmail.com",
+      "tags": [
+        "jsx",
+        "performance",
+        "react"
+      ],
+      "creationDate": "2026-01-14T07:58:26+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "EFFICIENT",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfwnW8oUaet74z5",
+      "rule": "typescript:S6478",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:frontend/src/components/ChatMessage.tsx",
+      "project": "Mangon3_Stock-Agent",
+      "line": 63,
+      "hash": "abb81fe47cd3e941b40167110679f10b",
+      "textRange": {
+        "startLine": 63,
+        "endLine": 63,
+        "startOffset": 43,
+        "endOffset": 45
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Move this component definition out of the parent component and pass data as props.",
+      "effort": "5min",
+      "debt": "5min",
+      "assignee": "Mangon3-Qgdku@github",
+      "author": "hoanglam130982@gmail.com",
+      "tags": [
+        "jsx",
+        "performance",
+        "react"
+      ],
+      "creationDate": "2026-01-14T07:58:26+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "EFFICIENT",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfwnW8oUaet74z6",
+      "rule": "typescript:S6478",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:frontend/src/components/ChatMessage.tsx",
+      "project": "Mangon3_Stock-Agent",
+      "line": 64,
+      "hash": "97906f8bf183571631acb3e8cf76c138",
+      "textRange": {
+        "startLine": 64,
+        "endLine": 64,
+        "startOffset": 43,
+        "endOffset": 45
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Move this component definition out of the parent component and pass data as props.",
+      "effort": "5min",
+      "debt": "5min",
+      "assignee": "Mangon3-Qgdku@github",
+      "author": "hoanglam130982@gmail.com",
+      "tags": [
+        "jsx",
+        "performance",
+        "react"
+      ],
+      "creationDate": "2026-01-14T07:58:26+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "EFFICIENT",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfwnW8oUaet74z7",
+      "rule": "typescript:S6478",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:frontend/src/components/ChatMessage.tsx",
+      "project": "Mangon3_Stock-Agent",
+      "line": 65,
+      "hash": "b3d1aff527fc10b582e606f02acf9f8f",
+      "textRange": {
+        "startLine": 65,
+        "endLine": 65,
+        "startOffset": 45,
+        "endOffset": 47
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Move this component definition out of the parent component and pass data as props.",
+      "effort": "5min",
+      "debt": "5min",
+      "assignee": "Mangon3-Qgdku@github",
+      "author": "hoanglam130982@gmail.com",
+      "tags": [
+        "jsx",
+        "performance",
+        "react"
+      ],
+      "creationDate": "2026-01-14T07:58:26+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "EFFICIENT",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfwnW8oUaet74zv",
+      "rule": "typescript:S6759",
+      "severity": "MINOR",
+      "component": "Mangon3_Stock-Agent:frontend/src/components/ChatMessage.tsx",
+      "project": "Mangon3_Stock-Agent",
+      "line": 19,
+      "hash": "43c022754414c4f03dd8f8ac033e3d09",
+      "textRange": {
+        "startLine": 19,
+        "endLine": 19,
+        "startOffset": 28,
+        "endOffset": 57
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Mark the props of the component as read-only.",
+      "effort": "5min",
+      "debt": "5min",
+      "assignee": "Mangon3-Qgdku@github",
+      "author": "hoanglam130982@gmail.com",
+      "tags": [
+        "react",
+        "type-dependent"
+      ],
+      "creationDate": "2026-01-14T07:21:27+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "CONVENTIONAL",
+      "cleanCodeAttributeCategory": "CONSISTENT",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "LOW"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxe6nW8oUaet74zP",
+      "rule": "python:S6711",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:src/tools/model/data.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 53,
+      "hash": "f1311bd1e6036d813656c81f4e5f3363",
+      "textRange": {
+        "startLine": 53,
+        "endLine": 53,
+        "startOffset": 20,
+        "endOffset": 36
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Use a \"numpy.random.Generator\" here instead of this legacy function.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "data-science",
+        "numpy"
+      ],
+      "creationDate": "2025-12-26T10:06:08+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "CONVENTIONAL",
+      "cleanCodeAttributeCategory": "CONSISTENT",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxe0nW8oUaet74zN",
+      "rule": "python:S5754",
+      "severity": "CRITICAL",
+      "component": "Mangon3_Stock-Agent:src/tools/model/feature.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 78,
+      "hash": "3e264f5fbab10735799511f21ca70842",
+      "textRange": {
+        "startLine": 78,
+        "endLine": 78,
+        "startOffset": 13,
+        "endOffset": 19
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Specify an exception class to catch or reraise the exception",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "bad-practice",
+        "error-handling",
+        "suspicious"
+      ],
+      "creationDate": "2025-12-26T10:06:08+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "COMPLETE",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxeonW8oUaet74zC",
+      "rule": "python:S3776",
+      "severity": "CRITICAL",
+      "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 79,
+      "hash": "65eb0bf78095d27c763e77df9b889ab3",
+      "textRange": {
+        "startLine": 79,
+        "endLine": 79,
+        "startOffset": 8,
+        "endOffset": 30
+      },
+      "flows": [
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+              "textRange": {
+                "startLine": 84,
+                "endLine": 84,
+                "startOffset": 8,
+                "endOffset": 11
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+              "textRange": {
+                "startLine": 92,
+                "endLine": 92,
+                "startOffset": 12,
+                "endOffset": 14
+              },
+              "msg": "+2 (incl 1 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+              "textRange": {
+                "startLine": 92,
+                "endLine": 92,
+                "startOffset": 40,
+                "endOffset": 43
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+              "textRange": {
+                "startLine": 100,
+                "endLine": 100,
+                "startOffset": 12,
+                "endOffset": 14
+              },
+              "msg": "+2 (incl 1 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+              "textRange": {
+                "startLine": 100,
+                "endLine": 100,
+                "startOffset": 40,
+                "endOffset": 43
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+              "textRange": {
+                "startLine": 108,
+                "endLine": 108,
+                "startOffset": 12,
+                "endOffset": 14
+              },
+              "msg": "+2 (incl 1 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+              "textRange": {
+                "startLine": 108,
+                "endLine": 108,
+                "startOffset": 40,
+                "endOffset": 43
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+              "textRange": {
+                "startLine": 120,
+                "endLine": 120,
+                "startOffset": 16,
+                "endOffset": 18
+              },
+              "msg": "+2 (incl 1 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+              "textRange": {
+                "startLine": 122,
+                "endLine": 122,
+                "startOffset": 20,
+                "endOffset": 22
+              },
+              "msg": "+3 (incl 2 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+              "textRange": {
+                "startLine": 123,
+                "endLine": 123,
+                "startOffset": 20,
+                "endOffset": 22
+              },
+              "msg": "+3 (incl 2 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+              "textRange": {
+                "startLine": 131,
+                "endLine": 131,
+                "startOffset": 16,
+                "endOffset": 20
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+              "textRange": {
+                "startLine": 133,
+                "endLine": 133,
+                "startOffset": 12,
+                "endOffset": 18
+              },
+              "msg": "+2 (incl 1 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+              "textRange": {
+                "startLine": 135,
+                "endLine": 135,
+                "startOffset": 12,
+                "endOffset": 18
+              },
+              "msg": "+2 (incl 1 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+              "textRange": {
+                "startLine": 138,
+                "endLine": 138,
+                "startOffset": 8,
+                "endOffset": 10
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+              "textRange": {
+                "startLine": 143,
+                "endLine": 143,
+                "startOffset": 8,
+                "endOffset": 10
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+              "textRange": {
+                "startLine": 146,
+                "endLine": 146,
+                "startOffset": 8,
+                "endOffset": 12
+              },
+              "msg": "+1"
+            }
+          ]
+        }
+      ],
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 26 to the 15 allowed.",
+      "effort": "16min",
+      "debt": "16min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "brain-overload"
+      ],
+      "creationDate": "2025-12-26T10:06:08+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "FOCUSED",
+      "cleanCodeAttributeCategory": "ADAPTABLE",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxeonW8oUaet74zB",
+      "rule": "python:S117",
+      "severity": "MINOR",
+      "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 81,
+      "hash": "07c21fea7d8c50360f4f23ecf9e7af5f",
+      "textRange": {
+        "startLine": 81,
+        "endLine": 81,
+        "startOffset": 8,
+        "endOffset": 20
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Rename this local variable \"train_X_list\" to match the regular expression ^[_a-z][a-z0-9_]*$.",
+      "effort": "2min",
+      "debt": "2min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "convention"
+      ],
+      "creationDate": "2025-12-26T10:06:08+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "IDENTIFIABLE",
+      "cleanCodeAttributeCategory": "CONSISTENT",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "LOW"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxeonW8oUaet74zA",
+      "rule": "python:S117",
+      "severity": "MINOR",
+      "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 82,
+      "hash": "bb97261e2d9ab6b06a565ddf750864a9",
+      "textRange": {
+        "startLine": 82,
+        "endLine": 82,
+        "startOffset": 8,
+        "endOffset": 19
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Rename this local variable \"test_X_list\" to match the regular expression ^[_a-z][a-z0-9_]*$.",
+      "effort": "2min",
+      "debt": "2min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "convention"
+      ],
+      "creationDate": "2025-12-26T10:06:08+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "IDENTIFIABLE",
+      "cleanCodeAttributeCategory": "CONSISTENT",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "LOW"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxeonW8oUaet74y_",
+      "rule": "python:S117",
+      "severity": "MINOR",
+      "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 140,
+      "hash": "ae4d9d7134b4e2a377625c10914312b1",
+      "textRange": {
+        "startLine": 140,
+        "endLine": 140,
+        "startOffset": 8,
+        "endOffset": 24
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Rename this local variable \"X_train_combined\" to match the regular expression ^[_a-z][a-z0-9_]*$.",
+      "effort": "2min",
+      "debt": "2min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "convention"
+      ],
+      "creationDate": "2025-12-26T10:06:08+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "IDENTIFIABLE",
+      "cleanCodeAttributeCategory": "CONSISTENT",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "LOW"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxeonW8oUaet74y-",
+      "rule": "python:S117",
+      "severity": "MINOR",
+      "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 144,
+      "hash": "6cc1735f6a90f474511e1eb104fdfd6d",
+      "textRange": {
+        "startLine": 144,
+        "endLine": 144,
+        "startOffset": 12,
+        "endOffset": 27
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Rename this local variable \"X_test_combined\" to match the regular expression ^[_a-z][a-z0-9_]*$.",
+      "effort": "2min",
+      "debt": "2min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "convention"
+      ],
+      "creationDate": "2025-12-26T10:06:08+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "IDENTIFIABLE",
+      "cleanCodeAttributeCategory": "CONSISTENT",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "LOW"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxeonW8oUaet74zF",
+      "rule": "python:S3776",
+      "severity": "CRITICAL",
+      "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 176,
+      "hash": "a0f4cbd3d0f07297534adbacba8220e9",
+      "textRange": {
+        "startLine": 176,
+        "endLine": 176,
+        "startOffset": 8,
+        "endOffset": 13
+      },
+      "flows": [
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+              "textRange": {
+                "startLine": 189,
+                "endLine": 189,
+                "startOffset": 26,
+                "endOffset": 28
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+              "textRange": {
+                "startLine": 190,
+                "endLine": 190,
+                "startOffset": 32,
+                "endOffset": 34
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+              "textRange": {
+                "startLine": 191,
+                "endLine": 191,
+                "startOffset": 32,
+                "endOffset": 34
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+              "textRange": {
+                "startLine": 200,
+                "endLine": 200,
+                "startOffset": 12,
+                "endOffset": 14
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+              "textRange": {
+                "startLine": 220,
+                "endLine": 220,
+                "startOffset": 12,
+                "endOffset": 15
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+              "textRange": {
+                "startLine": 225,
+                "endLine": 225,
+                "startOffset": 16,
+                "endOffset": 19
+              },
+              "msg": "+2 (incl 1 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+              "textRange": {
+                "startLine": 242,
+                "endLine": 242,
+                "startOffset": 16,
+                "endOffset": 18
+              },
+              "msg": "+2 (incl 1 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+              "textRange": {
+                "startLine": 249,
+                "endLine": 249,
+                "startOffset": 16,
+                "endOffset": 18
+              },
+              "msg": "+2 (incl 1 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+              "textRange": {
+                "startLine": 252,
+                "endLine": 252,
+                "startOffset": 16,
+                "endOffset": 20
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+              "textRange": {
+                "startLine": 254,
+                "endLine": 254,
+                "startOffset": 20,
+                "endOffset": 22
+              },
+              "msg": "+3 (incl 2 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+              "textRange": {
+                "startLine": 266,
+                "endLine": 266,
+                "startOffset": 8,
+                "endOffset": 14
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+              "textRange": {
+                "startLine": 269,
+                "endLine": 269,
+                "startOffset": 8,
+                "endOffset": 14
+              },
+              "msg": "+1"
+            }
+          ]
+        }
+      ],
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 17 to the 15 allowed.",
+      "effort": "7min",
+      "debt": "7min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "brain-overload"
+      ],
+      "creationDate": "2025-12-26T10:06:08+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "FOCUSED",
+      "cleanCodeAttributeCategory": "ADAPTABLE",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxeonW8oUaet74zG",
+      "rule": "python:S6983",
+      "severity": "MINOR",
+      "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 195,
+      "hash": "29466182ddd724c30a80aec1fd1a032e",
+      "textRange": {
+        "startLine": 195,
+        "endLine": 195,
+        "startOffset": 31,
+        "endOffset": 41
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Specify the `num_workers` parameter.",
+      "effort": "2min",
+      "debt": "2min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "machine-learning",
+        "pytorch"
+      ],
+      "creationDate": "2025-12-26T10:06:08+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "COMPLETE",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "RELIABILITY",
+          "severity": "LOW"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfqnW8oUaet74zi",
+      "rule": "typescript:S1128",
+      "severity": "MINOR",
+      "component": "Mangon3_Stock-Agent:frontend/src/components/AnalysisReport.tsx",
+      "project": "Mangon3_Stock-Agent",
+      "line": 3,
+      "hash": "cc5a833a6fef3d9af8cd39d66ee3fcff",
+      "textRange": {
+        "startLine": 3,
+        "endLine": 3,
+        "startOffset": 35,
+        "endOffset": 45
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Remove this unused import of 'DollarSign'.",
+      "effort": "1min",
+      "debt": "1min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "es2015",
+        "type-dependent",
+        "unused"
+      ],
+      "creationDate": "2025-12-24T07:42:16+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "CLEAR",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "LOW"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfqnW8oUaet74zj",
+      "rule": "typescript:S6759",
+      "severity": "MINOR",
+      "component": "Mangon3_Stock-Agent:frontend/src/components/AnalysisReport.tsx",
+      "project": "Mangon3_Stock-Agent",
+      "line": 11,
+      "hash": "c1f41eec5940f184799f79402abe21dc",
+      "textRange": {
+        "startLine": 11,
+        "endLine": 11,
+        "startOffset": 31,
+        "endOffset": 63
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Mark the props of the component as read-only.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "react",
+        "type-dependent"
+      ],
+      "creationDate": "2025-12-24T07:42:16+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "CONVENTIONAL",
+      "cleanCodeAttributeCategory": "CONSISTENT",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "LOW"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfqnW8oUaet74zk",
+      "rule": "typescript:S3358",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:frontend/src/components/AnalysisReport.tsx",
+      "project": "Mangon3_Stock-Agent",
+      "line": 30,
+      "hash": "be13313d451092016af68a49afc0ac1d",
+      "textRange": {
+        "startLine": 30,
+        "endLine": 31,
+        "startOffset": 12,
+        "endOffset": 74
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Extract this nested ternary operation into an independent statement.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "confusing"
+      ],
+      "creationDate": "2025-12-24T07:42:16+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "CLEAR",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfqnW8oUaet74zl",
+      "rule": "typescript:S3358",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:frontend/src/components/AnalysisReport.tsx",
+      "project": "Mangon3_Stock-Agent",
+      "line": 34,
+      "hash": "5057be26a5433e99a5b5239b683bac46",
+      "textRange": {
+        "startLine": 34,
+        "endLine": 35,
+        "startOffset": 13,
+        "endOffset": 45
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Extract this nested ternary operation into an independent statement.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "confusing"
+      ],
+      "creationDate": "2025-12-24T07:42:16+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "CLEAR",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfqnW8oUaet74zm",
+      "rule": "typescript:S3358",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:frontend/src/components/AnalysisReport.tsx",
+      "project": "Mangon3_Stock-Agent",
+      "line": 37,
+      "hash": "b43a133fe506e51d2df1222db5f6b09b",
+      "textRange": {
+        "startLine": 37,
+        "endLine": 37,
+        "startOffset": 52,
+        "endOffset": 99
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Extract this nested ternary operation into an independent statement.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "confusing"
+      ],
+      "creationDate": "2025-12-24T07:42:16+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "CLEAR",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfqnW8oUaet74zn",
+      "rule": "typescript:S6478",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:frontend/src/components/AnalysisReport.tsx",
+      "project": "Mangon3_Stock-Agent",
+      "line": 63,
+      "hash": "0cb90cfc1828a8a528dfe6a63670e51b",
+      "textRange": {
+        "startLine": 63,
+        "endLine": 63,
+        "startOffset": 41,
+        "endOffset": 43
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Move this component definition out of the parent component and pass data as props.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "jsx",
+        "performance",
+        "react"
+      ],
+      "creationDate": "2025-12-24T07:42:16+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "EFFICIENT",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfqnW8oUaet74zo",
+      "rule": "typescript:S6850",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:frontend/src/components/AnalysisReport.tsx",
+      "project": "Mangon3_Stock-Agent",
+      "line": 63,
+      "hash": "0cb90cfc1828a8a528dfe6a63670e51b",
+      "textRange": {
+        "startLine": 63,
+        "endLine": 63,
+        "startOffset": 44,
+        "endOffset": 116
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Headings must have content and the content must be accessible by a screen reader.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "accessibility",
+        "react"
+      ],
+      "creationDate": "2025-12-24T07:42:16+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "CONVENTIONAL",
+      "cleanCodeAttributeCategory": "CONSISTENT",
+      "impacts": [
+        {
+          "softwareQuality": "RELIABILITY",
+          "severity": "MEDIUM"
+        },
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "LOW"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfqnW8oUaet74zp",
+      "rule": "typescript:S6478",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:frontend/src/components/AnalysisReport.tsx",
+      "project": "Mangon3_Stock-Agent",
+      "line": 64,
+      "hash": "1a3a947a5d513e8225aef420e1240815",
+      "textRange": {
+        "startLine": 64,
+        "endLine": 64,
+        "startOffset": 41,
+        "endOffset": 43
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Move this component definition out of the parent component and pass data as props.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "jsx",
+        "performance",
+        "react"
+      ],
+      "creationDate": "2025-12-24T07:42:16+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "EFFICIENT",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfqnW8oUaet74zq",
+      "rule": "typescript:S6850",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:frontend/src/components/AnalysisReport.tsx",
+      "project": "Mangon3_Stock-Agent",
+      "line": 64,
+      "hash": "1a3a947a5d513e8225aef420e1240815",
+      "textRange": {
+        "startLine": 64,
+        "endLine": 64,
+        "startOffset": 44,
+        "endOffset": 145
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Headings must have content and the content must be accessible by a screen reader.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "accessibility",
+        "react"
+      ],
+      "creationDate": "2025-12-24T07:42:16+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "CONVENTIONAL",
+      "cleanCodeAttributeCategory": "CONSISTENT",
+      "impacts": [
+        {
+          "softwareQuality": "RELIABILITY",
+          "severity": "MEDIUM"
+        },
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "LOW"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfqnW8oUaet74zr",
+      "rule": "typescript:S6478",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:frontend/src/components/AnalysisReport.tsx",
+      "project": "Mangon3_Stock-Agent",
+      "line": 65,
+      "hash": "68f780727f7ccd3c4bee7a3b60dd127e",
+      "textRange": {
+        "startLine": 65,
+        "endLine": 65,
+        "startOffset": 41,
+        "endOffset": 43
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Move this component definition out of the parent component and pass data as props.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "jsx",
+        "performance",
+        "react"
+      ],
+      "creationDate": "2025-12-24T07:42:16+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "EFFICIENT",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfqnW8oUaet74zs",
+      "rule": "typescript:S6850",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:frontend/src/components/AnalysisReport.tsx",
+      "project": "Mangon3_Stock-Agent",
+      "line": 65,
+      "hash": "68f780727f7ccd3c4bee7a3b60dd127e",
+      "textRange": {
+        "startLine": 65,
+        "endLine": 65,
+        "startOffset": 44,
+        "endOffset": 119
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Headings must have content and the content must be accessible by a screen reader.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "accessibility",
+        "react"
+      ],
+      "creationDate": "2025-12-24T07:42:16+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "CONVENTIONAL",
+      "cleanCodeAttributeCategory": "CONSISTENT",
+      "impacts": [
+        {
+          "softwareQuality": "RELIABILITY",
+          "severity": "MEDIUM"
+        },
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "LOW"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfqnW8oUaet74zt",
+      "rule": "typescript:S6478",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:frontend/src/components/AnalysisReport.tsx",
+      "project": "Mangon3_Stock-Agent",
+      "line": 66,
+      "hash": "09cbfff94e39b8e09d34e434e774ee13",
+      "textRange": {
+        "startLine": 66,
+        "endLine": 66,
+        "startOffset": 45,
+        "endOffset": 47
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Move this component definition out of the parent component and pass data as props.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "jsx",
+        "performance",
+        "react"
+      ],
+      "creationDate": "2025-12-24T07:42:16+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "EFFICIENT",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfqnW8oUaet74zu",
+      "rule": "typescript:S6478",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:frontend/src/components/AnalysisReport.tsx",
+      "project": "Mangon3_Stock-Agent",
+      "line": 67,
+      "hash": "3108ade85c5fdb7c9f74e713527e3d24",
+      "textRange": {
+        "startLine": 67,
+        "endLine": 67,
+        "startOffset": 41,
+        "endOffset": 43
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Move this component definition out of the parent component and pass data as props.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "jsx",
+        "performance",
+        "react"
+      ],
+      "creationDate": "2025-12-24T07:42:16+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "EFFICIENT",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxdcnW8oUaet74y6",
+      "rule": "python:S8415",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:src/api/index.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 58,
+      "hash": "4e3ee115331cae62073cea30d2ddbce7",
+      "textRange": {
+        "startLine": 58,
+        "endLine": 58,
+        "startOffset": 14,
+        "endOffset": 27
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Document this HTTPException with status code 401 in the \"responses\" parameter.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "documentation",
+        "fastapi",
+        "openapi"
+      ],
+      "creationDate": "2025-12-24T07:38:39+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "COMPLETE",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfWnW8oUaet74zX",
+      "rule": "python:S3776",
+      "severity": "CRITICAL",
+      "component": "Mangon3_Stock-Agent:src/graph/nodes.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 14,
+      "hash": "9fa05537e9e5a8bec3d38cc9722caf37",
+      "textRange": {
+        "startLine": 14,
+        "endLine": 14,
+        "startOffset": 4,
+        "endOffset": 14
+      },
+      "flows": [
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/graph/nodes.py",
+              "textRange": {
+                "startLine": 20,
+                "endLine": 20,
+                "startOffset": 4,
+                "endOffset": 10
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/graph/nodes.py",
+              "textRange": {
+                "startLine": 22,
+                "endLine": 22,
+                "startOffset": 8,
+                "endOffset": 10
+              },
+              "msg": "+2 (incl 1 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/graph/nodes.py",
+              "textRange": {
+                "startLine": 23,
+                "endLine": 23,
+                "startOffset": 46,
+                "endOffset": 48
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/graph/nodes.py",
+              "textRange": {
+                "startLine": 27,
+                "endLine": 27,
+                "startOffset": 8,
+                "endOffset": 10
+              },
+              "msg": "+2 (incl 1 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/graph/nodes.py",
+              "textRange": {
+                "startLine": 27,
+                "endLine": 27,
+                "startOffset": 52,
+                "endOffset": 54
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/graph/nodes.py",
+              "textRange": {
+                "startLine": 30,
+                "endLine": 30,
+                "startOffset": 8,
+                "endOffset": 12
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/graph/nodes.py",
+              "textRange": {
+                "startLine": 35,
+                "endLine": 35,
+                "startOffset": 35,
+                "endOffset": 38
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/graph/nodes.py",
+              "textRange": {
+                "startLine": 39,
+                "endLine": 39,
+                "startOffset": 41,
+                "endOffset": 43
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/graph/nodes.py",
+              "textRange": {
+                "startLine": 39,
+                "endLine": 39,
+                "startOffset": 69,
+                "endOffset": 72
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/graph/nodes.py",
+              "textRange": {
+                "startLine": 40,
+                "endLine": 40,
+                "startOffset": 61,
+                "endOffset": 64
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/graph/nodes.py",
+              "textRange": {
+                "startLine": 42,
+                "endLine": 42,
+                "startOffset": 4,
+                "endOffset": 6
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/graph/nodes.py",
+              "textRange": {
+                "startLine": 42,
+                "endLine": 42,
+                "startOffset": 25,
+                "endOffset": 27
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/graph/nodes.py",
+              "textRange": {
+                "startLine": 44,
+                "endLine": 44,
+                "startOffset": 8,
+                "endOffset": 11
+              },
+              "msg": "+2 (incl 1 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/graph/nodes.py",
+              "textRange": {
+                "startLine": 45,
+                "endLine": 45,
+                "startOffset": 12,
+                "endOffset": 14
+              },
+              "msg": "+3 (incl 2 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/graph/nodes.py",
+              "textRange": {
+                "startLine": 47,
+                "endLine": 47,
+                "startOffset": 16,
+                "endOffset": 18
+              },
+              "msg": "+4 (incl 3 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/graph/nodes.py",
+              "textRange": {
+                "startLine": 47,
+                "endLine": 47,
+                "startOffset": 48,
+                "endOffset": 50
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/graph/nodes.py",
+              "textRange": {
+                "startLine": 49,
+                "endLine": 49,
+                "startOffset": 21,
+                "endOffset": 23
+              },
+              "msg": "+5 (incl 4 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/graph/nodes.py",
+              "textRange": {
+                "startLine": 53,
+                "endLine": 53,
+                "startOffset": 8,
+                "endOffset": 10
+              },
+              "msg": "+2 (incl 1 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/graph/nodes.py",
+              "textRange": {
+                "startLine": 66,
+                "endLine": 66,
+                "startOffset": 8,
+                "endOffset": 12
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/graph/nodes.py",
+              "textRange": {
+                "startLine": 67,
+                "endLine": 67,
+                "startOffset": 13,
+                "endOffset": 15
+              },
+              "msg": "+3 (incl 2 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/graph/nodes.py",
+              "textRange": {
+                "startLine": 69,
+                "endLine": 69,
+                "startOffset": 17,
+                "endOffset": 19
+              },
+              "msg": "+4 (incl 3 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/graph/nodes.py",
+              "textRange": {
+                "startLine": 73,
+                "endLine": 73,
+                "startOffset": 4,
+                "endOffset": 6
+              },
+              "msg": "+1"
+            }
+          ]
+        }
+      ],
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 40 to the 15 allowed.",
+      "effort": "30min",
+      "debt": "30min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "brain-overload"
+      ],
+      "creationDate": "2025-12-24T07:11:44+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "FOCUSED",
+      "cleanCodeAttributeCategory": "ADAPTABLE",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfWnW8oUaet74zY",
+      "rule": "python:S8572",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:src/graph/nodes.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 31,
+      "hash": "1d770e35ebb891dad3d3ccb09a456796",
+      "textRange": {
+        "startLine": 31,
+        "endLine": 31,
+        "startOffset": 20,
+        "endOffset": 25
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Use \"logging.exception()\" instead.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "exception",
+        "logging"
+      ],
+      "creationDate": "2025-12-24T06:17:14+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "COMPLETE",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfRnW8oUaet74zV",
+      "rule": "python:S1763",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:src/utils/device.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 19,
+      "hash": "dbfb394cbb82b01030f5bd33322b03ee",
+      "textRange": {
+        "startLine": 19,
+        "endLine": 20,
+        "startOffset": 8,
+        "endOffset": 12
+      },
+      "flows": [
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/utils/device.py",
+              "textRange": {
+                "startLine": 18,
+                "endLine": 18,
+                "startOffset": 8,
+                "endOffset": 21
+              },
+              "msg": "Statement exiting the current code block."
+            }
+          ]
+        }
+      ],
+      "status": "OPEN",
+      "message": "Delete this unreachable code or refactor the code to make it reachable.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "cwe",
+        "unused"
+      ],
+      "creationDate": "2025-12-24T02:18:47+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "BUG",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "LOGICAL",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "RELIABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxf9nW8oUaet74z-",
+      "rule": "text:S8565",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:pyproject.toml",
+      "project": "Mangon3_Stock-Agent",
+      "flows": [],
+      "status": "OPEN",
+      "message": "Dependency versions are not predictable if the lock file (uv.lock or poetry.lock) is missing.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [],
+      "creationDate": "2025-12-23T10:37:10+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "VULNERABILITY",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "COMPLETE",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "SECURITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxbpnW8oUaet74yx",
+      "rule": "python:S3457",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:src/app/persistence.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 20,
+      "hash": "2bad82a9e8b7b5cee1f628307a8dba80",
+      "textRange": {
+        "startLine": 20,
+        "endLine": 20,
+        "startOffset": 28,
+        "endOffset": 61
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Add replacement fields or use a normal string instead of an f-string.",
+      "effort": "1min",
+      "debt": "1min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "confusing"
+      ],
+      "creationDate": "2025-12-23T10:37:10+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "LOGICAL",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxbpnW8oUaet74yy",
+      "rule": "python:S3457",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:src/app/persistence.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 40,
+      "hash": "399e4501e5bb21b037678748b3d7a032",
+      "textRange": {
+        "startLine": 40,
+        "endLine": 40,
+        "startOffset": 24,
+        "endOffset": 77
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Add replacement fields or use a normal string instead of an f-string.",
+      "effort": "1min",
+      "debt": "1min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "confusing"
+      ],
+      "creationDate": "2025-12-23T10:37:10+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "LOGICAL",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxbpnW8oUaet74yz",
+      "rule": "python:S8572",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:src/app/persistence.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 65,
+      "hash": "1f749070fb7ec3d146471bc471025daa",
+      "textRange": {
+        "startLine": 65,
+        "endLine": 65,
+        "startOffset": 23,
+        "endOffset": 28
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Use \"logging.exception()\" instead.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "exception",
+        "logging"
+      ],
+      "creationDate": "2025-12-23T10:37:10+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "COMPLETE",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxbpnW8oUaet74y0",
+      "rule": "python:S8572",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:src/app/persistence.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 76,
+      "hash": "364c0546adddd972de45333191a7f01d",
+      "textRange": {
+        "startLine": 76,
+        "endLine": 76,
+        "startOffset": 23,
+        "endOffset": 28
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Use \"logging.exception()\" instead.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "exception",
+        "logging"
+      ],
+      "creationDate": "2025-12-23T10:37:10+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "COMPLETE",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxdWnW8oUaet74y1",
+      "rule": "python:S2737",
+      "severity": "MINOR",
+      "component": "Mangon3_Stock-Agent:src/rag/core.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 28,
+      "hash": "73d4fcb0eb5deba20a796c4264c34d02",
+      "textRange": {
+        "startLine": 28,
+        "endLine": 28,
+        "startOffset": 16,
+        "endOffset": 23
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Add logic to this except clause or eliminate it and rethrow the exception automatically.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "clumsy",
+        "error-handling",
+        "finding",
+        "unused"
+      ],
+      "creationDate": "2025-12-23T10:37:10+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "CLEAR",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "LOW"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxdWnW8oUaet74y2",
+      "rule": "python:S1481",
+      "severity": "MINOR",
+      "component": "Mangon3_Stock-Agent:src/rag/core.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 55,
+      "hash": "5e11fcffc5ca1f600d0bf53d38f19ae7",
+      "textRange": {
+        "startLine": 55,
+        "endLine": 55,
+        "startOffset": 28,
+        "endOffset": 29
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Remove the unused local variable \"e\".",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "unused"
+      ],
+      "creationDate": "2025-12-23T10:37:10+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "CLEAR",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "LOW"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxdWnW8oUaet74y3",
+      "rule": "python:S2737",
+      "severity": "MINOR",
+      "component": "Mangon3_Stock-Agent:src/rag/core.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 56,
+      "hash": "090245289ce5a188ea08adfb0defd1cb",
+      "textRange": {
+        "startLine": 56,
+        "endLine": 56,
+        "startOffset": 12,
+        "endOffset": 17
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Add logic to this except clause or eliminate it and rethrow the exception automatically.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "clumsy",
+        "error-handling",
+        "finding",
+        "unused"
+      ],
+      "creationDate": "2025-12-23T10:37:10+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "CLEAR",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "LOW"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxe6nW8oUaet74zO",
+      "rule": "python:S8572",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:src/tools/model/data.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 26,
+      "hash": "7749c685cf62480766c7160c1b5f2267",
+      "textRange": {
+        "startLine": 26,
+        "endLine": 26,
+        "startOffset": 24,
+        "endOffset": 29
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Use \"logging.exception()\" instead.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "exception",
+        "logging"
+      ],
+      "creationDate": "2025-12-23T10:37:10+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "COMPLETE",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxeunW8oUaet74zL",
+      "rule": "python:S2772",
+      "severity": "MINOR",
+      "component": "Mangon3_Stock-Agent:src/tools/model/infer.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 35,
+      "hash": "1a1dc91c907325c69271ddf0c944bc72",
+      "textRange": {
+        "startLine": 35,
+        "endLine": 35,
+        "startOffset": 8,
+        "endOffset": 12
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Remove this unneeded \"pass\".",
+      "effort": "2min",
+      "debt": "2min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "confusing"
+      ],
+      "creationDate": "2025-12-23T10:37:10+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "CLEAR",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "LOW"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxeunW8oUaet74zM",
+      "rule": "python:S6985",
+      "severity": "CRITICAL",
+      "component": "Mangon3_Stock-Agent:src/tools/model/infer.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 47,
+      "hash": "bc14a3894aa9c7edbd64d95efa3740fa",
+      "textRange": {
+        "startLine": 47,
+        "endLine": 47,
+        "startOffset": 30,
+        "endOffset": 40
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Replace this call with a safe alternative.",
+      "effort": "15min",
+      "debt": "15min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "cwe",
+        "former-hotspot",
+        "machine-learning",
+        "pytorch"
+      ],
+      "creationDate": "2025-12-23T10:37:10+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "VULNERABILITY",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "CONVENTIONAL",
+      "cleanCodeAttributeCategory": "CONSISTENT",
+      "impacts": [
+        {
+          "softwareQuality": "SECURITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxeonW8oUaet74zD",
+      "rule": "python:S8572",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 134,
+      "hash": "8c3db5d4f1c4f7afe496ffc9fc14f052",
+      "textRange": {
+        "startLine": 134,
+        "endLine": 134,
+        "startOffset": 23,
+        "endOffset": 28
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Use \"logging.exception()\" instead.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "exception",
+        "logging"
+      ],
+      "creationDate": "2025-12-23T10:37:10+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "COMPLETE",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxeonW8oUaet74zE",
+      "rule": "python:S8572",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 136,
+      "hash": "886ddcc588a0d6181103cf307cd2c7d3",
+      "textRange": {
+        "startLine": 136,
+        "endLine": 136,
+        "startOffset": 23,
+        "endOffset": 28
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Use \"logging.exception()\" instead.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "exception",
+        "logging"
+      ],
+      "creationDate": "2025-12-23T10:37:10+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "COMPLETE",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxeonW8oUaet74zH",
+      "rule": "python:S6983",
+      "severity": "MINOR",
+      "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 196,
+      "hash": "1fbfb84b622eb60a491ba86a924f9510",
+      "textRange": {
+        "startLine": 196,
+        "endLine": 196,
+        "startOffset": 30,
+        "endOffset": 40
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Specify the `num_workers` parameter.",
+      "effort": "2min",
+      "debt": "2min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "machine-learning",
+        "pytorch"
+      ],
+      "creationDate": "2025-12-23T10:37:10+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "COMPLETE",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "RELIABILITY",
+          "severity": "LOW"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxeonW8oUaet74zI",
+      "rule": "python:S6973",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 212,
+      "hash": "f0e83fa27a1286785665f0591f738ada",
+      "textRange": {
+        "startLine": 212,
+        "endLine": 212,
+        "startOffset": 24,
+        "endOffset": 77
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Add the missing hyperparameter weight_decay for this PyTorch optimizer.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "machine-learning",
+        "pytorch",
+        "scikit-learn"
+      ],
+      "creationDate": "2025-12-23T10:37:10+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "CONVENTIONAL",
+      "cleanCodeAttributeCategory": "CONSISTENT",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "MEDIUM"
+        },
+        {
+          "softwareQuality": "RELIABILITY",
+          "severity": "LOW"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxeonW8oUaet74zJ",
+      "rule": "python:S8572",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 267,
+      "hash": "a400edcec05f63c25c61476c672f1a90",
+      "textRange": {
+        "startLine": 267,
+        "endLine": 267,
+        "startOffset": 19,
+        "endOffset": 24
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Use \"logging.exception()\" instead.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "exception",
+        "logging"
+      ],
+      "creationDate": "2025-12-23T10:37:10+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "COMPLETE",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxeonW8oUaet74zK",
+      "rule": "python:S8572",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:src/tools/model/train.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 270,
+      "hash": "ebb5ca3979d8967f2e4940c2ea026b5d",
+      "textRange": {
+        "startLine": 270,
+        "endLine": 270,
+        "startOffset": 19,
+        "endOffset": 24
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Use \"logging.exception()\" instead.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "exception",
+        "logging"
+      ],
+      "creationDate": "2025-12-23T10:37:10+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "COMPLETE",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxehnW8oUaet74y9",
+      "rule": "python:S8572",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:src/tools/news.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 68,
+      "hash": "8064e4b5c82eae6e83796d8cdfcdea12",
+      "textRange": {
+        "startLine": 68,
+        "endLine": 68,
+        "startOffset": 19,
+        "endOffset": 24
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Use \"logging.exception()\" instead.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "exception",
+        "logging"
+      ],
+      "creationDate": "2025-12-23T10:37:10+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "COMPLETE",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxe_nW8oUaet74zQ",
+      "rule": "python:S1481",
+      "severity": "MINOR",
+      "component": "Mangon3_Stock-Agent:src/tools/sentiment/train.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 37,
+      "hash": "e11f733911bb648236fc9e529fa855e8",
+      "textRange": {
+        "startLine": 37,
+        "endLine": 37,
+        "startOffset": 12,
+        "endOffset": 25
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Replace the unused local variable \"label_encoder\" with \"_\".",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "unused"
+      ],
+      "creationDate": "2025-12-23T10:37:10+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "CLEAR",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "LOW"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxe_nW8oUaet74zR",
+      "rule": "python:S6969",
+      "severity": "MINOR",
+      "component": "Mangon3_Stock-Agent:src/tools/sentiment/train.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 41,
+      "hash": "b789a9d9181971d7d2b17f1afa35f939",
+      "textRange": {
+        "startLine": 41,
+        "endLine": 41,
+        "startOffset": 19,
+        "endOffset": 27
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Specify a memory argument for the pipeline.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "machine-learning",
+        "scikit-learn"
+      ],
+      "creationDate": "2025-12-23T10:37:10+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "EFFICIENT",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "LOW"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfRnW8oUaet74zW",
+      "rule": "python:S2772",
+      "severity": "MINOR",
+      "component": "Mangon3_Stock-Agent:src/utils/device.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 20,
+      "hash": "1a1dc91c907325c69271ddf0c944bc72",
+      "textRange": {
+        "startLine": 20,
+        "endLine": 20,
+        "startOffset": 8,
+        "endOffset": 12
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Remove this unneeded \"pass\".",
+      "effort": "2min",
+      "debt": "2min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "confusing"
+      ],
+      "creationDate": "2025-12-23T10:37:10+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "CLEAR",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "LOW"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfFnW8oUaet74zS",
+      "rule": "python:S5850",
+      "severity": "MAJOR",
+      "component": "Mangon3_Stock-Agent:src/utils/json_parser.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 6,
+      "hash": "e34b69bb2755ae708edc07162f661769",
+      "textRange": {
+        "startLine": 6,
+        "endLine": 6,
+        "startOffset": 27,
+        "endOffset": 54
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Group parts of the regex together to make the intended operator precedence explicit.",
+      "effort": "10min",
+      "debt": "10min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "regex"
+      ],
+      "creationDate": "2025-12-23T10:37:10+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "BUG",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "CLEAR",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "RELIABILITY",
+          "severity": "MEDIUM"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfFnW8oUaet74zT",
+      "rule": "python:S6353",
+      "severity": "MINOR",
+      "component": "Mangon3_Stock-Agent:src/utils/json_parser.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 8,
+      "hash": "04563b815e292195498e0775e7da2181",
+      "textRange": {
+        "startLine": 8,
+        "endLine": 8,
+        "startOffset": 39,
+        "endOffset": 51
+      },
+      "flows": [],
+      "status": "OPEN",
+      "message": "Use concise character class syntax '\\w' instead of '[a-zA-Z0-9_]'.",
+      "effort": "5min",
+      "debt": "5min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "regex"
+      ],
+      "creationDate": "2025-12-23T10:37:10+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "CLEAR",
+      "cleanCodeAttributeCategory": "INTENTIONAL",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "LOW"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    },
+    {
+      "key": "AZ5UVxfMnW8oUaet74zU",
+      "rule": "python:S3776",
+      "severity": "CRITICAL",
+      "component": "Mangon3_Stock-Agent:src/utils/retry.py",
+      "project": "Mangon3_Stock-Agent",
+      "line": 9,
+      "hash": "fe073446483b3a201089742fa8025b9a",
+      "textRange": {
+        "startLine": 9,
+        "endLine": 9,
+        "startOffset": 4,
+        "endOffset": 22
+      },
+      "flows": [
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/utils/retry.py",
+              "textRange": {
+                "startLine": 21,
+                "endLine": 21,
+                "startOffset": 12,
+                "endOffset": 15
+              },
+              "msg": "+2 (incl 1 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/utils/retry.py",
+              "textRange": {
+                "startLine": 24,
+                "endLine": 24,
+                "startOffset": 16,
+                "endOffset": 22
+              },
+              "msg": "+3 (incl 2 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/utils/retry.py",
+              "textRange": {
+                "startLine": 28,
+                "endLine": 28,
+                "startOffset": 58,
+                "endOffset": 60
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/utils/retry.py",
+              "textRange": {
+                "startLine": 31,
+                "endLine": 31,
+                "startOffset": 20,
+                "endOffset": 22
+              },
+              "msg": "+4 (incl 3 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/utils/retry.py",
+              "textRange": {
+                "startLine": 33,
+                "endLine": 33,
+                "startOffset": 20,
+                "endOffset": 22
+              },
+              "msg": "+4 (incl 3 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/utils/retry.py",
+              "textRange": {
+                "startLine": 39,
+                "endLine": 39,
+                "startOffset": 24,
+                "endOffset": 26
+              },
+              "msg": "+4 (incl 3 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/utils/retry.py",
+              "textRange": {
+                "startLine": 42,
+                "endLine": 42,
+                "startOffset": 24,
+                "endOffset": 28
+              },
+              "msg": "+1"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/utils/retry.py",
+              "textRange": {
+                "startLine": 45,
+                "endLine": 45,
+                "startOffset": 20,
+                "endOffset": 26
+              },
+              "msg": "+4 (incl 3 for nesting)"
+            }
+          ]
+        },
+        {
+          "locations": [
+            {
+              "component": "Mangon3_Stock-Agent:src/utils/retry.py",
+              "textRange": {
+                "startLine": 49,
+                "endLine": 49,
+                "startOffset": 20,
+                "endOffset": 22
+              },
+              "msg": "+4 (incl 3 for nesting)"
+            }
+          ]
+        }
+      ],
+      "status": "OPEN",
+      "message": "Refactor this function to reduce its Cognitive Complexity from 27 to the 15 allowed.",
+      "effort": "17min",
+      "debt": "17min",
+      "author": "lam.vu@ltsgroup.dev",
+      "tags": [
+        "brain-overload"
+      ],
+      "creationDate": "2025-12-23T10:37:10+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "type": "CODE_SMELL",
+      "organization": "mango80200782",
+      "cleanCodeAttribute": "FOCUSED",
+      "cleanCodeAttributeCategory": "ADAPTABLE",
+      "impacts": [
+        {
+          "softwareQuality": "MAINTAINABILITY",
+          "severity": "HIGH"
+        }
+      ],
+      "issueStatus": "OPEN",
+      "projectName": "Stock-Agent",
+      "internalTags": [],
+      "lastChangeAnalysisUuid": "35fa032a-ea6f-45a8-8f2d-0e92c13adbc4",
+      "lastChangeSource": "ANALYSIS"
+    }
+  ],
+  "components": [
+    {
+      "organization": "mango80200782",
+      "key": "Mangon3_Stock-Agent:src/utils/retry.py",
+      "uuid": "AZ5UVxJenW8oUaet74yK",
+      "enabled": true,
+      "qualifier": "FIL",
+      "name": "retry.py",
+      "longName": "src/utils/retry.py",
+      "path": "src/utils/retry.py"
+    },
+    {
+      "organization": "mango80200782",
+      "key": "Mangon3_Stock-Agent:src/tools/model/infer.py",
+      "uuid": "AZ5UVxJenW8oUaet74x-",
+      "enabled": true,
+      "qualifier": "FIL",
+      "name": "infer.py",
+      "longName": "src/tools/model/infer.py",
+      "path": "src/tools/model/infer.py"
+    },
+    {
+      "organization": "mango80200782",
+      "key": "Mangon3_Stock-Agent:src/utils/device.py",
+      "uuid": "AZ5UVxJenW8oUaet74yM",
+      "enabled": true,
+      "qualifier": "FIL",
+      "name": "device.py",
+      "longName": "src/utils/device.py",
+      "path": "src/utils/device.py"
+    },
+    {
+      "organization": "mango80200782",
+      "key": "Mangon3_Stock-Agent:src/api/index.py",
+      "uuid": "AZ5UVxJenW8oUaet74x1",
+      "enabled": true,
+      "qualifier": "FIL",
+      "name": "index.py",
+      "longName": "src/api/index.py",
+      "path": "src/api/index.py"
+    },
+    {
+      "organization": "mango80200782",
+      "key": "Mangon3_Stock-Agent:src/graph/nodes.py",
+      "uuid": "AZ5UVxJenW8oUaet74yQ",
+      "enabled": true,
+      "qualifier": "FIL",
+      "name": "nodes.py",
+      "longName": "src/graph/nodes.py",
+      "path": "src/graph/nodes.py"
+    },
+    {
+      "organization": "mango80200782",
+      "key": "Mangon3_Stock-Agent:pyproject.toml",
+      "uuid": "AZ5UVxJenW8oUaet74yt",
+      "enabled": true,
+      "qualifier": "FIL",
+      "name": "pyproject.toml",
+      "longName": "pyproject.toml",
+      "path": "pyproject.toml"
+    },
+    {
+      "organization": "mango80200782",
+      "key": "Mangon3_Stock-Agent:test_agent.py",
+      "uuid": "AZ5UVxJenW8oUaet74yv",
+      "enabled": true,
+      "qualifier": "FIL",
+      "name": "test_agent.py",
+      "longName": "test_agent.py",
+      "path": "test_agent.py"
+    },
+    {
+      "organization": "mango80200782",
+      "key": "Mangon3_Stock-Agent:src/app/persistence.py",
+      "uuid": "AZ5UVxJenW8oUaet74xt",
+      "enabled": true,
+      "qualifier": "FIL",
+      "name": "persistence.py",
+      "longName": "src/app/persistence.py",
+      "path": "src/app/persistence.py"
+    },
+    {
+      "organization": "mango80200782",
+      "key": "Mangon3_Stock-Agent:test_chat_system.py",
+      "uuid": "AZ5UVxJenW8oUaet74yu",
+      "enabled": true,
+      "qualifier": "FIL",
+      "name": "test_chat_system.py",
+      "longName": "test_chat_system.py",
+      "path": "test_chat_system.py"
+    },
+    {
+      "organization": "mango80200782",
+      "key": "Mangon3_Stock-Agent:src/rag/core.py",
+      "uuid": "AZ5UVxJenW8oUaet74xw",
+      "enabled": true,
+      "qualifier": "FIL",
+      "name": "core.py",
+      "longName": "src/rag/core.py",
+      "path": "src/rag/core.py"
+    },
+    {
+      "organization": "mango80200782",
+      "key": "Mangon3_Stock-Agent:src/memory/store.py",
+      "uuid": "AZ5UVxJenW8oUaet74yX",
+      "enabled": true,
+      "qualifier": "FIL",
+      "name": "store.py",
+      "longName": "src/memory/store.py",
+      "path": "src/memory/store.py"
+    },
+    {
+      "organization": "mango80200782",
+      "key": "Mangon3_Stock-Agent:Dockerfile",
+      "uuid": "AZ5UVxJenW8oUaet74yw",
+      "enabled": true,
+      "qualifier": "FIL",
+      "name": "Dockerfile",
+      "longName": "Dockerfile",
+      "path": "Dockerfile"
+    },
+    {
+      "organization": "mango80200782",
+      "key": "Mangon3_Stock-Agent",
+      "uuid": "AZ5UVp90G3QGqPYjq7AY",
+      "enabled": true,
+      "qualifier": "TRK",
+      "name": "Stock-Agent",
+      "longName": "Stock-Agent"
+    },
+    {
+      "organization": "mango80200782",
+      "key": "Mangon3_Stock-Agent:src/tools/model/train.py",
+      "uuid": "AZ5UVxJenW8oUaet74x9",
+      "enabled": true,
+      "qualifier": "FIL",
+      "name": "train.py",
+      "longName": "src/tools/model/train.py",
+      "path": "src/tools/model/train.py"
+    },
+    {
+      "organization": "mango80200782",
+      "key": "Mangon3_Stock-Agent:src/tools/news.py",
+      "uuid": "AZ5UVxJenW8oUaet74x8",
+      "enabled": true,
+      "qualifier": "FIL",
+      "name": "news.py",
+      "longName": "src/tools/news.py",
+      "path": "src/tools/news.py"
+    },
+    {
+      "organization": "mango80200782",
+      "key": "Mangon3_Stock-Agent:src/tools/model/feature.py",
+      "uuid": "AZ5UVxJenW8oUaet74x_",
+      "enabled": true,
+      "qualifier": "FIL",
+      "name": "feature.py",
+      "longName": "src/tools/model/feature.py",
+      "path": "src/tools/model/feature.py"
+    },
+    {
+      "organization": "mango80200782",
+      "key": "Mangon3_Stock-Agent:src/main.py",
+      "uuid": "AZ5UVxJenW8oUaet74yb",
+      "enabled": true,
+      "qualifier": "FIL",
+      "name": "main.py",
+      "longName": "src/main.py",
+      "path": "src/main.py"
+    },
+    {
+      "organization": "mango80200782",
+      "key": "Mangon3_Stock-Agent:src/tools/model/data.py",
+      "uuid": "AZ5UVxJenW8oUaet74yB",
+      "enabled": true,
+      "qualifier": "FIL",
+      "name": "data.py",
+      "longName": "src/tools/model/data.py",
+      "path": "src/tools/model/data.py"
+    },
+    {
+      "organization": "mango80200782",
+      "key": "Mangon3_Stock-Agent:frontend/src/components/ChatMessage.tsx",
+      "uuid": "AZ5UVxJenW8oUaet74yf",
+      "enabled": true,
+      "qualifier": "FIL",
+      "name": "ChatMessage.tsx",
+      "longName": "frontend/src/components/ChatMessage.tsx",
+      "path": "frontend/src/components/ChatMessage.tsx"
+    },
+    {
+      "organization": "mango80200782",
+      "key": "Mangon3_Stock-Agent:frontend/src/components/AnalysisReport.tsx",
+      "uuid": "AZ5UVxJenW8oUaet74ye",
+      "enabled": true,
+      "qualifier": "FIL",
+      "name": "AnalysisReport.tsx",
+      "longName": "frontend/src/components/AnalysisReport.tsx",
+      "path": "frontend/src/components/AnalysisReport.tsx"
+    },
+    {
+      "organization": "mango80200782",
+      "key": "Mangon3_Stock-Agent:src/tools/sentiment/train.py",
+      "uuid": "AZ5UVxJenW8oUaet74yE",
+      "enabled": true,
+      "qualifier": "FIL",
+      "name": "train.py",
+      "longName": "src/tools/sentiment/train.py",
+      "path": "src/tools/sentiment/train.py"
+    },
+    {
+      "organization": "mango80200782",
+      "key": "Mangon3_Stock-Agent:frontend/src/app/page.tsx",
+      "uuid": "AZ5UVxJenW8oUaet74yj",
+      "enabled": true,
+      "qualifier": "FIL",
+      "name": "page.tsx",
+      "longName": "frontend/src/app/page.tsx",
+      "path": "frontend/src/app/page.tsx"
+    },
+    {
+      "organization": "mango80200782",
+      "key": "Mangon3_Stock-Agent:src/utils/json_parser.py",
+      "uuid": "AZ5UVxJenW8oUaet74yJ",
+      "enabled": true,
+      "qualifier": "FIL",
+      "name": "json_parser.py",
+      "longName": "src/utils/json_parser.py",
+      "path": "src/utils/json_parser.py"
+    }
+  ],
+  "organizations": [
+    {
+      "key": "mango80200782",
+      "name": "Mangon3"
+    }
+  ],
+  "facets": []
+}
+
+// HOTSPOTS JSON:
+{
+  "paging": {
+    "pageIndex": 1,
+    "pageSize": 500,
+    "total": 5
+  },
+  "hotspots": [
+    {
+      "key": "AZ5UVxgNnW8oUaet740E",
+      "component": "Mangon3_Stock-Agent:Dockerfile",
+      "project": "Mangon3_Stock-Agent",
+      "securityCategory": "permission",
+      "vulnerabilityProbability": "MEDIUM",
+      "status": "TO_REVIEW",
+      "line": 19,
+      "message": "Copying recursively might inadvertently add sensitive data to the container. Make sure it is safe here.",
+      "author": "lam.vu@ltsgroup.dev",
+      "creationDate": "2025-12-23T10:37:10+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "textRange": {
+        "startLine": 19,
+        "endLine": 19,
+        "startOffset": 5,
+        "endOffset": 6
+      },
+      "flows": [],
+      "ruleKey": "docker:S6470"
+    },
+    {
+      "key": "AZ5UVxgNnW8oUaet740D",
+      "component": "Mangon3_Stock-Agent:Dockerfile",
+      "project": "Mangon3_Stock-Agent",
+      "securityCategory": "permission",
+      "vulnerabilityProbability": "MEDIUM",
+      "status": "TO_REVIEW",
+      "line": 1,
+      "message": "The \"python\" image runs with \"root\" as the default user. Make sure it is safe here.",
+      "author": "lam.vu@ltsgroup.dev",
+      "creationDate": "2025-12-24T02:09:48+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "textRange": {
+        "startLine": 1,
+        "endLine": 1,
+        "startOffset": 0,
+        "endOffset": 21
+      },
+      "flows": [],
+      "ruleKey": "docker:S6471"
+    },
+    {
+      "key": "AZ5UVxfknW8oUaet74zc",
+      "component": "Mangon3_Stock-Agent:src/main.py",
+      "project": "Mangon3_Stock-Agent",
+      "securityCategory": "encrypt-data",
+      "vulnerabilityProbability": "LOW",
+      "status": "TO_REVIEW",
+      "line": 8,
+      "message": "Using http protocol is insecure. Use https instead",
+      "assignee": "AZ4BBqDNrFVXCkxHj0h6",
+      "author": "hoanglam130982@gmail.com",
+      "creationDate": "2026-01-15T09:35:23+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "textRange": {
+        "startLine": 8,
+        "endLine": 8,
+        "startOffset": 31,
+        "endOffset": 71
+      },
+      "flows": [],
+      "ruleKey": "python:S5332"
+    },
+    {
+      "key": "AZ5UVxfknW8oUaet74zd",
+      "component": "Mangon3_Stock-Agent:src/main.py",
+      "project": "Mangon3_Stock-Agent",
+      "securityCategory": "encrypt-data",
+      "vulnerabilityProbability": "LOW",
+      "status": "TO_REVIEW",
+      "line": 8,
+      "message": "Using http protocol is insecure. Use https instead",
+      "assignee": "AZ4BBqDNrFVXCkxHj0h6",
+      "author": "hoanglam130982@gmail.com",
+      "creationDate": "2026-01-15T09:35:23+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "textRange": {
+        "startLine": 8,
+        "endLine": 8,
+        "startOffset": 33,
+        "endOffset": 48
+      },
+      "flows": [],
+      "ruleKey": "python:S5332"
+    },
+    {
+      "key": "AZ5UVxgCnW8oUaet74z_",
+      "component": "Mangon3_Stock-Agent:test_chat_system.py",
+      "project": "Mangon3_Stock-Agent",
+      "securityCategory": "encrypt-data",
+      "vulnerabilityProbability": "LOW",
+      "status": "TO_REVIEW",
+      "line": 8,
+      "message": "Using http protocol is insecure. Use https instead",
+      "assignee": "AZ4BBqDNrFVXCkxHj0h6",
+      "author": "hoanglam130982@gmail.com",
+      "creationDate": "2026-05-23T03:03:12+0000",
+      "updateDate": "2026-05-23T10:17:10+0000",
+      "textRange": {
+        "startLine": 8,
+        "endLine": 8,
+        "startOffset": 10,
+        "endOffset": 39
+      },
+      "flows": [],
+      "ruleKey": "python:S5332"
+    }
+  ],
+  "components": [
+    {
+      "organization": "mango80200782",
+      "key": "Mangon3_Stock-Agent:test_chat_system.py",
+      "qualifier": "FIL",
+      "name": "test_chat_system.py",
+      "longName": "test_chat_system.py",
+      "path": "test_chat_system.py"
+    },
+    {
+      "organization": "mango80200782",
+      "key": "Mangon3_Stock-Agent",
+      "qualifier": "TRK",
+      "name": "Stock-Agent",
+      "longName": "Stock-Agent"
+    },
+    {
+      "organization": "mango80200782",
+      "key": "Mangon3_Stock-Agent:Dockerfile",
+      "qualifier": "FIL",
+      "name": "Dockerfile",
+      "longName": "Dockerfile",
+      "path": "Dockerfile"
+    },
+    {
+      "organization": "mango80200782",
+      "key": "Mangon3_Stock-Agent:src/main.py",
+      "qualifier": "FIL",
+      "name": "main.py",
+      "longName": "src/main.py",
+      "path": "src/main.py"
+    }
+  ]
+}
+
+// QUALITY GATE JSON:
+{
+  "projectStatus": {
+    "status": "ERROR",
+    "conditions": [
+      {
+        "status": "OK",
+        "metricKey": "new_reliability_rating",
+        "comparator": "GT",
+        "periodIndex": 1,
+        "errorThreshold": "1",
+        "actualValue": "1"
+      },
+      {
+        "status": "ERROR",
+        "metricKey": "new_security_rating",
+        "comparator": "GT",
+        "periodIndex": 1,
+        "errorThreshold": "1",
+        "actualValue": "3"
+      },
+      {
+        "status": "OK",
+        "metricKey": "new_maintainability_rating",
+        "comparator": "GT",
+        "periodIndex": 1,
+        "errorThreshold": "1",
+        "actualValue": "1"
+      },
+      {
+        "status": "ERROR",
+        "metricKey": "new_coverage",
+        "comparator": "LT",
+        "periodIndex": 1,
+        "errorThreshold": "80",
+        "actualValue": "0.0"
+      },
+      {
+        "status": "OK",
+        "metricKey": "new_duplicated_lines_density",
+        "comparator": "GT",
+        "periodIndex": 1,
+        "errorThreshold": "3",
+        "actualValue": "0.0"
+      },
+      {
+        "status": "OK",
+        "metricKey": "new_security_hotspots_reviewed",
+        "comparator": "LT",
+        "periodIndex": 1,
+        "errorThreshold": "100",
+        "actualValue": "100.0"
+      }
+    ],
+    "periods": [
+      {
+        "index": 1,
+        "mode": "previous_version",
+        "date": "2026-05-23T10:17:10+0000"
+      }
+    ],
+    "ignoredConditions": false
+  }
+}

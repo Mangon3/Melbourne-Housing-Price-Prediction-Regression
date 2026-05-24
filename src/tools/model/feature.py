@@ -75,7 +75,7 @@ class FeatureCalculator:
                  df['dow_cos'] = np.cos(2 * np.pi * idx.dayofweek / 7)
                  df['hour_sin'] = np.sin(2 * np.pi * idx.hour / 24)
                  df['hour_cos'] = np.cos(2 * np.pi * idx.hour / 24)
-             except:
+             except (TypeError, ValueError):
                  df['dow_sin'] = 0.0
                  df['dow_cos'] = 0.0
                  df['hour_sin'] = 0.0

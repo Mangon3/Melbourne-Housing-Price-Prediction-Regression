@@ -17,7 +17,7 @@ class CacheManager:
         self.redis_client = None
         try:
             if settings.REDIS_URL:
-                logger.info(f"Connecting to Redis via URL...")
+                logger.info("Connecting to Redis via URL...")
                 self.redis_client = redis.from_url(
                     settings.REDIS_URL,
                     decode_responses=True,
@@ -27,7 +27,7 @@ class CacheManager:
                 host = settings.REDIS_HOST
                 port = settings.REDIS_PORT
                 db = settings.REDIS_DB
-                logger.info(f"Connecting to Redis at {host}:{port}...")
+                logger.info("Connecting to Redis at %s:%s...", host, port)
                 self.redis_client = redis.Redis(
                     host=host, 
                     port=port, 
@@ -37,9 +37,9 @@ class CacheManager:
                 )
             self.redis_client.ping()
             self.redis_available = True
-            logger.info(f"Redis client initialized successfully for caching.")
+            logger.info("Redis client initialized successfully for caching.")
         except Exception as e:
-            logger.critical(f"Failed to connect to Redis. Caching will be disabled. Error: {e}")
+            logger.critical("Failed to connect to Redis. Caching will be disabled. Error: %s", e)
             
     def invoke_with_cache(
         self,
@@ -53,16 +53,16 @@ class CacheManager:
             try:
                 cached_response_json = self.redis_client.get(cache_key)
                 if cached_response_json:
-                    logger.info(f"[CACHE HIT] Returning cached analysis for {symbol}.")
+                    logger.info("[CACHE HIT] Returning cached analysis for %s.", symbol)
                     response_output = json.loads(cached_response_json)
                     ttl_seconds = self.redis_client.ttl(cache_key)
                     if ttl_seconds > 0:
-                         logger.debug(f"Time remaining in cache: {timedelta(seconds=ttl_seconds)}")
+                         logger.debug("Time remaining in cache: %s", timedelta(seconds=ttl_seconds))
                     return {"output": response_output}
                 else:
-                    logger.info(f"[CACHE MISS] No existing cache entry found for {symbol}. Calculating.")
-            except Exception as e:
-                logger.error(f"Redis get failed: {e}")
+                    logger.info("[CACHE MISS] No existing cache entry found for %s. Calculating.", symbol)
+            except Exception:
+                logger.exception("Redis get failed")
         logger.info("--- Running full RAG Pipeline Worker (LLM/Tool/Ingestion) ---")
         response_string = worker_function()
         response = {"output": response_string}
@@ -71,9 +71,9 @@ class CacheManager:
                 response_json = json.dumps(response_string)
                 self.redis_client.setex(cache_key, self.TTL_SECONDS, response_json)
                 expiry_dt = datetime.now() + timedelta(seconds=self.TTL_SECONDS)
-                logger.info(f"[CACHE UPDATE] Saved new analysis to Redis. (Expires: {expiry_dt.strftime('%Y-%m-%d %H:%M:%S')})")
-            except Exception as e:
-                logger.error(f"Redis set failed: {e}")
+                logger.info("[CACHE UPDATE] Saved new analysis to Redis. (Expires: %s)", expiry_dt.strftime('%Y-%m-%d %H:%M:%S'))
+            except Exception:
+                logger.exception("Redis set failed")
         return response
 
 cache_manager = CacheManager()

@@ -8,6 +8,64 @@ import httpx
 API_URL = "http://0.0.0.0:7860/analyze"  # Ensure this matches the port in docker-compose.yml
 API_KEY = os.environ.get("GOOGLE_API_KEY", "")
 
+
+def _verify_chat_response(report):
+    """Check if the report matches expected chat-type response patterns."""
+    chat_keywords = [
+        "Stock Agent", "AI Analyst",
+        "couldn't understand", "apologize",
+        "Hello", "help"
+    ]
+    if any(kw in report for kw in chat_keywords):
+        return True
+    return "MACRO NEWS" not in report
+
+
+def _verify_stock_response(report):
+    """Check if the report matches expected stock-type response patterns."""
+    stock_keywords = [
+        "Investment Report", "Analysis", "Price",
+        "couldn't understand", "apologize"
+    ]
+    return any(kw in report for kw in stock_keywords)
+
+
+async def _process_stream_response(response, expected_type):
+    """Processes the SSE stream and returns (found_expected, full_text)."""
+    found_expected = False
+    full_text = ""
+
+    async for line in response.aiter_lines():
+        if not line or not line.startswith("data: "):
+            continue
+
+        data_str = line[6:].strip()
+        if data_str == "[DONE]":
+            break
+
+        try:
+            chunk = json.loads(data_str)
+        except json.JSONDecodeError:
+            continue
+
+        if chunk.get("type") == "error":
+            pytest.skip(f"Server returned an error chunk: {chunk.get('message', 'unknown')}")
+            return found_expected, full_text
+
+        if chunk.get("type") != "result":
+            continue
+
+        report = chunk.get("final_report", "")
+        full_text += report
+
+        if expected_type == "CHAT":
+            found_expected = _verify_chat_response(report)
+        elif expected_type == "STOCK":
+            found_expected = _verify_stock_response(report)
+
+    return found_expected, full_text
+
+
 @pytest.mark.anyio
 @pytest.mark.parametrize("query, expected_type", [
     ("Hello! Who are you?", "CHAT"),
@@ -21,9 +79,6 @@ async def test_query(query: str, expected_type: str):
     if API_KEY:
         headers["X-Gemini-API-Key"] = API_KEY
     payload = {"query": query}
-    
-    found_expected_response = False
-    full_text = ""
 
     try:
         async with httpx.AsyncClient(timeout=180.0) as client:
@@ -34,52 +89,10 @@ async def test_query(query: str, expected_type: str):
                     pytest.skip(f"API returned {response.status_code} (likely transient LLM error)")
                     return
 
-                async for line in response.aiter_lines():
-                    if not line or not line.startswith("data: "):
-                        continue
-                    
-                    data_str = line[6:].strip()
-                    if data_str == "[DONE]":
-                        break
-                        
-                    try:
-                        chunk = json.loads(data_str)
-                        
-                        if chunk.get("type") == "result":
-                            # Check if valid result
-                            report = chunk.get("final_report", "")
-                            full_text += report
-                            
-                            # Simple heuristic verification
-                            if expected_type == "CHAT":
-                                if any(kw in report for kw in [
-                                    "Stock Agent", "AI Analyst",
-                                    "couldn't understand", "apologize",
-                                    "Hello", "help"
-                                ]):
-                                    found_expected_response = True
-                                else:
-                                    if "MACRO NEWS" not in report:
-                                         found_expected_response = True
-                                         
-                            elif expected_type == "STOCK":
-                                if any(kw in report for kw in [
-                                    "Investment Report", "Analysis", "Price",
-                                    "couldn't understand", "apologize"
-                                ]):
-                                    found_expected_response = True
-                                    
-                        elif chunk.get("type") == "error":
-                            print(f"    Server-side error: {chunk.get('message', 'unknown')}")
-                            pytest.skip("Server returned an error chunk (transient LLM failure)")
-                            return
+                found_expected_response, full_text = await _process_stream_response(response, expected_type)
 
-                    except json.JSONDecodeError:
-                        pass
-                        
     except httpx.ConnectError:
         pytest.fail(f"Failed to connect to {API_URL}. Is server running?")
         return
 
     assert found_expected_response, f"TEST FAILED. Did not match expected output signatures. Received: {full_text[:200]}..."
-

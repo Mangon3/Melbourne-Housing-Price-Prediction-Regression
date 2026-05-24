@@ -31,8 +31,7 @@ def inference_results(prob: float) -> Tuple[str, str]:
 class MicroModelPredictor:
 
     def __init__(self):
-        self.data_fetcher = tv_data_fetcher 
-        pass
+        self.data_fetcher = tv_data_fetcher
 
     def _load_model(self) -> HybridStockNet:
         if not settings.MODEL_PATH.exists():
@@ -44,7 +43,7 @@ class MicroModelPredictor:
             dropout=settings.DROPOUT
         )
         device = get_device()
-        model.load_state_dict(torch.load(settings.MODEL_PATH, map_location=device))
+        model.load_state_dict(torch.load(settings.MODEL_PATH, map_location=device, weights_only=True))
         model.to(device)
         model.eval()
         return model

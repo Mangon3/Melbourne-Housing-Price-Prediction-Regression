@@ -22,10 +22,11 @@ class ChromaRAG:
         if self._chroma_client is None:
             self.CHROMA_PERSIST_PATH.mkdir(parents=True, exist_ok=True)
             try:
-                logger.info(f"Initializing ChromaDB at path: {self.CHROMA_PERSIST_PATH}")
+                logger.info("Initializing ChromaDB at path: %s", self.CHROMA_PERSIST_PATH)
                 self._chroma_client = chromadb.PersistentClient(path=str(self.CHROMA_PERSIST_PATH))
-            except Exception as e:
-                raise e
+            except Exception:
+                logger.exception("Failed to initialize ChromaDB client")
+                raise
         return self._chroma_client
 
     def _get_news_collection(self) -> chromadb.Collection:
@@ -52,7 +53,8 @@ class ChromaRAG:
                 metadatas=metadatas,
                 documents=contents
             )
-        except Exception as e:
+        except Exception:
+            logger.exception("Failed to ingest news documents into ChromaDB")
             raise
 
     def retrieve_context(self, query: str) -> Tuple[str, List[Dict[str, Any]]]:

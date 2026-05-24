@@ -38,5 +38,5 @@ def test_settings_default_values():
     assert "gemini-2.5-flash" in settings.MODEL
     assert settings.SEQ_LEN == 10
     assert settings.HIDDEN_DIM == 32
-    assert settings.DROPOUT == 0.1
+    assert settings.DROPOUT == pytest.approx(0.1)
     assert "open" in settings.REQUIRED_OHLCV_COLS

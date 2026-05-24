@@ -1,4 +1,5 @@
 import json
+import logging
 from typing import Optional, Annotated
 from fastapi import FastAPI, HTTPException, Header
 from fastapi.responses import StreamingResponse
@@ -40,11 +41,45 @@ class AnalyzeRequest(BaseModel):
             raise ValueError('Either symbol or query must be provided.')
         return self
 
+
+def _parse_intent(current_agent: Agent, query: str):
+    """Parses user intent, returning (intent, symbol, intent_data)."""
+    logger.info("Analyzing intent for query: %s", query)
+    try:
+        intent_data = current_agent.parse_intent(query)
+        return intent_data['intent'], intent_data.get('symbol'), intent_data
+    except Exception:
+        logger.exception("Intent parsing failed")
+        return "UNKNOWN", None, {'intent': 'UNKNOWN', 'symbol': None, 'tools': []}
+
+
+def _build_unknown_response():
+    """Generates a response stream for unknown intents."""
+    yield {"type": "progress", "step": "error", "message": "Analyzing...", "percent": 0}
+    yield {
+        "type": "result",
+        "final_report": "I apologize, but I couldn't understand your request. Could you please specify a stock symbol or ask a financial question?",
+        "symbol": "UNKNOWN"
+    }
+
+
+def _get_stream_iterator(intent, symbol, intent_data, current_agent, request):
+    """Returns the appropriate stream iterator based on intent."""
+    if intent == "STOCK_QUERY" and symbol:
+        tools_to_use = intent_data.get('tools') if intent_data else None
+        return current_agent.analyze(symbol.upper(), tools=tools_to_use)
+    if intent == "GENERAL_CHAT":
+        return current_agent.respond_conversational(request.query)
+    if intent == "UNKNOWN":
+        return _build_unknown_response()
+    return None
+
+
 @app.get("/")
 async def root():
     return {"message": "StockAgent API is running. Use /analyze to generate reports."}
 
-@app.post("/analyze")
+@app.post("/analyze", responses={401: {"description": "Missing API Key"}})
 async def analyze_stock(
     request: AnalyzeRequest,
     x_gemini_api_key: Annotated[str | None, Header()] = None
@@ -60,53 +95,29 @@ async def analyze_stock(
     intent = "STOCK_QUERY"
     symbol = request.symbol
     query_text = request.query or (f"Analyze {symbol}" if symbol else "")
+    intent_data = None
 
     if not symbol and request.query:
-        logger.info(f"Analyzing intent for query: {request.query}")
-        try:
-            intent_data = current_agent.parse_intent(request.query)
-            intent = intent_data['intent']
-            symbol = intent_data.get('symbol')
-        except Exception as e:
-            logger.error(f"Intent parsing failed: {e}")
-            intent = "UNKNOWN"
-            intent_data = {'intent': 'UNKNOWN', 'symbol': None, 'tools': []}
-            symbol = None
-
+        intent, symbol, intent_data = _parse_intent(current_agent, request.query)
 
     async def event_generator():
         try:
-            stream_iterator = None
-            if intent == "STOCK_QUERY" and symbol:
-                tools_to_use = intent_data.get('tools') if 'intent_data' in locals() else None
-                stream_iterator = current_agent.analyze(symbol.upper(), tools=tools_to_use)
-            elif intent == "GENERAL_CHAT":
-                stream_iterator = current_agent.respond_conversational(request.query)
-            elif intent == "UNKNOWN":
-                async def unknown_response():
-                    yield {"type": "progress", "step": "error", "message": "Analyzing...", "percent": 0}
-                    yield {
-                        "type": "result", 
-                        "final_report": "I apologize, but I couldn't understand your request. Could you please specify a stock symbol or ask a financial question?",
-                        "symbol": "UNKNOWN"
-                    }
-                stream_iterator = unknown_response()
-            else:
+            stream_iterator = _get_stream_iterator(intent, symbol, intent_data, current_agent, request)
+            if stream_iterator is None:
                 yield f"data: {json.dumps({'error': 'Invalid Intent'})}\n\n"
                 return
             for chunk in stream_iterator:
-                if chunk.get("type") == "result":
-                    if 'final_report' in chunk:
-                        memory_store.save_turn(
-                            user_input=query_text,
-                            model_output=chunk['final_report'],
-                            intent=intent
-                        )
-                        stm.add_turn(query_text, chunk['final_report'])
+                if chunk.get("type") == "result" and 'final_report' in chunk:
+                    memory_store.save_turn(
+                        user_input=query_text,
+                        model_output=chunk['final_report'],
+                        intent=intent
+                    )
+                    stm.add_turn(query_text, chunk['final_report'])
                 yield f"data: {json.dumps(chunk)}\n\n"
-        except Exception as e:
+        except Exception:
             logger.exception("Analysis Stream Crash")
-            error_payload = format_error(e)
+            error_payload = format_error(Exception("Analysis stream error"))
             yield f"data: {json.dumps(error_payload)}\n\n"
 
     return StreamingResponse(

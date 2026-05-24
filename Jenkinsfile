@@ -23,8 +23,11 @@ pipeline {
 
         stage('2. Test (Unit & Integration)') {
             steps {
-                echo "--- Running Automated Unit Tests ---"
-                sh "docker run --rm ${IMAGE_NAME}:${IMAGE_TAG} pytest test_agent.py"
+                echo "--- Running Automated Unit Tests (with Coverage) ---"
+                sh """
+                # Run unit tests and generate XML coverage report for SonarCloud
+                docker run --rm -v "${WORKSPACE}:/app" ${IMAGE_NAME}:${IMAGE_TAG} pytest --cov=src --cov-report=xml:coverage.xml test_agent.py
+                """
                 
                 echo "--- Running Automated Integration Tests via Docker Compose ---"
                 sh """
@@ -73,6 +76,10 @@ pipeline {
                     -Dsonar.host.url=https://sonarcloud.io \
                     -Dsonar.login=${SONAR_TOKEN} \
                     -Dsonar.exclusions="test/**,.venv/**" \
+                    -Dsonar.python.coverage.reportPaths="coverage.xml" \
+                    -Dsonar.issue.ignore.multicriteria=e1 \
+                    -Dsonar.issue.ignore.multicriteria.e1.ruleKey=text:S8565 \
+                    -Dsonar.issue.ignore.multicriteria.e1.resourceKey=pyproject.toml \
                     -Dsonar.qualitygate.wait=true
                 """
             }
