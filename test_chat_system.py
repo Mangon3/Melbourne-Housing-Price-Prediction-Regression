@@ -4,8 +4,10 @@ import json
 import os
 import httpx
 
+from src.api.index import app
+from httpx import ASGITransport
+
 # Configuration
-API_URL = "http://0.0.0.0:7860/analyze"  # Ensure this matches the port in docker-compose.yml
 API_KEY = os.environ.get("GOOGLE_API_KEY", "")
 
 
@@ -81,8 +83,9 @@ async def test_query(query: str, expected_type: str):
     payload = {"query": query}
 
     try:
-        async with httpx.AsyncClient(timeout=180.0) as client:
-            async with client.stream("POST", API_URL, json=payload, headers=headers) as response:
+        transport = ASGITransport(app=app)
+        async with httpx.AsyncClient(transport=transport, base_url="http://testserver", timeout=180.0) as client:
+            async with client.stream("POST", "/analyze", json=payload, headers=headers) as response:
                 if response.status_code != 200:
                     error_text = await response.aread()
                     print(f"    WARNING: API returned {response.status_code}: {error_text}")
@@ -92,7 +95,7 @@ async def test_query(query: str, expected_type: str):
                 found_expected_response, full_text = await _process_stream_response(response, expected_type)
 
     except httpx.ConnectError:
-        pytest.fail(f"Failed to connect to {API_URL}. Is server running?")
+        pytest.fail("Failed to connect to the internal test server.")
         return
 
     assert found_expected_response, f"TEST FAILED. Did not match expected output signatures. Received: {full_text[:200]}..."
