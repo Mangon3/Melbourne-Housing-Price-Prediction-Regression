@@ -63,11 +63,15 @@ async def analyze_stock(
 
     if not symbol and request.query:
         logger.info(f"Analyzing intent for query: {request.query}")
-        intent_data = current_agent.parse_intent(request.query)
-        intent = intent_data['intent']
-        symbol = intent_data.get('symbol')
-        if intent == "UNKNOWN":
-             pass
+        try:
+            intent_data = current_agent.parse_intent(request.query)
+            intent = intent_data['intent']
+            symbol = intent_data.get('symbol')
+        except Exception as e:
+            logger.error(f"Intent parsing failed: {e}")
+            intent = "UNKNOWN"
+            intent_data = {'intent': 'UNKNOWN', 'symbol': None, 'tools': []}
+            symbol = None
 
 
     async def event_generator():

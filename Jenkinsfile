@@ -52,6 +52,9 @@ pipeline {
                 always {
                     sh """
                     export COMPOSE_PROJECT_NAME=test_env_${BUILD_NUMBER}
+                    echo "--- Container Logs (stock-agent) ---"
+                    docker-compose --env-file .env -f docker-compose.yml logs stock-agent || true
+                    echo "--- End Container Logs ---"
                     docker-compose --env-file .env -f docker-compose.yml down || true
                     """
                 }
