@@ -112,3 +112,106 @@ def test_micro_model_exception(mock_trainer):
     res = micro.execute_model_training("AAPL")
     assert res["status"] == "error"
     assert "Unknown Exception" in res["message"]
+
+# --- New Coverage Tests ---
+
+@patch("src.tools.news.settings")
+def test_news_fetcher_no_api_key(mock_settings):
+    mock_settings.FINNHUB_API_KEY = None
+    fetcher = NewsFetcher()
+    assert fetcher.finnhub_client is None
+
+@patch("src.tools.news.Path")
+def test_news_fetcher_no_data_path(mock_path):
+    mock_path.return_value.exists.return_value = False
+    with patch("src.tools.news.settings.FINNHUB_API_KEY", "dummy"):
+        with patch("src.tools.news.NewsFetcher._load_model"):
+            with patch("src.tools.news.NewsFetcher.train_model"):
+                fetcher = NewsFetcher()
+                # Just testing that initialization succeeds even if Path("/data") does not exist
+
+@patch("src.tools.news.Path")
+def test_news_fetcher_with_data_path(mock_path):
+    # Target line 22
+    mock_path.return_value.exists.return_value = True
+    with patch("src.tools.news.settings.FINNHUB_API_KEY", "dummy"):
+        with patch("src.tools.news.NewsFetcher._load_model"):
+            with patch("src.tools.news.NewsFetcher.train_model"):
+                fetcher = NewsFetcher()
+                assert mock_path.return_value.exists.called
+
+def test_news_fetcher_load_model_exception():
+    fetcher = NewsFetcher()
+    with patch("src.tools.news.Path.exists", return_value=True):
+        with patch("src.tools.news.joblib.load", side_effect=Exception("Load error")):
+            fetcher._load_model() 
+
+def test_predict_sentiment_no_pipeline():
+    fetcher = NewsFetcher()
+    fetcher.pipeline = None
+    res = fetcher.predict_sentiment("text")
+    assert res == {"label": "N/A", "score": 0.0}
+
+def test_fetch_stock_news_no_client():
+    fetcher = NewsFetcher()
+    fetcher.finnhub_client = None
+    res = fetcher.fetch_stock_news("AAPL")
+    assert res == [{"error": "Finnhub client not initialized."}]
+
+@patch("src.tools.news.finnhub.Client")
+def test_fetch_stock_news_datetime_error(mock_finnhub):
+    fetcher = NewsFetcher()
+    fetcher.finnhub_client = MagicMock()
+    fetcher.finnhub_client.company_news.return_value = [
+        {"datetime": "invalid_timestamp", "headline": "Bad Date"}
+    ]
+    fetcher.predict_sentiment = MagicMock(return_value={"label": "Neutral", "score": 0.5})
+    res = fetcher.fetch_stock_news("AAPL")
+    assert res[0]["created_at"] == "N/A"
+
+@patch("src.tools.news.finnhub.Client")
+def test_fetch_stock_news_empty_after_filter(mock_finnhub):
+    fetcher = NewsFetcher()
+    fetcher.finnhub_client = MagicMock()
+    fetcher.finnhub_client.company_news.return_value = [
+        {"datetime": 1600000000, "headline": ""} 
+    ]
+    res = fetcher.fetch_stock_news("AAPL")
+    assert "warning" in res[0]
+
+@patch("src.tools.news.finnhub.Client")
+def test_fetch_stock_news_exceptions(mock_finnhub):
+    fetcher = NewsFetcher()
+    fetcher.finnhub_client = MagicMock()
+    
+    # finnhub APIException Limit Reached
+    class MockLimitEx(finnhub.FinnhubAPIException):
+        def __init__(self): pass
+        def __str__(self): return "API limit reached"
+        
+    fetcher.finnhub_client.company_news.side_effect = MockLimitEx()
+    res = fetcher.fetch_stock_news("AAPL")
+    assert "limit reached" in res[0]["error"]
+    
+    # finnhub APIException Other
+    class MockOtherEx(finnhub.FinnhubAPIException):
+        def __init__(self): pass
+        def __str__(self): return "Other error"
+        
+    fetcher.finnhub_client.company_news.side_effect = MockOtherEx()
+    res = fetcher.fetch_stock_news("AAPL")
+    assert "Finnhub API Error" in res[0]["error"]
+    
+    # General Exception
+    fetcher.finnhub_client.company_news.side_effect = Exception("Unexpected")
+    res = fetcher.fetch_stock_news("AAPL")
+    assert "unexpected issue" in res[0]["error"]
+
+@patch("src.tools.news.finnhub.Client")
+def test_fetch_stock_news_no_data(mock_finnhub):
+    fetcher = NewsFetcher()
+    fetcher.finnhub_client = MagicMock()
+    fetcher.finnhub_client.company_news.return_value = []
+    res = fetcher.fetch_stock_news("AAPL")
+    assert "warning" in res[0]
+

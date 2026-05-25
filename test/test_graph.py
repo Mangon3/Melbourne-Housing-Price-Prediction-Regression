@@ -34,7 +34,8 @@ def test_invoke_model_safely_unknown_error():
         _invoke_model_safely(mock_model, [])
 
 def test_extract_symbol_from_messages():
-    msgs = [HumanMessage(content="analyze AAPL please")]
+    # To hit `continue`, the non-Human message must be processed first by reversed()
+    msgs = [HumanMessage(content="analyze AAPL please"), ToolMessage(content="blah", tool_call_id="1")]
     assert _extract_symbol_from_messages(msgs) == "AAPL"
     
     msgs = [HumanMessage(content="what is the timeframe for NVDA?")]
