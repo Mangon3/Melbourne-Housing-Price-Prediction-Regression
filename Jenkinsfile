@@ -49,13 +49,12 @@ pipeline {
                 docker-compose --env-file .env -f docker-compose.yml up -d
                 sleep 15
                 
-                # Run the integration tests inside the running app container
+                # Run the integration tests inside the running app container, appending to the unit test coverage
                 APP_CONTAINER=\$(docker-compose --env-file .env ps -q stock-agent)
-                docker exec -e GOOGLE_API_KEY=\$(grep GOOGLE_API_KEY .env | cut -d '=' -f2) \${APP_CONTAINER} pytest --cov=. --cov-report=xml:coverage_integration.xml test/test_chat_system.py
+                docker exec -e GOOGLE_API_KEY=\$(grep GOOGLE_API_KEY .env | cut -d '=' -f2) \${APP_CONTAINER} pytest --cov=. --cov-append --cov-report=xml:coverage.xml test/test_chat_system.py
                 
-                # Copy the integration coverage report out of the container
-                docker cp \${APP_CONTAINER}:/app/coverage_integration.xml coverage_integration.xml
-                sed -i 's|<source>/app</source>|<source>/usr/src</source>|g' coverage_integration.xml
+                # Fix paths in coverage.xml to match SonarScanner's expected base directory
+                sed -i 's|<source>/app</source>|<source>/usr/src</source>|g' coverage.xml
                 """
             }
             post {
@@ -83,7 +82,7 @@ pipeline {
                     -Dsonar.host.url=https://sonarcloud.io \
                     -Dsonar.login=${SONAR_TOKEN} \
                     -Dsonar.exclusions="test/**,.venv/**,src/app/**,src/components/**,src/lib/**,**/*.ts,**/*.tsx,**/*.css" \
-                    -Dsonar.python.coverage.reportPaths="coverage.xml,coverage_integration.xml" \
+                    -Dsonar.python.coverage.reportPaths="coverage.xml" \
                     -Dsonar.issue.ignore.multicriteria=e1,e2,e3 \
                     -Dsonar.issue.ignore.multicriteria.e1.ruleKey=text:S8565 \
                     -Dsonar.issue.ignore.multicriteria.e1.resourceKey=pyproject.toml \
@@ -100,7 +99,7 @@ pipeline {
             steps {
                 echo "Scanning Docker Image for High/Critical Vulnerabilities..."
                 sh """
-                docker run --rm \
+                docker run --rm --network=host \
                     -v /var/run/docker.sock:/var/run/docker.sock \
                     -v "${WORKSPACE}/.trivyignore:/.trivyignore" \
                     aquasec/trivy image --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1 ${IMAGE_NAME}:${IMAGE_TAG}
