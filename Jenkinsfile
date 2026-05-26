@@ -16,7 +16,7 @@ pipeline {
         stage('1. Build') {
             steps {
                 echo "Building Docker Image: ${IMAGE_NAME}:${IMAGE_TAG}..."
-                sh "docker build --network=host -f backend/Dockerfile -t ${IMAGE_NAME}:${IMAGE_TAG} -t ${IMAGE_NAME}:latest ./backend | tee build_log.txt"
+                sh "docker build --network=host -f Dockerfile -t ${IMAGE_NAME}:${IMAGE_TAG} -t ${IMAGE_NAME}:latest . | tee build_log.txt"
                 archiveArtifacts artifacts: 'build_log.txt', allowEmptyArchive: true
             }
         }
@@ -93,9 +93,9 @@ pipeline {
                     -Dsonar.issue.ignore.multicriteria.e1.ruleKey=text:S8565 \
                     -Dsonar.issue.ignore.multicriteria.e1.resourceKey=backend/pyproject.toml \
                     -Dsonar.issue.ignore.multicriteria.e2.ruleKey=docker:S8544 \
-                    -Dsonar.issue.ignore.multicriteria.e2.resourceKey=backend/Dockerfile \
+                    -Dsonar.issue.ignore.multicriteria.e2.resourceKey=Dockerfile \
                     -Dsonar.issue.ignore.multicriteria.e3.ruleKey=docker:S8541 \
-                    -Dsonar.issue.ignore.multicriteria.e3.resourceKey=backend/Dockerfile \
+                    -Dsonar.issue.ignore.multicriteria.e3.resourceKey=Dockerfile \
                     -Dsonar.qualitygate.wait=true
                 """
             }
