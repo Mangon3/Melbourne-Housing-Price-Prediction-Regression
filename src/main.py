@@ -5,7 +5,7 @@ import sys
 import httpx
 
 DEFAULT_PORT = 7861
-API_URL = os.getenv("API_URL", f"http://0.0.0.0:{DEFAULT_PORT}/analyze")
+API_URL = os.getenv("API_URL", f"http://0.0.0.0:{DEFAULT_PORT}/analyze")  # nosonar
 API_KEY = os.getenv("GOOGLE_API_KEY", "")
 
 

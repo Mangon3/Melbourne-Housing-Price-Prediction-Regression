@@ -17,8 +17,13 @@ RUN pip install --no-cache-dir --only-binary :all: torch==2.12.0+cpu torchvision
     && pip install --upgrade --no-cache-dir --no-build-isolation git+https://github.com/rongardF/tvdatafeed.git \
     && pip install --upgrade --no-cache-dir pip setuptools wheel==0.46.2 jaraco.context==6.1.0
 
-COPY . .
+COPY src/ src/
+COPY test/ test/
+COPY pyproject.toml README.md ./
 RUN pip install --no-cache-dir --only-binary :all: -e .
+
+RUN groupadd -r appuser && useradd -r -g appuser appuser && chown -R appuser:appuser /app
+USER appuser
 
 EXPOSE 7860
 CMD ["uvicorn", "src.api.index:app", "--host", "0.0.0.0", "--port", "7860"]

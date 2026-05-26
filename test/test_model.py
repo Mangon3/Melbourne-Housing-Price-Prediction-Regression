@@ -227,8 +227,14 @@ def test_stock_model_trainer_train(mock_load_prep):
     trainer = StockModelTrainer()
     
     # Mock mismatch to test RuntimeError
-    mock_dataset_err = MagicMock()
-    mock_dataset_err.X.shape = (10, settings.INPUT_SIZE, 5) 
+    class MismatchDataset(torch.utils.data.Dataset):
+        def __init__(self, size):
+            self.X = torch.randn(size, 5, 999)
+            self.y = torch.randn(size, 1)
+        def __len__(self): return len(self.X)
+        def __getitem__(self, i): return self.X[i], self.y[i]
+
+    mock_dataset_err = MismatchDataset(10)
     mock_load_prep.return_value = (mock_dataset_err, mock_dataset_err)
     
     res_err = trainer.train(num_epochs=1)
@@ -251,6 +257,42 @@ def test_stock_model_trainer_train(mock_load_prep):
             # Trigger early stopping with patience
             res = trainer.train(symbols=["AAPL"], num_epochs=20, batch_size=2)
             assert res["status"] == "success"
+
+@patch("src.tools.model.train.StockModelTrainer._load_and_prepare_data")
+def test_stock_model_trainer_early_stop_and_exceptions(mock_load_prep):
+    trainer = StockModelTrainer()
+    
+    # Test unexpected Exception
+    mock_load_prep.side_effect = Exception("Unexpected error")
+    res_err = trainer.train(symbols=["AAPL"], num_epochs=1)
+    assert res_err["status"] == "error"
+    
+    # Test Early Stopping
+    class DummyDataset(torch.utils.data.Dataset):
+        def __init__(self, size):
+            self.X = torch.randn(size, 5, settings.INPUT_SIZE)
+            self.y = torch.randn(size, 1)
+        def __len__(self): return len(self.X)
+        def __getitem__(self, i): return self.X[i], self.y[i]
+        
+    ds_train = DummyDataset(10)
+    ds_test = DummyDataset(10)
+    mock_load_prep.side_effect = None
+    mock_load_prep.return_value = (ds_train, ds_test)
+
+    with patch("pathlib.Path.mkdir"), patch("src.tools.model.train.torch.save"):
+        with patch("src.tools.model.train.StockModelTrainer._run_training_epoch") as mock_run_train, \
+             patch("src.tools.model.train.StockModelTrainer._evaluate_model") as mock_eval:
+            mock_run_train.return_value = 100.0
+            mock_eval.return_value = (100.0, 0.5)
+            res = trainer.train(symbols=["AAPL"], num_epochs=20, batch_size=2)
+            assert res["status"] == "success"
+
+def test_evaluate_model_empty_dataloader():
+    trainer = StockModelTrainer()
+    model = MagicMock()
+    loss, acc = trainer._evaluate_model(model, [])
+    assert acc == 0.0
 
 @patch("src.tools.model.train.StockModelTrainer._process_symbol_data")
 @patch("src.tools.model.train.StockModelTrainer._fetch_from_exchanges")

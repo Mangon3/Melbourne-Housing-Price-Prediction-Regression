@@ -3,7 +3,7 @@ import ast
 from typing import Any, List, Dict
 
 def parse_agent_output(raw_output: str) -> List[Dict[str, Any]]:
-    cleaned_str = re.sub(r'(?:^\s*```[a-zA-Z]*\n?|```\s*$)', '', raw_output, flags=re.MULTILINE).strip()
+    cleaned_str = re.sub(r'(?:(?:^\s*```[a-zA-Z]*\n?)|(?:```\s*$))', '', raw_output, flags=re.MULTILINE).strip()
     literal_like_str = cleaned_str.replace(r'<\ctrl46>', "'") 
     key_regex = re.compile(r'([{,]\s*)(\w+)(\s*:\s*)')
     python_literal_str = key_regex.sub(r"\1'\2'\3", literal_like_str)

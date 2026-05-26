@@ -144,12 +144,8 @@ class StockModelTrainer:
         x_train_combined = np.concatenate(train_x_list, axis=0)
         y_train_combined = np.concatenate(train_y_list, axis=0)
 
-        if test_x_list:
-            x_test_combined = np.concatenate(test_x_list, axis=0)
-            y_test_combined = np.concatenate(test_y_list, axis=0)
-        else:
-            x_test_combined = np.array([])
-            y_test_combined = np.array([])
+        x_test_combined = np.concatenate(test_x_list, axis=0)
+        y_test_combined = np.concatenate(test_y_list, axis=0)
 
         return StockDataset(x_train_combined, y_train_combined), StockDataset(x_test_combined, y_test_combined)
 
@@ -170,7 +166,7 @@ class StockModelTrainer:
                 pred_sign = (prob_pred > 0.5).float()
                 correct_predictions += (pred_sign == target_sign).sum().item()
                 total_samples += labels.size(0)
-        avg_loss = running_loss / len(dataloader)
+        avg_loss = running_loss / len(dataloader) if len(dataloader) > 0 else 0.0
         if total_samples > 0:
             directional_accuracy = correct_predictions / total_samples
         else:
