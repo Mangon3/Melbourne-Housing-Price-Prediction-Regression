@@ -164,6 +164,9 @@ pipeline {
                 echo "Checking Metrics Endpoint for Prometheus..."
                 curl -f http://localhost:7860/metrics || echo "WARNING: /metrics not found, but app is up."
                 
+                echo "Checking Prometheus is scraping metrics..."
+                curl -f http://localhost:9090/-/healthy || echo "WARNING: Prometheus health check failed."
+                
                 echo "Simulating incident alert to Slack/Email..."
                 echo '{"text": "Deployment ${IMAGE_TAG} successful! Live on Staging."}' > alert.json
                 echo "Webhook payload:"
