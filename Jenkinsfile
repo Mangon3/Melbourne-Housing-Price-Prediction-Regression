@@ -26,7 +26,7 @@ pipeline {
                 echo "--- Running Automated Unit Tests (with Coverage) ---"
                 sh """
                 # Clean up old caches that might have root permissions
-                rm -rf .pytest_cache .coverage coverage.xml
+                docker run --rm -u root -v "${WORKSPACE}:/app" ${IMAGE_NAME}:${IMAGE_TAG} rm -rf /app/.pytest_cache /app/.coverage /app/coverage.xml
 
                 # Run unit tests and generate XML coverage report for SonarCloud
                 docker run --rm -u \$(id -u):\$(id -g) -e USER=jenkins -v "${WORKSPACE}:/app" ${IMAGE_NAME}:${IMAGE_TAG} pytest --cov=. --cov-report=xml:coverage.xml test/
