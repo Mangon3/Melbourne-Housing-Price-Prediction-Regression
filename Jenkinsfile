@@ -37,8 +37,9 @@ pipeline {
                 
                 echo "--- Running Automated Integration Tests via Docker Compose ---"
                 sh """
-                # Copy .env from Jenkins home for API keys
+                # Copy .env from Jenkins home for API keys and make it readable by the container user
                 cp /var/lib/jenkins/.env .env || true
+                chmod 644 .env || true
                 
                 export IMAGE_NAME=${IMAGE_NAME}
                 export IMAGE_TAG=${IMAGE_TAG}
