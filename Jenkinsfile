@@ -26,7 +26,7 @@ pipeline {
                 echo "--- Running Automated Unit Tests (with Coverage) ---"
                 sh """
                 # Run unit tests and generate XML coverage report for SonarCloud
-                docker run --rm -v "${WORKSPACE}:/app" ${IMAGE_NAME}:${IMAGE_TAG} pytest --cov=. --cov-report=xml:coverage.xml test/
+                docker run --rm -u \$(id -u):\$(id -g) -v "${WORKSPACE}:/app" ${IMAGE_NAME}:${IMAGE_TAG} pytest --cov=. --cov-report=xml:coverage.xml test/
                 
                 # Fix paths in coverage.xml to match SonarScanner's expected base directory
                 sed -i 's|<source>/app</source>|<source>/usr/src</source>|g' coverage.xml
@@ -51,7 +51,7 @@ pipeline {
                 
                 # Run the integration tests inside the running app container, appending to the unit test coverage
                 APP_CONTAINER=\$(docker-compose --env-file .env ps -q stock-agent)
-                docker exec -e GOOGLE_API_KEY=\$(grep GOOGLE_API_KEY .env | cut -d '=' -f2) \${APP_CONTAINER} pytest --cov=. --cov-append --cov-report=xml:coverage.xml test/test_chat_system.py
+                docker exec -u \$(id -u):\$(id -g) -e GOOGLE_API_KEY=\$(grep GOOGLE_API_KEY .env | cut -d '=' -f2) \${APP_CONTAINER} pytest --cov=. --cov-append --cov-report=xml:coverage.xml test/test_chat_system.py
                 
                 # Fix paths in coverage.xml to match SonarScanner's expected base directory
                 sed -i 's|<source>/app</source>|<source>/usr/src</source>|g' coverage.xml
