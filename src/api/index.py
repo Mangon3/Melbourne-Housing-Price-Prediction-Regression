@@ -123,7 +123,7 @@ async def analyze_stock(
                 yield f"data: {json.dumps(chunk)}\n\n"
         except Exception:
             logger.exception("Analysis Stream Crash")
-            error_payload = format_error(Exception("Analysis stream error"))
+            error_payload = format_error(RuntimeError("Analysis stream error"))
             yield f"data: {json.dumps(error_payload)}\n\n"
 
     return StreamingResponse(
