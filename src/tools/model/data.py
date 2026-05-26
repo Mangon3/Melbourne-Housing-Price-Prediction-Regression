@@ -50,7 +50,7 @@ class TvDataFetcher:
             data.columns = [col.lower() for col in data.columns]
             returns_5d = data['close'].pct_change(5).fillna(0)
             proxy_sentiment = 1 / (1 + np.exp(-returns_5d * 10))
-            rng = np.random.default_rng()
+            rng = np.random.default_rng(42)
             noise = rng.normal(0, 0.05, len(data))
             data['News_Sentiment_Score'] = (proxy_sentiment + noise).clip(0, 1)
             data = data[['open', 'high', 'low', 'close', 'volume', 'News_Sentiment_Score']]

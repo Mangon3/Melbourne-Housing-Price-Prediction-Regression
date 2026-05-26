@@ -76,6 +76,17 @@ def _get_stream_iterator(intent, symbol, intent_data, current_agent, request):
     return None
 
 
+def _save_memory_if_final_result(chunk: dict, query_text: str, intent: str) -> None:
+    """Persists the final result chunk to long-term and short-term memory."""
+    if chunk.get("type") == "result" and 'final_report' in chunk:
+        memory_store.save_turn(
+            user_input=query_text,
+            model_output=chunk['final_report'],
+            intent=intent
+        )
+        stm.add_turn(query_text, chunk['final_report'])
+
+
 @app.get("/")
 async def root():
     return {"message": "StockAgent API is running. Use /analyze to generate reports."}
@@ -108,13 +119,7 @@ async def analyze_stock(
                 yield f"data: {json.dumps({'error': 'Invalid Intent'})}\n\n"
                 return
             for chunk in stream_iterator:
-                if chunk.get("type") == "result" and 'final_report' in chunk:
-                    memory_store.save_turn(
-                        user_input=query_text,
-                        model_output=chunk['final_report'],
-                        intent=intent
-                    )
-                    stm.add_turn(query_text, chunk['final_report'])
+                _save_memory_if_final_result(chunk, query_text, intent)
                 yield f"data: {json.dumps(chunk)}\n\n"
         except Exception:
             logger.exception("Analysis Stream Crash")

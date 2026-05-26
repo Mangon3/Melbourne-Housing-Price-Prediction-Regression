@@ -15,14 +15,13 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir --only-binary :all: torch==2.12.0+cpu torchvision==0.27.0+cpu torchaudio==2.11.0+cpu --index-url https://download.pytorch.org/whl/cpu \
     && pip install --no-cache-dir --only-binary :all: -r requirements.txt \
     && pip install --upgrade --no-cache-dir --no-build-isolation git+https://github.com/rongardF/tvdatafeed.git \
-    && pip install --upgrade --no-cache-dir pip setuptools wheel==0.46.2 jaraco.context==6.1.0
+    && pip install --upgrade --no-cache-dir jaraco.context==6.1.0 pip setuptools wheel==0.46.2
 
 COPY src/ src/
 COPY test/ test/
 COPY pyproject.toml README.md ./
-RUN pip install --no-cache-dir --only-binary :all: -e .
-
-RUN groupadd -r appuser && useradd -r -g appuser appuser && chown -R appuser:appuser /app
+RUN pip install --no-cache-dir --only-binary :all: -e . \
+    && groupadd -r appuser && useradd -r -g appuser appuser && chown -R appuser:appuser /app
 USER appuser
 
 EXPOSE 7860

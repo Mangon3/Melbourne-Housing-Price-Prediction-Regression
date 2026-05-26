@@ -87,9 +87,8 @@ class StockModelTrainer:
             )
             if not (isinstance(df_raw, dict) and "error" in df_raw):
                 return df_raw
-            if exchange != exchanges[-1]:
-                logger.info("%s fetch failed for %s, trying next exchange...", exchange, symbol)
-        return df_raw
+            logger.info("%s fetch failed for %s, trying next exchange...", exchange, symbol)
+        return {"error": f"Failed to fetch data for {symbol} from all exchanges."}
 
     def _process_symbol_data(self, symbol: str, df_raw):
         """Processes raw data into train/test sequences. Returns (X_train, y_train, X_test, y_test) or None."""
@@ -110,7 +109,7 @@ class StockModelTrainer:
             y_train, y_test = y_data[:split_index], y_data[split_index:]
             logger.info("Success for %s: Created %d sequences (Train: %d, Test: %d).", symbol, len(x_data), len(x_train), len(x_test))
             return x_train, y_train, x_test, y_test
-        except ValueError as e:
+        except ValueError:
             logger.exception("Skipping %s due to feature calculation error", symbol)
             return None
         except Exception:
