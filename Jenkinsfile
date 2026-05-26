@@ -16,7 +16,7 @@ pipeline {
         stage('1. Build') {
             steps {
                 echo "Building Docker Image: ${IMAGE_NAME}:${IMAGE_TAG}..."
-                sh "docker build --network=host -t ${IMAGE_NAME}:${IMAGE_TAG} -t ${IMAGE_NAME}:latest . | tee build_log.txt"
+                sh "docker build --network=host -f backend/Dockerfile -t ${IMAGE_NAME}:${IMAGE_TAG} -t ${IMAGE_NAME}:latest ./backend | tee build_log.txt"
                 archiveArtifacts artifacts: 'build_log.txt', allowEmptyArchive: true
             }
         }
@@ -26,13 +26,13 @@ pipeline {
                 echo "--- Running Automated Unit Tests (with Coverage) ---"
                 sh """
                 # Clean up old caches that might have root permissions
-                docker run --rm -u root -v "${WORKSPACE}:/app" ${IMAGE_NAME}:${IMAGE_TAG} rm -rf /app/.pytest_cache /app/.coverage /app/coverage.xml
+                docker run --rm -u root -v "${WORKSPACE}/backend:/app" ${IMAGE_NAME}:${IMAGE_TAG} rm -rf /app/.pytest_cache /app/.coverage /app/coverage.xml
 
                 # Run unit tests and generate XML coverage report for SonarCloud
-                docker run --rm -u \$(id -u):\$(id -g) -e USER=jenkins -v "${WORKSPACE}:/app" ${IMAGE_NAME}:${IMAGE_TAG} pytest --cov=. --cov-report=xml:coverage.xml test/
+                docker run --rm -u \$(id -u):\$(id -g) -e USER=jenkins -v "${WORKSPACE}/backend:/app" ${IMAGE_NAME}:${IMAGE_TAG} pytest --cov=. --cov-report=xml:coverage.xml test/
                 
-                # Fix paths in coverage.xml to match SonarScanner's expected base directory
-                sed -i 's|<source>/app</source>|<source>/usr/src</source>|g' coverage.xml
+                # Fix paths in coverage.xml so SonarScanner can match them to the workspace
+                sed -i 's|<source>/app</source>|<source>/usr/src/backend</source>|g' backend/coverage.xml
                 """
                 
                 echo "--- Running Automated Integration Tests via Docker Compose ---"
@@ -45,20 +45,20 @@ pipeline {
                 export IMAGE_TAG=${IMAGE_TAG}
                 # Prevent port collisions by temporarily bringing down staging
                 export COMPOSE_PROJECT_NAME=staging_env
-                docker-compose --env-file .env -f docker-compose.yml down || true
+                docker-compose --project-directory ${WORKSPACE} --env-file .env -f infra/docker-compose.yml down || true
                 
                 export COMPOSE_PROJECT_NAME=test_env_${BUILD_NUMBER}
                 
                 # Start IaC with env file
-                docker-compose --env-file .env -f docker-compose.yml up -d
+                docker-compose --project-directory ${WORKSPACE} --env-file .env -f infra/docker-compose.yml up -d
                 sleep 15
                 
                 # Run the integration tests inside the running app container, appending to the unit test coverage
-                APP_CONTAINER=\$(docker-compose --env-file .env ps -q stock-agent)
+                APP_CONTAINER=\$(docker-compose --project-directory ${WORKSPACE} --env-file .env -f infra/docker-compose.yml ps -q stock-agent)
                 docker exec -u \$(id -u):\$(id -g) -e USER=jenkins -e GOOGLE_API_KEY=\$(grep GOOGLE_API_KEY .env | cut -d '=' -f2) \${APP_CONTAINER} pytest --cov=. --cov-append --cov-report=xml:coverage.xml test/test_chat_system.py
                 
-                # Fix paths in coverage.xml to match SonarScanner's expected base directory
-                sed -i 's|<source>/app</source>|<source>/usr/src</source>|g' coverage.xml
+                # Fix paths in coverage.xml so SonarScanner can match them to the workspace
+                sed -i 's|<source>/app</source>|<source>/usr/src/backend</source>|g' backend/coverage.xml
                 """
             }
             post {
@@ -66,9 +66,9 @@ pipeline {
                     sh """
                     export COMPOSE_PROJECT_NAME=test_env_${BUILD_NUMBER}
                     echo "--- Container Logs (stock-agent) ---"
-                    docker-compose --env-file .env -f docker-compose.yml logs stock-agent || true
+                    docker-compose --project-directory ${WORKSPACE} --env-file .env -f infra/docker-compose.yml logs stock-agent || true
                     echo "--- End Container Logs ---"
-                    docker-compose --env-file .env -f docker-compose.yml down || true
+                    docker-compose --project-directory ${WORKSPACE} --env-file .env -f infra/docker-compose.yml down || true
                     """
                 }
             }
@@ -85,15 +85,17 @@ pipeline {
                     -Dsonar.organization=mango80200782 \
                     -Dsonar.host.url=https://sonarcloud.io \
                     -Dsonar.login=${SONAR_TOKEN} \
-                    -Dsonar.exclusions="test/**,.venv/**,src/app/**,src/components/**,src/lib/**,**/*.ts,**/*.tsx,**/*.css" \
-                    -Dsonar.python.coverage.reportPaths="coverage.xml" \
+                    -Dsonar.sources=backend/src \
+                    -Dsonar.tests=backend/test \
+                    -Dsonar.exclusions="frontend/**,.venv/**,backend/test/**,**/*.ts,**/*.tsx,**/*.css" \
+                    -Dsonar.python.coverage.reportPaths="backend/coverage.xml" \
                     -Dsonar.issue.ignore.multicriteria=e1,e2,e3 \
                     -Dsonar.issue.ignore.multicriteria.e1.ruleKey=text:S8565 \
-                    -Dsonar.issue.ignore.multicriteria.e1.resourceKey=pyproject.toml \
+                    -Dsonar.issue.ignore.multicriteria.e1.resourceKey=backend/pyproject.toml \
                     -Dsonar.issue.ignore.multicriteria.e2.ruleKey=docker:S8544 \
-                    -Dsonar.issue.ignore.multicriteria.e2.resourceKey=Dockerfile \
+                    -Dsonar.issue.ignore.multicriteria.e2.resourceKey=backend/Dockerfile \
                     -Dsonar.issue.ignore.multicriteria.e3.ruleKey=docker:S8541 \
-                    -Dsonar.issue.ignore.multicriteria.e3.resourceKey=Dockerfile \
+                    -Dsonar.issue.ignore.multicriteria.e3.resourceKey=backend/Dockerfile \
                     -Dsonar.qualitygate.wait=true
                 """
             }
@@ -120,13 +122,13 @@ pipeline {
                         export IMAGE_NAME=${IMAGE_NAME}
                         export IMAGE_TAG=${IMAGE_TAG}
                         export COMPOSE_PROJECT_NAME=staging_env
-                        docker-compose --env-file .env -f docker-compose.yml up -d
+                        docker-compose --project-directory ${WORKSPACE} --env-file .env -f infra/docker-compose.yml up -d
                         """
                     } catch (Exception e) {
                         echo "Deployment failed! Initiating rollback to previous state..."
                         sh """
                         export COMPOSE_PROJECT_NAME=staging_env
-                        docker-compose --env-file .env -f docker-compose.yml down
+                        docker-compose --project-directory ${WORKSPACE} --env-file .env -f infra/docker-compose.yml down
                         # In a real environment, we would re-deploy the previous successful image tag here.
                         """
                         error("Deployment failed and rollback executed.")

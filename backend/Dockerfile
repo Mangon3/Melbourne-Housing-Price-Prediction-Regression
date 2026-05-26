@@ -19,7 +19,7 @@ RUN pip install --no-cache-dir --only-binary :all: torch==2.12.0+cpu torchvision
 
 COPY src/ src/
 COPY test/ test/
-COPY pyproject.toml README.md ./
+COPY pyproject.toml ./
 RUN pip install --no-cache-dir --only-binary :all: -e . \
     && groupadd -r appuser && useradd -r -g appuser appuser && chown -R appuser:appuser /app
 USER appuser

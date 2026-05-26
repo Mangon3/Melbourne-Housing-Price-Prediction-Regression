@@ -2,10 +2,9 @@
 services:
   stock-agent:
     image: ${IMAGE_NAME:-stockagent-stock-agent}:${IMAGE_TAG:-latest}
-    # container_name: stock_agent_container
     network_mode: "host"
     volumes:
-      - .:/app
+      - ./backend:/app
     environment:
       - PYTHONUNBUFFERED=1
       - REDIS_HOST=localhost
@@ -18,12 +17,9 @@ services:
     restart: unless-stopped
     devices:
       - /dev/dri:/dev/dri
-    # group_add: 
-    #   - video
 
   redis:
     image: redis:alpine
-    # container_name: stock_agent_redis
     ports:
       - "6379:6379"
     volumes:
@@ -33,7 +29,7 @@ services:
     image: prom/prometheus:latest
     network_mode: "host"
     volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./infra/prometheus.yml:/etc/prometheus/prometheus.yml:ro
     restart: unless-stopped
 
 volumes:

@@ -12,13 +12,14 @@ A FastAPI-powered financial analysis platform using LangGraph, Google Gemini, an
 
 ## Live Demo
 
-[https://huggingface.co/spaces/YOUR_USERNAME/stock-agent](https://huggingface.co/spaces/YOUR_USERNAME/stock-agent)
+[https://huggingface.co/spaces/mangonnnn/stock-agent](https://huggingface.co/spaces/mangonnnn/stock-agent)
 
 ## API Endpoint
 
 ### POST `/analyze`
 
 **Request:**
+
 ```json
 {
   "symbol": "AAPL",
@@ -28,6 +29,7 @@ A FastAPI-powered financial analysis platform using LangGraph, Google Gemini, an
 ```
 
 **Response:**
+
 ```json
 {
   "symbol": "AAPL",
@@ -40,10 +42,12 @@ A FastAPI-powered financial analysis platform using LangGraph, Google Gemini, an
 ## Local Development
 
 ### Prerequisites
+
 - Python 3.11+
 - Docker (optional)
 
 ### Setup
+
 ```bash
 # Clone repo
 git clone https://github.com/YOUR_USERNAME/stock-agent.git
@@ -62,11 +66,13 @@ cp .env.example .env
 ```
 
 ### Run Locally
+
 ```bash
 uvicorn src.api.index:app --reload --host 0.0.0.0 --port 8000
 ```
 
 ### Run with Docker
+
 ```bash
 docker-compose up
 ```
@@ -79,4 +85,3 @@ docker-compose up
 - **Vector DB**: ChromaDB
 - **Cache**: Redis
 - **ML**: PyTorch + scikit-learn
-
