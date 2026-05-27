@@ -30,6 +30,7 @@ services:
     network_mode: "host"
     volumes:
       - ./infra/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./infra/alert.rules.yml:/etc/prometheus/alert.rules.yml:ro
     restart: unless-stopped
 
 volumes:
