@@ -3,7 +3,9 @@ import json
 import os
 import sys
 import httpx
+from dotenv import load_dotenv
 
+load_dotenv()
 DEFAULT_PORT = 7861
 API_URL = os.getenv("API_URL", f"http://0.0.0.0:{DEFAULT_PORT}/analyze")  # nosonar
 API_KEY = os.getenv("GOOGLE_API_KEY", "")
@@ -43,7 +45,8 @@ async def stream_response(query: str):
         async with httpx.AsyncClient(timeout=300.0) as client:
             async with client.stream("POST", API_URL, json=payload, headers=headers) as response:
                 if response.status_code != 200:
-                    print(f"Error {response.status_code}: {await response.read()}")
+                    error_msg = (await response.aread()).decode("utf-8")
+                    print(f"Error {response.status_code}: {error_msg}")
                     return
                 print("Agent: ", end="", flush=True)
                 async for line in response.aiter_lines():
