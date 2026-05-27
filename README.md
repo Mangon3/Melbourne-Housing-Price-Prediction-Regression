@@ -31,7 +31,7 @@ A FastAPI-powered financial analysis platform using LangGraph, Google Gemini, an
 {
   "symbol": "AAPL",
   "timeframe_days": 10,
-  "query": "Analyze Apple's AI strategy" // optional
+  "query": "Analyze Apple's AI strategy"
 }
 ```
 
@@ -51,7 +51,7 @@ A FastAPI-powered financial analysis platform using LangGraph, Google Gemini, an
 ### Prerequisites
 
 - Python 3.11+
-- Docker (optional)
+- Docker
 
 ### Setup
 
