@@ -7,7 +7,7 @@ class Settings(BaseSettings):
     # External API Keys
     GOOGLE_API_KEY: Optional[str] = None
     MODEL: str = "gemini-2.5-flash"
-    TEXT_EMBEDDING: str = "text-embedding-004"
+    TEXT_EMBEDDING: str = "models/embedding-001"
 
     # Redis Configuration
     REDIS_URL: Optional[str] = None
