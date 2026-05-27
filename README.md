@@ -50,21 +50,30 @@ _The API will be available at `http://localhost:7860/analyze`._
 
 ## Testing the Application
 
-### 1. Local API Testing (CLI Client)
+### 1. Local API Testing (Without Docker)
 
-You can interact with the local backend API directly from your terminal using the built-in Python client script.
+You can run the FastAPI server and the Python client directly from your terminal. Open two terminal windows:
+
+**Terminal 1 (Start the Server):**
 
 ```bash
-# Create and activate a virtual environment
+cd backend
+# Create and activate virtual environment
 python -m venv .venv
 source .venv/bin/activate
+pip install -e .
 
-# Install the backend package
-pip install -e backend/
+# Run the API
+uvicorn src.api.index:app --reload --port 8000
+```
 
-# Run the CLI client
-export API_URL="http://localhost:7860/analyze"
-python backend/src/main.py
+**Terminal 2 (Run the Client):**
+
+```bash
+cd backend
+source .venv/bin/activate
+export API_URL="http://localhost:8000/analyze"
+python -m src.main
 ```
 
 ### 2. Online Testing (Vercel)
