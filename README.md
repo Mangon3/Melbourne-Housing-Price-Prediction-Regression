@@ -5,90 +5,81 @@ colorTo: green
 sdk: docker
 pinned: false
 ---
-# Stock Agent API
 
-A FastAPI-powered financial analysis platform using LangGraph, Google Gemini, and machine learning for comprehensive stock analysis.
+# AI Stock Agent
+
+A comprehensive financial analysis platform consisting of a **Next.js Frontend** and a **FastAPI Backend**. It utilizes a LangGraph agent to orchestrate Google Gemini, a GRU machine learning model for price prediction, and a ChromaDB vector database for RAG (Retrieval-Augmented Generation) on financial news.
 
 ## Features
 
-- **RAG-Enhanced News Analysis**: ChromaDB-powered retrieval for financial news
-- **ML-Based Price Prediction**: GRU neural network for technical analysis
-- **LangGraph Agent**: Multi-tool orchestration for dynamic analysis
-- **Redis Caching**: 24-hour cache for API responses
-- **Rate Limit Handling**: Automatic retry with exponential backoff
+- **Frontend UI**: Sleek, modern chat interface deployed on Vercel.
+- **RAG-Enhanced News Analysis**: ChromaDB-powered retrieval for financial news.
+- **ML-Based Price Prediction**: GRU neural network for technical analysis.
+- **LangGraph Agent**: Multi-tool orchestration for dynamic analysis.
+- **DevSecOps Pipeline**: Fully automated Jenkins CI/CD with SonarCloud & Trivy security scanning.
 
-## Live Demo
+## Live Demos
 
-[https://huggingface.co/spaces/mangonnnn/stock-agent](https://huggingface.co/spaces/mangonnnn/stock-agent)
+- **Frontend UI (Vercel)**: [https://stock-agent-frontend-three.vercel.app/](https://stock-agent-frontend-three.vercel.app/)
+- **Backend API (Hugging Face)**: [https://huggingface.co/spaces/mangonnnn/stock-agent](https://huggingface.co/spaces/mangonnnn/stock-agent)
 
-## API Endpoint
+## Local Development (Docker)
 
-### POST `/analyze`
-
-**Request:**
-
-```json
-{
-  "symbol": "AAPL",
-  "timeframe_days": 10,
-  "query": "Analyze Apple's AI strategy"
-}
-```
-
-**Response:**
-
-```json
-{
-  "symbol": "AAPL",
-  "macro_analysis": "...",
-  "micro_analysis": {...},
-  "final_report": "..."
-}
-```
-
-## Local Development
+The easiest way to run the entire backend infrastructure (FastAPI, Redis, Prometheus) locally is via Docker Compose.
 
 ### Prerequisites
 
-- Python 3.11+
-- Docker
+- Docker & Docker Compose
 
-### Setup
+### Setup & Run
 
 ```bash
-# Clone repo
-git clone https://github.com/YOUR_USERNAME/stock-agent.git
-cd stock-agent
+# Clone the repository
+git clone https://github.com/Mangon3/Stock-Agent.git
+cd Stock-Agent
 
-# Create virtual environment
-python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Configure environment
+# Configure your environment variables
 cp .env.example .env
-# Edit .env with your API keys
+# Edit .env and add your API keys (GOOGLE_API_KEY, FINNHUB_API_KEY)
+
+# Build and start the infrastructure
+docker-compose --project-directory . -f infra/docker-compose.yml up -d --build
 ```
 
-### Run Locally
+_The API will be available at `http://localhost:7860/analyze`._
+
+## Testing the Application
+
+### 1. Local API Testing (CLI Client)
+
+You can interact with the local backend API directly from your terminal using the built-in Python client script.
 
 ```bash
-uvicorn src.api.index:app --reload --host 0.0.0.0 --port 8000
+# Create and activate a virtual environment
+python -m venv .venv
+source .venv/bin/activate
+
+# Install the backend package
+pip install -e backend/
+
+# Run the CLI client
+export API_URL="http://localhost:7860/analyze"
+python backend/src/main.py
 ```
 
-### Run with Docker
+### 2. Online Testing (Vercel)
 
-```bash
-docker-compose up
-```
+The frontend application is automatically deployed to Vercel upon every push to the `main` branch.
+To test the web interface:
+
+1. Visit your live Vercel URL.
+2. Click the **Settings (Gear Icon)** in the top right.
+3. Enter your **Google Gemini API Key**.
+4. Type a query like `"Analyze Apple"` into the chat box to see the RAG agent stream the report in real-time.
 
 ## Tech Stack
 
-- **Framework**: FastAPI
-- **Agent**: LangGraph
-- **LLM**: Google Gemini 2.5 Flash
-- **Vector DB**: ChromaDB
-- **Cache**: Redis
-- **ML**: PyTorch + scikit-learn
+- **Frontend**: Next.js, React, Tailwind CSS, Framer Motion
+- **Backend**: Python, FastAPI
+- **AI/ML**: LangGraph, Google Gemini 2.5, PyTorch, ChromaDB
+- **Infrastructure**: Docker, Jenkins, Prometheus, Redis
