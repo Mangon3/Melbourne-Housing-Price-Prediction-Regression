@@ -178,7 +178,7 @@ pipeline {
                 sleep 5
                 sh """
                 echo "Checking Application Health..."
-                curl -f http://localhost:7860/docs || exit 1
+                curl -f http://localhost:7860/health || exit 1
                 
                 echo "Checking Metrics Endpoint for Prometheus..."
                 curl -f http://localhost:7860/metrics || echo "WARNING: /metrics not found, but app is up."

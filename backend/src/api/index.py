@@ -91,6 +91,10 @@ def _save_memory_if_final_result(chunk: dict, query_text: str, intent: str) -> N
 async def root():
     return {"message": "StockAgent API is running. Use /analyze to generate reports."}
 
+@app.get("/health")
+async def health_check():
+    return {"status": "ok", "service": "StockAgent API"}
+
 @app.post("/analyze", responses={401: {"description": "Missing API Key"}})
 async def analyze_stock(
     request: AnalyzeRequest,
