@@ -84,7 +84,7 @@ pipeline {
                     -Dsonar.projectKey=Mangon3_Stock-Agent \
                     -Dsonar.organization=mango80200782 \
                     -Dsonar.host.url=https://sonarcloud.io \
-                    -Dsonar.login=${SONAR_TOKEN} \
+                    -Dsonar.login=\$SONAR_TOKEN \
                     -Dsonar.sources=backend/src \
                     -Dsonar.tests=backend/test \
                     -Dsonar.exclusions="frontend/**,.venv/**,backend/test/**,**/*.ts,**/*.tsx,**/*.css" \
