@@ -119,9 +119,16 @@ pipeline {
                 script {
                     try {
                         sh """
+                        export COMPOSE_PROJECT_NAME=staging_env
+                        OLD_CONTAINER=\$(docker-compose --project-directory ${WORKSPACE} --env-file .env -f infra/docker-compose.yml ps -q stock-agent | head -n 1)
+                        if [ ! -z "\$OLD_CONTAINER" ]; then
+                            docker inspect --format '{{.Config.Image}}' \$OLD_CONTAINER | cut -d ':' -f2 > .previous_tag
+                        else
+                            echo "latest" > .previous_tag
+                        fi
+
                         export IMAGE_NAME=${IMAGE_NAME}
                         export IMAGE_TAG=${IMAGE_TAG}
-                        export COMPOSE_PROJECT_NAME=staging_env
                         docker-compose --project-directory ${WORKSPACE} --env-file .env -f infra/docker-compose.yml up -d
                         """
                     } catch (Exception e) {
@@ -129,7 +136,17 @@ pipeline {
                         sh """
                         export COMPOSE_PROJECT_NAME=staging_env
                         docker-compose --project-directory ${WORKSPACE} --env-file .env -f infra/docker-compose.yml down
-                        # In a real environment, we would re-deploy the previous successful image tag here.
+                        
+                        if [ -f .previous_tag ]; then
+                            PREV_TAG=\$(cat .previous_tag)
+                        else
+                            PREV_TAG="latest"
+                        fi
+                        echo "Rolling back to tag: \$PREV_TAG"
+                        
+                        export IMAGE_NAME=${IMAGE_NAME}
+                        export IMAGE_TAG=\$PREV_TAG
+                        docker-compose --project-directory ${WORKSPACE} --env-file .env -f infra/docker-compose.yml up -d
                         """
                         error("Deployment failed and rollback executed.")
                     }
