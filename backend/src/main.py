@@ -84,8 +84,11 @@ async def main():
             print("\nExiting...")
             break
         
-if __name__ == "__main__":
+def cli_entry():
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
         pass
+
+if __name__ == "__main__":
+    cli_entry()

@@ -2,8 +2,9 @@ import pytest
 import asyncio
 import json
 from unittest.mock import patch, MagicMock, AsyncMock
+import httpx
 
-from src.main import _process_sse_chunk, stream_response, main
+from src.main import _process_sse_chunk, stream_response, main, cli_entry
 
 @pytest.mark.asyncio
 async def test_stream_response_success():
@@ -38,7 +39,7 @@ async def test_stream_response_success():
 async def test_stream_response_error_status():
     class MockResponseError:
         status_code = 400
-        async def read(self):
+        async def aread(self):
             return b"Bad Request"
         async def __aenter__(self):
             return self
@@ -57,6 +58,11 @@ async def test_stream_response_error_status():
         await stream_response("test query")
         
     with patch("src.main.httpx.AsyncClient", side_effect=Exception("GenErr")):
+        await stream_response("test query")
+
+@pytest.mark.asyncio
+async def test_stream_response_connect_error():
+    with patch("src.main.httpx.AsyncClient", side_effect=httpx.ConnectError("Connection failed")):
         await stream_response("test query")
 
 @pytest.mark.asyncio
@@ -88,22 +94,10 @@ async def test_main_keyboard_interrupt():
         # Should catch KeyboardInterrupt and break
         await main()
 
-def test_main_execution_block():
-    with patch("src.main.main", side_effect=KeyboardInterrupt):
-        with patch("src.main.asyncio.run") as mock_run:
-            mock_run.side_effect = KeyboardInterrupt
-            # Need to import and run main directly, but since we are in test file,
-            # we can just simulate the block if we really want to cover lines 85-88,
-            # actually it's easier to run a subprocess or just mock __name__ check,
-            # but standard coverage doesn't easily hit `if __name__ == "__main__":` 
-            # unless we run the script. We can execute it via runpy.
-            pass
-
-import runpy
-def test_run_main_module():
-    with patch("src.main.main", new_callable=AsyncMock) as mock_main:
-        mock_main.side_effect = KeyboardInterrupt
-        try:
-            runpy.run_module("src.main", run_name="__main__")
-        except Exception:
-            pass
+def test_cli_entry():
+    with patch("src.main.asyncio.run", side_effect=KeyboardInterrupt):
+        cli_entry()
+    
+    with patch("src.main.asyncio.run") as mock_run:
+        cli_entry()
+        assert mock_run.call_count == 1
