@@ -26,6 +26,15 @@ class TvDataFetcher:
                  logger.exception("Failed to initialize TvDatafeed")
             return None
 
+    def _process_historical_data(self, data: pd.DataFrame) -> pd.DataFrame:
+        data.columns = [col.lower() for col in data.columns]
+        returns_5d = data['close'].pct_change(5).fillna(0)
+        proxy_sentiment = 1 / (1 + np.exp(-returns_5d * 10))
+        rng = np.random.default_rng(42)
+        noise = rng.normal(0, 0.05, len(data))
+        data['News_Sentiment_Score'] = (proxy_sentiment + noise).clip(0, 1)
+        return data[['open', 'high', 'low', 'close', 'volume', 'News_Sentiment_Score']]
+
     def fetch_historical_data(self, symbol: str, timeframe_days: int, exchange: str = "NASDAQ", interval: str = None) -> Union[pd.DataFrame, Dict[str, str]]:
         if self.tv is None:
             return {"error": "TvDatafeed is not initialized. Cannot fetch data."}
@@ -38,43 +47,26 @@ class TvDataFetcher:
         else:
             tv_interval = Interval.in_daily
             n_bars = int(timeframe_days * 1.5)
+            
         max_retries = 3
         last_error = None
         for attempt in range(max_retries):
             try:
-                data = self.tv.get_hist(
-                    symbol=symbol,
-                    exchange=exchange,
-                    interval=tv_interval,
-                    n_bars=n_bars
-                )
-                if data is None or data.empty:
-                    last_error = f"No historical data found for {symbol} on {exchange}."
-                    if attempt < max_retries - 1:
-                        logger.warning(f"No data for {symbol}, retrying ({attempt+1}/{max_retries})...")
-                        self.tv = self._initialize_tv_datafeed()
-                        import time
-                        time.sleep(2)
-                        continue
-                    return {"error": last_error}
-                
-                data.columns = [col.lower() for col in data.columns]
-                returns_5d = data['close'].pct_change(5).fillna(0)
-                proxy_sentiment = 1 / (1 + np.exp(-returns_5d * 10))
-                rng = np.random.default_rng(42)
-                noise = rng.normal(0, 0.05, len(data))
-                data['News_Sentiment_Score'] = (proxy_sentiment + noise).clip(0, 1)
-                data = data[['open', 'high', 'low', 'close', 'volume', 'News_Sentiment_Score']]
-                return data
+                data = self.tv.get_hist(symbol=symbol, exchange=exchange, interval=tv_interval, n_bars=n_bars)
+                if data is not None and not data.empty:
+                    return self._process_historical_data(data)
+                last_error = f"No historical data found for {symbol} on {exchange}."
             except Exception as e:
                 last_error = e
-                if attempt < max_retries - 1:
-                    logger.warning(f"Error fetching data for {symbol}, retrying ({attempt+1}/{max_retries}). Error: {e}")
-                    self.tv = self._initialize_tv_datafeed()
-                    import time
-                    time.sleep(2)
-                    continue
+
+            if attempt < max_retries - 1:
+                logger.warning(f"Error/No data for {symbol}, retrying ({attempt+1}/{max_retries}). Error: {last_error}")
+                self.tv = self._initialize_tv_datafeed()
+                import time
+                time.sleep(2)
+            else:
                 return {"error": f"Data fetching error for {symbol} after {max_retries} attempts: {last_error}"}
+                
         return {"error": str(last_error)}
             
 tv_data_fetcher = TvDataFetcher()
